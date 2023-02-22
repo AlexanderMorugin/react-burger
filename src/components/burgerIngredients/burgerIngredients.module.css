@@ -1,0 +1,68 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.components {
+  display: flex;
+  flex-direction: column;
+  height: 756px;
+  box-sizing: border-box;
+  margin: 40px 0 0 0;
+  padding: 0;
+  overflow-y: scroll;
+}
+
+.components::-webkit-scrollbar {
+  width: 8px;
+}
+
+.components::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.components::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+}
+
+.componentBlock {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 24px 16px 40px 16px;
+}
+
+.component {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 272px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.image {
+  width: 240px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.price {
+  display: flex;
+  gap: 8px;
+  box-sizing: border-box;
+  margin: 4px 0;
+  padding: 0;
+}
