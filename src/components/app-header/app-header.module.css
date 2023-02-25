@@ -1,0 +1,48 @@
+.header {
+  width: 100%;
+  background: #1C1C21;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.leftBlock {
+  display: flex;
+  gap: 8px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.logoBlock {
+  position: absolute;
+  top: 16px;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 16px 20px;
+}
+
+.logo {
+  width: 289px;
+}
