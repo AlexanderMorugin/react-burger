@@ -1,17 +1,14 @@
-import React from 'react';
-import './main.css';
-import BurgerIngredients from '../burgerIngredients/burgerIngredients';
-import BurgerConstructor from '../burgerConstructor/burgerConstructor';
+import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import BurgerConstructor from '../burger-constructor/burger-constructor';
+import mainStyles from './main.module.css';
 
-class Main extends React.Component {
-  render() {
-    return (
-      <div className="main">
-        <BurgerIngredients />
-        <BurgerConstructor />
-      </div>        
-    );
-  }
+function Main() {
+  return (
+    <main className={mainStyles.main}>
+      <BurgerIngredients />
+      <BurgerConstructor />
+    </main>        
+  );
 }
 
 export default Main;
