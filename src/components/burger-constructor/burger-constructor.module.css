@@ -1,0 +1,75 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 100px 16px 52px 16px;
+}
+
+.elements {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 16px 0 32px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 464px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 8px 0 0;
+  list-style: none;
+}
+
+.content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+}
+
+.element {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dots {
+  width: 24px;
+  height: 24px;
+  background: url("../../images/dots-for-constructor.svg");
+  background-repeat: no-repeat;
+  background-position: center;  
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 40px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 40px 0 0 0;
+  padding: 0;
+}
+
+.sum {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
