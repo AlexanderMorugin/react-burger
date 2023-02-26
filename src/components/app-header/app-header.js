@@ -3,7 +3,7 @@ import styles from './app-header.module.css';
 
 function AppHeader() {
   return (
-    <div className={styles.header}>
+    <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.leftBlock}>
           <div className={styles.button}>
@@ -23,7 +23,7 @@ function AppHeader() {
           <p className="text text_type_main-default text_color_inactive">Личный кабинет</p>
         </div>          
       </div>      
-    </div>        
+    </header>        
   );
 }
 
