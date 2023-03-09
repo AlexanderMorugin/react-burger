@@ -1,0 +1,25 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, .6);
+  overflow: hidden;
+  transition: .5s;
+}
+
+.button {
+  position: absolute;
+  top: 60px;
+  right: 40px;
+  border: 0;
+  background: transparent;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
