@@ -1,4 +1,5 @@
 import React from "react";
+// import { CSSTransition } from "react-transition-group";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import OrderDetails from "../order-details/order-details";
 
@@ -12,6 +13,10 @@ import styles from "./burger-constructor.module.css";
 
 function BurgerConstructor({ items }) {
   const [openModal, setOpenModal] = React.useState(false);
+
+  const showModal = () => {
+    setOpenModal(true);
+  }
 
   const closeModal = () => {
     setOpenModal(false);
@@ -94,15 +99,16 @@ function BurgerConstructor({ items }) {
           htmlType="button"
           type="primary"
           size="large"
-          onClick={() => setOpenModal(true)}
+          onClick={showModal}
         >
           Оформить заказ
         </Button>
       </div>
 
-      <ModalOverlay openModal={openModal} onClose={closeModal}>
-        <OrderDetails />
-      </ModalOverlay>
+            <ModalOverlay openModal={openModal} onClose={closeModal}>
+              <OrderDetails />
+            </ModalOverlay>
+      
     </section>
   );
 }

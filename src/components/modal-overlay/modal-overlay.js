@@ -33,7 +33,7 @@ function ModalOverlay(props) {
             <CloseIcon type="primary" />
           </button>
           {props.children}
-        </Modal>
+        </Modal>      
       </div>,
       element
     );
