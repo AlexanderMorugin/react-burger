@@ -1,0 +1,12 @@
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  height: fit-content;
+  background: #1C1C21;
+  border-radius: 40px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 40px;
+}
+

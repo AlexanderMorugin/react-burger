@@ -1,0 +1,9 @@
+.main {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  max-width: 1240px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0 0 40px 0;
+}
