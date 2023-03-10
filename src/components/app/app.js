@@ -12,7 +12,12 @@ function App() {
   React.useEffect(() => {
     async function fetchData() {
       return await fetch(URL)
-        .then((res) => res.json())
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          return Promise.reject(`Ошибка ${res.status}`);
+        })
         .then((data) => setItems(data.data))
         .catch((error) => console.log(error));
     }
