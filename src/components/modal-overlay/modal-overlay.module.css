@@ -11,15 +11,3 @@
   overflow: hidden;
   transition: .5s;
 }
-
-.button {
-  position: absolute;
-  top: 60px;
-  right: 40px;
-  border: 0;
-  background: transparent;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-}

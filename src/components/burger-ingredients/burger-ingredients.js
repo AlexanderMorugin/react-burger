@@ -2,37 +2,23 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientElement from "../ingredient-element/ingredient-element";
-import ModalOverlay from "../modal-overlay/modal-overlay";
+import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import styles from "./burger-ingredients.module.css";
 
-function BurgerIngredients({ items }) {
+function BurgerIngredients({ ingredients }) {
   const [openModal, setOpenModal] = React.useState(false);
-  const [current, setCurrent] = React.useState("one");
-  const [modalItem, setModalItem] = React.useState([]);
+  const [current, setCurrent] = React.useState("bun");
+  const [currentIngredient, setCurrentIngredient] = React.useState({});
 
-  const showModal = (obj) => {
-    setModalItem(obj);
+  const showModal = (ingredient) => {
+    setCurrentIngredient(ingredient);
     setOpenModal(true);
-    // console.log(cardItems);
   };
 
-  const closeModal = () => {
+  const handleClose = () => {
     setOpenModal(false);
   };
-
-  const closeOnEscapeKeyDown = (e) => {
-    if ((e.charCode || e.keyCode) === 27) {
-      setOpenModal(false);
-    }
-  };
-
-  React.useEffect(() => {
-    document.body.addEventListener("keydown", closeOnEscapeKeyDown);
-    return function cleanup() {
-      document.body.removeEventListener("keydown", closeOnEscapeKeyDown);
-    };
-  }, []);
 
   return (
     <section className={styles.box}>
@@ -51,13 +37,13 @@ function BurgerIngredients({ items }) {
       <div className={styles.components}>
         <h2 className="text text_type_main-medium">Булки</h2>
         <ul className={styles.block}>
-          {items.map((obj) => {
-            if (obj.type === "bun") {
+          {ingredients.map((ingredient) => {
+            if (ingredient.type === "bun") {
               return (
                 <IngredientElement
-                  key={obj._id}
-                  {...obj}
-                  onClick={() => showModal(obj)}
+                  key={ingredient._id}
+                  {...ingredient}
+                  onClick={() => showModal(ingredient)}
                 />
               );
             }
@@ -65,13 +51,13 @@ function BurgerIngredients({ items }) {
         </ul>
         <h2 className="text text_type_main-medium">Соусы</h2>
         <ul className={styles.block}>
-          {items.map((obj) => {
-            if (obj.type === "sauce") {
+          {ingredients.map((ingredient) => {
+            if (ingredient.type === "sauce") {
               return (
                 <IngredientElement
-                  key={obj._id}
-                  {...obj}
-                  onClick={() => showModal(obj)}
+                  key={ingredient._id}
+                  {...ingredient}
+                  onClick={() => showModal(ingredient)}
                 />
               );
             }
@@ -79,13 +65,13 @@ function BurgerIngredients({ items }) {
         </ul>
         <h2 className="text text_type_main-medium">Начинки</h2>
         <ul className={styles.block}>
-          {items.map((obj) => {
-            if (obj.type === "main") {
+          {ingredients.map((ingredient) => {
+            if (ingredient.type === "main") {
               return (
                 <IngredientElement
-                  key={obj._id}
-                  {...obj}
-                  onClick={() => showModal(obj)}
+                  key={ingredient._id}
+                  {...ingredient}
+                  onClick={() => showModal(ingredient)}
                 />
               );
             }
@@ -93,15 +79,17 @@ function BurgerIngredients({ items }) {
         </ul>
       </div>
 
-      <ModalOverlay openModal={openModal} onClose={closeModal}>
-        <IngredientDetails item={modalItem} />
-      </ModalOverlay>
+      {openModal && (
+        <Modal onClose={handleClose}>
+          <IngredientDetails currentIngredient={currentIngredient} />
+        </Modal>
+      )}
     </section>
   );
 }
 
 BurgerIngredients.propTypes = {
-  items: PropTypes.array.isRequired,
+  ingredients: PropTypes.array.isRequired,
 };
 
 export default BurgerIngredients;

@@ -1,22 +1,21 @@
 import PropTypes from 'prop-types';
 import Image from "../image/image";
-
 import styles from "./ingredient-details.module.css";
 
-function IngredientDetails({ item } ) {
+function IngredientDetails({currentIngredient}) {
   return (
     <>   
       <div className={styles.top}>
         <h2 className="text text_type_main-large">Детали ингредиента</h2>
       </div>
-      <div className={styles.container} key={item._id}>
+      <div className={styles.container} key={currentIngredient._id}>
         <div className={styles.image}>
-          <Image image={item.image_large} alt={item.name} />
+          <Image image={currentIngredient.image_large} alt={currentIngredient.name} />
         </div>
         <p
           className={"text text_type_main-medium mt-4" + " " + styles.centered}
         >
-          {item.name}
+          {currentIngredient.name}
         </p>
         <ul className={styles.nutritions}>
           <li className={styles.nutrition}>
@@ -24,7 +23,7 @@ function IngredientDetails({ item } ) {
               Калории, ккал
             </p>
             <p className="text text_type_digits-default text_color_inactive">
-              {item.calories / 10}
+              {currentIngredient.calories / 10}
             </p>
           </li>
           <li className={styles.nutrition}>
@@ -32,7 +31,7 @@ function IngredientDetails({ item } ) {
               Белки, г
             </p>
             <p className="text text_type_digits-default text_color_inactive">
-              {item.proteins / 10}
+              {currentIngredient.proteins / 10}
             </p>
           </li>
           <li className={styles.nutrition}>
@@ -40,7 +39,7 @@ function IngredientDetails({ item } ) {
               Жиры, г
             </p>
             <p className="text text_type_digits-default text_color_inactive">
-              {item.fat / 10}
+              {currentIngredient.fat / 10}
             </p>
           </li>
           <li className={styles.nutrition}>
@@ -48,7 +47,7 @@ function IngredientDetails({ item } ) {
               Углеводы, г
             </p>
             <p className="text text_type_digits-default text_color_inactive">
-              {item.carbohydrates / 10}
+              {currentIngredient.carbohydrates / 10}
             </p>
           </li>
         </ul>
@@ -58,7 +57,7 @@ function IngredientDetails({ item } ) {
 }
 
 IngredientDetails.propTypes = {
-  // item: PropTypes.array.isRequired,
+  currentIngredient: PropTypes.object.isRequired
 };
 
 export default IngredientDetails;

@@ -1,64 +1,50 @@
 import React from "react";
 // import { CSSTransition } from "react-transition-group";
-import ModalOverlay from "../modal-overlay/modal-overlay";
+import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
-
 import PropTypes from "prop-types";
 import {
   ConstructorElement,
   Button,
-  CurrencyIcon
+  CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css";
 
-function BurgerConstructor({ items }) {
+function BurgerConstructor({ ingredients }) {
   const [openModal, setOpenModal] = React.useState(false);
 
   const showModal = () => {
     setOpenModal(true);
-  }
-
-  const closeModal = () => {
-    setOpenModal(false);
-  }
-
-  const closeOnEscapeKeyDown = e => {
-    if ((e.charCode || e.keyCode) === 27) {
-      setOpenModal(false);
-    }
   };
 
-  React.useEffect(() => {
-    document.body.addEventListener("keydown", closeOnEscapeKeyDown);
-    return function cleanup() {
-      document.body.removeEventListener("keydown", closeOnEscapeKeyDown);
-    };
-  }, []);
+  const handleClose = () => {
+    setOpenModal(false);
+  };
 
-  const bunTop = items.map((obj) => {
+  const bunTop = ingredients.map((ingredient) => {
     // Верхняя булка
     return (
       <ConstructorElement
         type="top"
         isLocked={true}
-        text={obj.name}
-        price={obj.price}
-        thumbnail={obj.image}
-        key={obj.id}
+        text={ingredient.name + " " + "(верх)"}
+        price={ingredient.price}
+        thumbnail={ingredient.image}
+        key={ingredient.id}
       />
     );
   });
 
-  const bunBottom = items.map((obj) => {
+  const bunBottom = ingredients.map((ingredient) => {
     // Нижняя булка
     return (
       <ConstructorElement
         type="bottom"
         isLocked={true}
-        text={obj.name}
-        price={obj.price}
-        thumbnail={obj.image}
-        key={obj.id}
+        text={ingredient.name + " " + "(низ)"}
+        price={ingredient.price}
+        thumbnail={ingredient.image}
+        key={ingredient.id}
       />
     );
   });
@@ -70,15 +56,15 @@ function BurgerConstructor({ items }) {
       </div>
 
       <ul className={styles.content}>
-        {items.map((obj) => {
-          if (obj.type !== "bun") {
+        {ingredients.map((ingredient) => {
+          if (ingredient.type !== "bun") {
             return (
-              <li className={styles.element} key={obj._id}>
+              <li className={styles.element} key={ingredient._id}>
                 <div className={styles.dots}></div>
                 <ConstructorElement
-                  text={obj.name}
-                  price={obj.price}
-                  thumbnail={obj.image}
+                  text={ingredient.name}
+                  price={ingredient.price}
+                  thumbnail={ingredient.image}
                 />
               </li>
             );
@@ -105,16 +91,17 @@ function BurgerConstructor({ items }) {
         </Button>
       </div>
 
-            <ModalOverlay openModal={openModal} onClose={closeModal}>
-              <OrderDetails />
-            </ModalOverlay>
-      
+      {openModal && (
+        <Modal onClose={handleClose}>
+          <OrderDetails />
+        </Modal>
+      )}
     </section>
   );
 }
 
 BurgerConstructor.propTypes = {
-  items: PropTypes.array.isRequired,
+  ingredients: PropTypes.array.isRequired,
 };
 
 export default BurgerConstructor;

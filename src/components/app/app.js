@@ -7,7 +7,7 @@ import styles from "./app.module.css";
 const URL = "https://norma.nomoreparties.space/api/ingredients";
 
 function App() {
-  const [items, setItems] = React.useState([]);
+  const [ingredients, setIngredients] = React.useState([]);
 
   React.useEffect(() => {
     async function fetchData() {
@@ -18,7 +18,7 @@ function App() {
           }
           return Promise.reject(`Ошибка ${res.status}`);
         })
-        .then((data) => setItems(data.data))
+        .then((data) => setIngredients(data.data))
         .catch((error) => console.log(error));
     }
     fetchData();
@@ -28,8 +28,8 @@ function App() {
     <>
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients items={items} />
-        <BurgerConstructor items={items} />
+        <BurgerIngredients ingredients={ingredients} />
+        <BurgerConstructor ingredients={ingredients} />
       </main>
     </>
   );
