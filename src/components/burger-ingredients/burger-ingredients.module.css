@@ -1,0 +1,45 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.tabs {
+  display: flex;
+}
+
+.components {
+  display: flex;
+  flex-direction: column;
+  height: 756px;
+  box-sizing: border-box;
+  margin: 40px 0 0 0;
+  padding: 0;
+  overflow-y: scroll;
+}
+
+.components::-webkit-scrollbar {
+  width: 8px;
+}
+
+.components::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.components::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+}
+
+.block {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 24px 16px 40px 16px;
+  list-style: none;
+}
