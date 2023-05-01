@@ -1,24 +1,17 @@
 import { useMemo, useRef, useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useSelector, useDispatch } from "react-redux";
-// import { fetchIngredients } from "../../services/actions/ingredients-actions";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-// import IngredientElement from "../ingredient-element/ingredient-element";
 import IngredientsList from "../ingredients-list/ingredients-list";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
+import { setCurrentIngredientAction } from "../../services/actions/ingredient-details-actions";
 import styles from "./burger-ingredients.module.css";
-// import Tabs from "../tabs/tabs";
-import { setCurrentIngredientAction, resetCurrentIngredientAction } from '../../services/actions/ingredient-details-actions';
 
-function BurgerIngredients() {
-  // Работа с Редаксом
+const BurgerIngredients = () => {
   const dispatch = useDispatch();
   const ingredientStore = useSelector((state) => state.ingredientsStore);
 
-  // console.log(ingredientStore.ingredients)
-
-    // Модалка
   const [showModal, setShowModal] = useState(false);
 
   const openModal = (ingredient) => {
@@ -26,11 +19,10 @@ function BurgerIngredients() {
     setShowModal(true);
   };
   const closeModal = () => {
-    dispatch(resetCurrentIngredientAction());
     setShowModal(false);
-  }
+  };
 
-    // Работа Табов с прокруткой ингредиентов
+  // Работа Табов с прокруткой ингредиентов
   const [current, setCurrent] = useState("bun");
 
   const tabs = [
@@ -59,27 +51,26 @@ function BurgerIngredients() {
     setCurrent(ingredients);
   };
 
-
   const buns = useMemo(
     () =>
-    ingredientStore.ingredients.filter((item) => {
-        return item.type === "bun"
+      ingredientStore.ingredients.filter((item) => {
+        return item.type === "bun";
       }),
     [ingredientStore]
   );
 
   const sauce = useMemo(
     () =>
-    ingredientStore.ingredients.filter((item) => {
-        return item.type === "sauce"
+      ingredientStore.ingredients.filter((item) => {
+        return item.type === "sauce";
       }),
     [ingredientStore]
   );
 
   const main = useMemo(
     () =>
-    ingredientStore.ingredients.filter((item) => {
-        return item.type === "main"
+      ingredientStore.ingredients.filter((item) => {
+        return item.type === "main";
       }),
     [ingredientStore]
   );
@@ -99,13 +90,28 @@ function BurgerIngredients() {
           </Tab>
         ))}
       </nav>
-      {/* <Tabs bunRef={bunRef} sauceRef={sauceRef} mainRef={mainRef} current={current} /> */}
-
-      {/* <div className={styles.components} ref={containerRef} onScroll={handleScroll} > */}
       <div className={styles.components}>
-        <IngredientsList title='Булки' data={buns} openModal={openModal} ref={bunRef} id="bun" />
-        <IngredientsList title='Соусы' data={sauce} openModal={openModal} ref={sauceRef} id="sauce" />
-        <IngredientsList title='Начинки' data={main} openModal={openModal} ref={mainRef} id="main" />
+        <IngredientsList
+          title="Булки"
+          data={buns}
+          openModal={openModal}
+          ref={bunRef}
+          id="bun"
+        />
+        <IngredientsList
+          title="Соусы"
+          data={sauce}
+          openModal={openModal}
+          ref={sauceRef}
+          id="sauce"
+        />
+        <IngredientsList
+          title="Начинки"
+          data={main}
+          openModal={openModal}
+          ref={mainRef}
+          id="main"
+        />
       </div>
 
       {showModal && (
@@ -115,6 +121,6 @@ function BurgerIngredients() {
       )}
     </section>
   );
-}
+};
 
 export default BurgerIngredients;

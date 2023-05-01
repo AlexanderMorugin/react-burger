@@ -1,20 +1,18 @@
-import React from "react";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { useDrag } from "react-dnd";
 import {
   CurrencyIcon,
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDrag } from "react-dnd";
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
-import styles from "./ingredient-element.module.css";
 import Image from "../image/image";
-// import PropTypes from "prop-types";
-// import Image from "../image/image";
-// import { ingredientType } from '../../utils/prop-types';
-// import styles from './ingredient.module.css';
+import styles from "./ingredient-element.module.css";
 
-function IngredientElement({ ingredient, onClick }) {
-  const { _id, image, price, name } = ingredient;
+import PropTypes from "prop-types";
+import ingredientPropTypes from "../../utils/ingredient-prop-types";
+
+const IngredientElement = ({ ingredient, onClick }) => {
+  const { image, price, name } = ingredient;
   const { bun, ingredients } = useSelector((state) => state.constructorStore);
 
   const [{ opacity }, dragRef] = useDrag({
@@ -53,13 +51,11 @@ function IngredientElement({ ingredient, onClick }) {
       </p>
     </li>
   );
-}
+};
 
-// IngredientElement.propTypes = {
-//   image: PropTypes.string.isRequired,
-//   name: PropTypes.string.isRequired,
-//   price: PropTypes.number.isRequired,
-//   _id: PropTypes.string.isRequired,
-// };
+IngredientElement.propTypes = {
+  ingredient: ingredientPropTypes,
+  onClick: PropTypes.func,
+};
 
 export default IngredientElement;

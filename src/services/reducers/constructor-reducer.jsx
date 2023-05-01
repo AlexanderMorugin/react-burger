@@ -1,14 +1,11 @@
 import {
   ADD_BUN,
   ADD_INGREDIENT,
-  // MOVE_INGREDIENT,
   DELETE_INGREDIENT,
-  RESET_INGREDIENT
-} from '../actions/constructor-actions'
-
+} from "../actions/constructor-actions";
 
 const initialState = {
-  bun: '',
+  bun: "",
   ingredients: [],
 };
 
@@ -26,30 +23,15 @@ export const constructorReducer = (state = initialState, action) => {
         ingredients: [...state.ingredients, action.ingridient],
       };
 
-    // case MOVE_INGREDIENT:
-    //   const moveIngredients = [...state.ingredients];
-    //   moveIngredients.splice(
-    //     action.data.draggedIngredient,
-    //     0,
-    //     moveIngredients.splice(action.data.hoverIngredient, 1)[0]
-    //   );
-    //   return {
-    //     ...state,
-    //     ingredients: moveIngredients
-    //   };
-
     case DELETE_INGREDIENT:
       const deleteIngredients = [...state.ingredients];
       deleteIngredients.splice(action.index, 1);
       return {
         ...state,
-        ingredients: deleteIngredients
+        ingredients: deleteIngredients,
       };
-
-    case RESET_INGREDIENT:
-      return initialState;
 
     default:
       return state;
-  };
-}
+  }
+};

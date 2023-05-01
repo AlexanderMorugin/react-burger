@@ -8,7 +8,7 @@ import BurgerConstructor from "../burger-constructor/burger-constructor";
 import { getIngredientsAction } from "../../services/actions/ingredients-actions";
 import styles from "./app.module.css";
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,6 +26,6 @@ function App() {
       </main>
     </>
   );
-}
+};
 
 export default App;

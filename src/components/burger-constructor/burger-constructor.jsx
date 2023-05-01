@@ -1,26 +1,22 @@
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useDrop } from "react-dnd";
 import {
   ConstructorElement,
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState, useEffect, useMemo } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useDrop } from "react-dnd";
-import styles from "./burger-constructor.module.css";
 import Modal from "../modal/modal";
 import {
   addIngridientAction,
   addBunAction,
-  resetIngredientAction,
 } from "../../services/actions/constructor-actions";
-import {
-  // postOrderClear,
-  postOrderAction,
-} from "../../services/actions/order-actions";
+import { postOrderAction } from "../../services/actions/order-actions";
 import OrderDetails from "../order-details/order-details";
 import ConstructorIngredient from "../constructor-ingredient/constructor-ingredient";
+import styles from "./burger-constructor.module.css";
 
-function BurgerConstructor() {
+const BurgerConstructor = () => {
   const { bun, ingredients } = useSelector((state) => state.constructorStore);
 
   const orderNumber = useSelector((state) => state.orderStore.data);
@@ -57,68 +53,69 @@ function BurgerConstructor() {
   };
 
   const closeModal = () => {
-    // dispatch(postOrderClear());
-    dispatch(resetIngredientAction());
     setShowModal(false);
   };
 
   return (
     <section className={styles.box} ref={dropTarget}>
       {bun || ingredients.length > 0 ? (
-      <div className={styles.elements}>
-        {bun && (
-          <div className={styles.bun}>
-            <ConstructorElement
-              type="top"
-              isLocked={true}
-              text={`${bun.name} (верх)`}
-              price={`${bun.price}`}
-              thumbnail={`${bun.image}`}
-            />
-          </div>
-        )}
-        <ul className={styles.content}>
-          {ingredients.length > 0 ? (
-            ingredients.map((item, index) => (
-            <li className={styles.element} key={item._id}>
-              <ConstructorIngredient item={item} index={index} />
-            </li>
-            ))
-          ) : (
-            <div className={styles.chekConstructorTwo}>
-            <p className="text text_type_main-medium text_color_inactive" style={{textAlign: "center"}}>
-              Теперь добавьте ингредиенты.
-            </p>
-            <div className={styles.chekImage}></div>
-            <p className="text text_type_main-medium">
-              Это будет вкусный бургер!
-            </p>
-          </div>
+        <div className={styles.elements}>
+          {bun && (
+            <div className={styles.bun}>
+              <ConstructorElement
+                type="top"
+                isLocked={true}
+                text={`${bun.name} (верх)`}
+                price={`${bun.price}`}
+                thumbnail={`${bun.image}`}
+              />
+            </div>
           )}
-        </ul>
-        {bun && (
-          <div className={styles.bun}>
-            <ConstructorElement
-              type="bottom"
-              isLocked={true}
-              text={`${bun.name} (низ)`}
-              price={`${bun.price}`}
-              thumbnail={`${bun.image}`}
-            />
-          </div>
-        )}
-      </div>
+          <ul className={styles.content}>
+            {ingredients.length > 0 ? (
+              ingredients.map((item, index) => (
+                <li className={styles.element} key={item._id}>
+                  <ConstructorIngredient item={item} index={index} />
+                </li>
+              ))
+            ) : (
+              <div className={styles.chekConstructorTwo}>
+                <p
+                  className="text text_type_main-medium text_color_inactive"
+                  style={{ textAlign: "center" }}
+                >
+                  Теперь добавьте ингредиенты.
+                </p>
+                <div className={styles.chekImage}></div>
+                <p className="text text_type_main-medium">
+                  Это будет вкусный бургер!
+                </p>
+              </div>
+            )}
+          </ul>
+          {bun && (
+            <div className={styles.bun}>
+              <ConstructorElement
+                type="bottom"
+                isLocked={true}
+                text={`${bun.name} (низ)`}
+                price={`${bun.price}`}
+                thumbnail={`${bun.image}`}
+              />
+            </div>
+          )}
+        </div>
       ) : (
         <div className={styles.chekConstructorOne}>
-            <p className="text text_type_main-medium text_color_inactive" style={{textAlign: "center"}}>
-              Перенестите необходимые ингредиенты для бургера в эту часть
-              экрана.
-            </p>
-            <div className={styles.chekImage}></div>
-            <p className="text text_type_main-medium">
-              Начните с булочки.
-            </p>
-          </div>
+          <p
+            className="text text_type_main-medium text_color_inactive"
+            style={{ textAlign: "center" }}
+          >
+            Перенестите необходимые ингредиенты для бургера в эту часть экрана.
+          </p>
+          <div className={styles.chekImage}></div>
+          <p className="text text_type_main-medium">Начните с булочки.</p>
+        </div>
       )}
 
       <div className={styles.bottom}>
@@ -149,6 +146,6 @@ function BurgerConstructor() {
       )}
     </section>
   );
-}
+};
 
 export default BurgerConstructor;

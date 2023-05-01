@@ -2,11 +2,10 @@ import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_FAILED,
-} from "../actions/ingredients-actions.js";
+} from "../actions/ingredients-actions";
 
 const initialState  = {
   ingredients: [],
-  ingredientsLoading: false,
   ingredientsRequest: false,
   ingredientsFailed: false,
 };
@@ -16,7 +15,6 @@ export const ingredientsReducer = (state = initialState, action) => {
     case GET_INGREDIENTS_REQUEST:
       return {
         ...state,
-        ingredientsLoading: true,
         ingredientsFailed: false,
         ingredientsRequest: false,
       };
@@ -24,14 +22,12 @@ export const ingredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         ingredients: action.payload,
-        ingredientsLoading: false,
         ingredientsFailed: false,
         ingredientsRequest: true,
       };
     case GET_INGREDIENTS_FAILED:
       return {
         ...state,
-        ingredientsLoading: false,
         ingredientsFailed: true,
       };
     default:

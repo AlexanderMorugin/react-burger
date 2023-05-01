@@ -1,19 +1,23 @@
-import { useSelector } from 'react-redux';
-// import PropTypes from 'prop-types';
+import { useSelector } from "react-redux";
 import Image from "../image/image";
 import styles from "./ingredient-details.module.css";
 
-function IngredientDetails() {
-  const currentIngredient = useSelector((state) => state.ingredientDetailsStore.сurrentIngredient);
+const IngredientDetails = () => {
+  const currentIngredient = useSelector(
+    (state) => state.ingredientDetailsStore.сurrentIngredient
+  );
 
   return (
-    <>   
+    <>
       <div className={styles.top}>
         <h2 className="text text_type_main-large">Детали ингредиента</h2>
       </div>
       <div className={styles.container} key={currentIngredient._id}>
         <div className={styles.image}>
-          <Image image={currentIngredient.image_large} alt={currentIngredient.name} />
+          <Image
+            image={currentIngredient.image_large}
+            alt={currentIngredient.name}
+          />
         </div>
         <p
           className={"text text_type_main-medium mt-4" + " " + styles.centered}
@@ -57,10 +61,6 @@ function IngredientDetails() {
       </div>
     </>
   );
-}
-
-// IngredientDetails.propTypes = {
-//   currentIngredient: PropTypes.object.isRequired
-// };
+};
 
 export default IngredientDetails;

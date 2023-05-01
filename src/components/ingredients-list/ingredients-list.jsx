@@ -1,8 +1,7 @@
-import styles from './ingredients-list.module.css';
-import IngredientElement from '../ingredient-element/ingredient-element';
-import PropTypes from 'prop-types';
-import { forwardRef } from 'react';
-
+import { forwardRef } from "react";
+import PropTypes from "prop-types";
+import IngredientElement from "../ingredient-element/ingredient-element";
+import styles from "./ingredients-list.module.css";
 
 const IngredientsList = forwardRef((props, ref) => {
   const { title, openModal, data, id } = props;
@@ -24,9 +23,8 @@ const IngredientsList = forwardRef((props, ref) => {
   );
 });
 
-
-// IngredientsList.propTypes = {
-//   title: PropTypes.string.isRequired,
-// };
+IngredientsList.propTypes = {
+  title: PropTypes.string.isRequired,
+};
 
 export default IngredientsList;
