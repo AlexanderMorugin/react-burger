@@ -1,8 +1,11 @@
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+// import PropTypes from 'prop-types';
 import Image from "../image/image";
 import styles from "./ingredient-details.module.css";
 
-function IngredientDetails({currentIngredient}) {
+function IngredientDetails() {
+  const currentIngredient = useSelector((state) => state.ingredientDetailsStore.сurrentIngredient);
+
   return (
     <>   
       <div className={styles.top}>
@@ -56,8 +59,8 @@ function IngredientDetails({currentIngredient}) {
   );
 }
 
-IngredientDetails.propTypes = {
-  currentIngredient: PropTypes.object.isRequired
-};
+// IngredientDetails.propTypes = {
+//   currentIngredient: PropTypes.object.isRequired
+// };
 
 export default IngredientDetails;

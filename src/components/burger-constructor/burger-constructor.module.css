@@ -1,19 +1,25 @@
 .box {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 16px;
   width: 100%;
-  max-width: 600px;
+  max-width: 620px;
   box-sizing: border-box;
   margin: 0;
-  padding: 100px 16px 52px 16px;
+  /* padding: 100px 16px 52px 16px; */
+  padding: 100px 0 52px 0;
 }
 
 .elements {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 0 16px 0 32px;
+  /* justify-content: flex-end; */
+  /* align-items: flex-end; */
+  /* padding: 0 16px 0 32px; */
+  padding: 0 0 0 16px;
+  /* list-style: none; */
 }
 
 .content {
@@ -40,10 +46,21 @@
   background-color: #8585AD;
 }
 
+.bun {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 16px 0 32px;
+}
+
 .element {
   display: flex;
   align-items: center;
   gap: 8px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .dots {
@@ -72,4 +89,49 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+.chekConstructorOne {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  margin: 50px;
+  padding: 50px;
+  border: 3px solid #8585AD;
+}
+
+.chekConstructorTwo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin: 30px;
+  padding: 50px;
+}
+
+.chekImage {
+  width: 150px;
+  height: 150px;
+  background: url("../../images/logo.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; 
+  animation: pulse 4s linear infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
 }

@@ -1,107 +1,154 @@
-import React from "react";
-// import { CSSTransition } from "react-transition-group";
-import Modal from "../modal/modal";
-import OrderDetails from "../order-details/order-details";
-import PropTypes from "prop-types";
 import {
   ConstructorElement,
-  Button,
   CurrencyIcon,
+  Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useState, useEffect, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useDrop } from "react-dnd";
 import styles from "./burger-constructor.module.css";
+import Modal from "../modal/modal";
+import {
+  addIngridientAction,
+  addBunAction,
+  resetIngredientAction,
+} from "../../services/actions/constructor-actions";
+import {
+  // postOrderClear,
+  postOrderAction,
+} from "../../services/actions/order-actions";
+import OrderDetails from "../order-details/order-details";
+import ConstructorIngredient from "../constructor-ingredient/constructor-ingredient";
 
-function BurgerConstructor({ ingredients }) {
-  const [openModal, setOpenModal] = React.useState(false);
+function BurgerConstructor() {
+  const { bun, ingredients } = useSelector((state) => state.constructorStore);
 
-  const showModal = () => {
-    setOpenModal(true);
-  };
+  const orderNumber = useSelector((state) => state.orderStore.data);
+  const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(null);
 
-  const handleClose = () => {
-    setOpenModal(false);
-  };
-
-  const bunTop = ingredients.map((ingredient) => {
-    // Верхняя булка
-    return (
-      <ConstructorElement
-        type="top"
-        isLocked={true}
-        text={ingredient.name + " " + "(верх)"}
-        price={ingredient.price}
-        thumbnail={ingredient.image}
-        key={ingredient.id}
-      />
-    );
+  const [, dropTarget] = useDrop({
+    accept: "ingredients",
+    drop(item) {
+      if (item.ingredient.type === "bun") {
+        dispatch(addBunAction(item.ingredient));
+      } else {
+        dispatch(addIngridientAction(item.ingredient));
+      }
+    },
   });
 
-  const bunBottom = ingredients.map((ingredient) => {
-    // Нижняя булка
-    return (
-      <ConstructorElement
-        type="bottom"
-        isLocked={true}
-        text={ingredient.name + " " + "(низ)"}
-        price={ingredient.price}
-        thumbnail={ingredient.image}
-        key={ingredient.id}
-      />
+  useEffect(() => {
+    const sum = ingredients.reduce(
+      (current, total) => current + total.price,
+      bun === null || bun.price === undefined ? 0 : bun.price * 2
     );
-  });
+    setTotalPrice(sum);
+  }, [bun, ingredients]);
+
+  const openModal = () => {
+    const ingredientsId = ingredients.map((item) => item._id);
+    const bunId = bun._id;
+    const orderItems = [bunId, ...ingredientsId, bunId];
+
+    dispatch(postOrderAction(orderItems));
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    // dispatch(postOrderClear());
+    dispatch(resetIngredientAction());
+    setShowModal(false);
+  };
 
   return (
-    <section className={styles.box}>
+    <section className={styles.box} ref={dropTarget}>
+      {bun || ingredients.length > 0 ? (
       <div className={styles.elements}>
-        <div className={styles.element}>{bunTop[0]}</div>
+        {bun && (
+          <div className={styles.bun}>
+            <ConstructorElement
+              type="top"
+              isLocked={true}
+              text={`${bun.name} (верх)`}
+              price={`${bun.price}`}
+              thumbnail={`${bun.image}`}
+            />
+          </div>
+        )}
+        <ul className={styles.content}>
+          {ingredients.length > 0 ? (
+            ingredients.map((item, index) => (
+            <li className={styles.element} key={item._id}>
+              <ConstructorIngredient item={item} index={index} />
+            </li>
+            ))
+          ) : (
+            <div className={styles.chekConstructorTwo}>
+            <p className="text text_type_main-medium text_color_inactive" style={{textAlign: "center"}}>
+              Теперь добавьте ингредиенты.
+            </p>
+            <div className={styles.chekImage}></div>
+            <p className="text text_type_main-medium">
+              Это будет вкусный бургер!
+            </p>
+          </div>
+          )}
+        </ul>
+        {bun && (
+          <div className={styles.bun}>
+            <ConstructorElement
+              type="bottom"
+              isLocked={true}
+              text={`${bun.name} (низ)`}
+              price={`${bun.price}`}
+              thumbnail={`${bun.image}`}
+            />
+          </div>
+        )}
       </div>
-
-      <ul className={styles.content}>
-        {ingredients.map((ingredient) => {
-          if (ingredient.type !== "bun") {
-            return (
-              <li className={styles.element} key={ingredient._id}>
-                <div className={styles.dots}></div>
-                <ConstructorElement
-                  text={ingredient.name}
-                  price={ingredient.price}
-                  thumbnail={ingredient.image}
-                />
-              </li>
-            );
-          }
-        })}
-      </ul>
-
-      <div className={styles.elements}>
-        <div className={styles.element}>{bunBottom[0]}</div>
-      </div>
+      ) : (
+        <div className={styles.chekConstructorOne}>
+            <p className="text text_type_main-medium text_color_inactive" style={{textAlign: "center"}}>
+              Перенестите необходимые ингредиенты для бургера в эту часть
+              экрана.
+            </p>
+            <div className={styles.chekImage}></div>
+            <p className="text text_type_main-medium">
+              Начните с булочки.
+            </p>
+          </div>
+      )}
 
       <div className={styles.bottom}>
         <div className={styles.sum}>
-          <p className="text text_type_digits-medium">610</p>
+          <p className="text text_type_digits-medium">{totalPrice}</p>
           <CurrencyIcon type="primary" />
         </div>
         <Button
           htmlType="button"
           type="primary"
           size="large"
-          onClick={showModal}
+          onClick={() => {
+            openModal();
+          }}
         >
           Оформить заказ
         </Button>
       </div>
 
-      {openModal && (
-        <Modal onClose={handleClose}>
-          <OrderDetails />
+      {showModal && (
+        <Modal onClose={closeModal}>
+          <OrderDetails
+            orderNumber={
+              orderNumber && orderNumber.order && orderNumber.order.number
+            }
+          />
         </Modal>
       )}
     </section>
   );
 }
-
-BurgerConstructor.propTypes = {
-  ingredients: PropTypes.array.isRequired,
-};
 
 export default BurgerConstructor;

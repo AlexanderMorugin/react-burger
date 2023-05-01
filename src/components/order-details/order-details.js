@@ -1,10 +1,10 @@
 import styles from "./order-details.module.css";
 
-function OrderDetails() {
+function OrderDetails({orderNumber}) {
   return (
     <div className={styles.container}>
       <p className={"text text_type_digits-large" + " " + styles.number}>
-        034536
+      {orderNumber}
       </p>
       <p className="text text_type_main-medium mt-8">идентификатор заказа</p>
       <div className={styles.ok}></div>
