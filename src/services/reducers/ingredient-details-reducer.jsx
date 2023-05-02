@@ -1,4 +1,7 @@
-import { SET_CURRENT_INGREDIENT } from "../actions/ingredient-details-actions";
+import {
+  SET_CURRENT_INGREDIENT,
+  RESET_CURRENT_INGREDIENT,
+} from "../actions/ingredient-details-actions";
 
 const initialState = {
   сurrentIngredient: "",
@@ -9,6 +12,12 @@ export const ingredientDetailsReducer = (state = initialState, action) => {
       return {
         ...state,
         сurrentIngredient: { ...state.сurrentIngredient, ...action.data },
+      };
+    }
+    case RESET_CURRENT_INGREDIENT: {
+      return {
+        ...state,
+        сurrentIngredient: "",
       };
     }
     default: {

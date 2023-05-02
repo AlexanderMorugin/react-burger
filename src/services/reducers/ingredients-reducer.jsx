@@ -4,7 +4,7 @@ import {
   GET_INGREDIENTS_FAILED,
 } from "../actions/ingredients-actions";
 
-const initialState  = {
+const initialState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
@@ -34,4 +34,3 @@ export const ingredientsReducer = (state = initialState, action) => {
       return state;
   }
 };
-

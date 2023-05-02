@@ -5,6 +5,7 @@ import styles from "./ingredients-list.module.css";
 
 const IngredientsList = forwardRef((props, ref) => {
   const { title, openModal, data, id } = props;
+
   return (
     <div ref={ref} id={id}>
       <h2 className="text_type_main-medium mt-10">{title}</h2>

@@ -13,7 +13,9 @@ import ingredientPropTypes from "../../utils/ingredient-prop-types";
 
 const IngredientElement = ({ ingredient, onClick }) => {
   const { image, price, name } = ingredient;
-  const { bun, ingredients } = useSelector((state) => state.constructorStore);
+
+  const getConstructorData = (state) => state.constructorStore;
+  const { bun, ingredients } = useSelector(getConstructorData);
 
   const [{ opacity }, dragRef] = useDrag({
     type: "ingredients",

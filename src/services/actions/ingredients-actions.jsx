@@ -1,4 +1,4 @@
-import { URL_GET_INGREDIENTS } from "../../utils/constants";
+import { URL_GET_INGREDIENTS, checkResponse } from "../../utils/api";
 
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
@@ -16,10 +16,6 @@ export const getIngredientsSuccess = (data) => ({
 export const getIngredientsFailed = () => ({
   type: GET_INGREDIENTS_FAILED,
 });
-
-const checkResponse = (res) => {
-  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
-};
 
 export const getIngredientsAction = () => {
   return async (dispatch) => {

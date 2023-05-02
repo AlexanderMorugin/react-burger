@@ -1,16 +1,21 @@
-import { useMemo, useRef, useState, useEffect } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useSelector, useDispatch } from "react-redux";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientsList from "../ingredients-list/ingredients-list";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
-import { setCurrentIngredientAction } from "../../services/actions/ingredient-details-actions";
+import {
+  setCurrentIngredientAction,
+  resetCurrentIngredientAction,
+} from "../../services/actions/ingredient-details-actions";
 import styles from "./burger-ingredients.module.css";
 
 const BurgerIngredients = () => {
   const dispatch = useDispatch();
-  const ingredientStore = useSelector((state) => state.ingredientsStore);
+
+  const getIngredientsData = (state) => state.ingredientsStore;
+  const ingredientsData = useSelector(getIngredientsData);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -19,6 +24,7 @@ const BurgerIngredients = () => {
     setShowModal(true);
   };
   const closeModal = () => {
+    dispatch(resetCurrentIngredientAction());
     setShowModal(false);
   };
 
@@ -53,26 +59,26 @@ const BurgerIngredients = () => {
 
   const buns = useMemo(
     () =>
-      ingredientStore.ingredients.filter((item) => {
+      ingredientsData.ingredients.filter((item) => {
         return item.type === "bun";
       }),
-    [ingredientStore]
+    [ingredientsData]
   );
 
   const sauce = useMemo(
     () =>
-      ingredientStore.ingredients.filter((item) => {
+      ingredientsData.ingredients.filter((item) => {
         return item.type === "sauce";
       }),
-    [ingredientStore]
+    [ingredientsData]
   );
 
   const main = useMemo(
     () =>
-      ingredientStore.ingredients.filter((item) => {
+      ingredientsData.ingredients.filter((item) => {
         return item.type === "main";
       }),
-    [ingredientStore]
+    [ingredientsData]
   );
 
   return (
