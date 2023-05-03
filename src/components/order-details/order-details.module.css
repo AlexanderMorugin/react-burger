@@ -20,6 +20,18 @@
 
 .number {
   text-shadow: 0 4px 32px rgba(51, 51, 255, .5), 0 8px 8px rgba(51, 51, 255, .5), 0 0 16px rgba(51, 51, 255, .25);
+  transform: translateX(100%);
+  opacity: 0;
+  -webkit-animation-name: fade;
+          animation-name: fade;
+  -webkit-animation-delay: .3s;
+          animation-delay: .3s;
+  -webkit-animation-duration: .8s;
+          animation-duration: .8s;          
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 
 .ok {
@@ -31,4 +43,48 @@
   box-sizing: border-box;
   margin: 60px 0 0 0;
   padding: 0;
+  opacity: 0;
+  -webkit-animation-name: scale;
+          animation-name: scale;
+  -webkit-animation-delay: .8s;
+          animation-delay: .8s;
+  -webkit-animation-duration: .3s;
+          animation-duration: .3s;          
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

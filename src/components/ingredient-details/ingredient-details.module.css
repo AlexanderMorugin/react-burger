@@ -24,10 +24,31 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  animation: pulse 3s linear infinite;
 }
 
-.centered {
-  text-align: center;
+@-webkit-keyframes pulse {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.9);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.9);
+  }
 }
 
 .nutritions {
@@ -48,4 +69,197 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+.title {
+  opacity: 0;
+  -webkit-animation-name: scroll_title;
+          animation-name: scroll_title;
+  -webkit-animation-delay: .5s;
+          animation-delay: .5s;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;          
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.name {
+  text-align: center;
+  opacity: 0;
+  -webkit-animation-name: scroll;
+          animation-name: scroll;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;          
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.caloriesText {
+  opacity: 0;
+  -webkit-animation-name: scroll;
+          animation-name: scroll;
+  -webkit-animation-delay: .3s;
+          animation-delay: .3s;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;          
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.proteinsText {
+  opacity: 0;
+  -webkit-animation-name: scroll;
+          animation-name: scroll;
+  -webkit-animation-delay: .5s;
+          animation-delay: .5s;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;          
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.fatText{
+  opacity: 0;
+  -webkit-animation-name: scroll;
+          animation-name: scroll;
+  -webkit-animation-delay: .7s;
+          animation-delay: .7s;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;          
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.carbohydratesText {
+  opacity: 0;
+  -webkit-animation-name: scroll;
+          animation-name: scroll;
+  -webkit-animation-delay: .9s;
+          animation-delay: .9s;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;          
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.caloriesNumber {
+  opacity: 0;
+  -webkit-animation-name: scroll;
+          animation-name: scroll;
+  -webkit-animation-delay: .5s;
+          animation-delay: .5s;
+  -webkit-animation-duration: .6s;
+          animation-duration: .6s;          
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.proteinsNumber {
+  opacity: 0;
+  -webkit-animation-name: scroll;
+          animation-name: scroll;
+  -webkit-animation-delay: .7s;
+          animation-delay: .7s;
+  -webkit-animation-duration: .6s;
+          animation-duration: .6s;          
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.fatNumber {
+  opacity: 0;
+  -webkit-animation-name: scroll;
+          animation-name: scroll;
+  -webkit-animation-delay: .9s;
+          animation-delay: .9s;
+  -webkit-animation-duration: .6s;
+          animation-duration: .6s;          
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.carbohydratesNumber {
+  opacity: 0;
+  -webkit-animation-name: scroll;
+          animation-name: scroll;
+  -webkit-animation-delay: 1.1s;
+          animation-delay: 1.1s;
+  -webkit-animation-duration: .6s;
+          animation-duration: .6s;          
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes scroll_title {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scroll_title {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes scroll {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  50% {
+    opacity: .5;
+    transform: translateY(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scroll {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  50% {
+    opacity: .5;
+    transform: translateY(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
