@@ -1,4 +1,4 @@
-import { URL_POST_ORDER, checkResponse } from "../../utils/api";
+import { BASE_URL, URL_POST_ORDER, checkResponse } from "../../utils/api";
 
 export const POST_ORDER_REQUEST = "POST_ORDER_REQUEST";
 export const POST_ORDER_SUCCESS = "POST_ORDER_SUCCESS";
@@ -28,7 +28,7 @@ export const postOrderResetAction = () => {
 export const postOrderAction = (data) => async (dispatch) => {
   try {
     dispatch(postOrderRequestAction());
-    const response = await fetch(`${URL_POST_ORDER}`, {
+    const response = await fetch(`${BASE_URL}/orders`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -21,6 +21,8 @@ import OrderDetails from "../order-details/order-details";
 import ConstructorIngredient from "../constructor-ingredient/constructor-ingredient";
 import styles from "./burger-constructor.module.css";
 
+import { motion } from "framer-motion";
+
 const BurgerConstructor = () => {
   const getConstructorData = (state) => state.constructorStore;
   const { bun, ingredients } = useSelector(getConstructorData);
@@ -47,7 +49,7 @@ const BurgerConstructor = () => {
     }),
   });
 
-  const backgroundColor = isHover ? '#131316' : 'transparent';
+  const backgroundColor = isHover ? "#131316" : "transparent";
 
   useEffect(() => {
     const sum = ingredients.reduce(
@@ -73,7 +75,14 @@ const BurgerConstructor = () => {
   };
 
   return (
-    <section className={styles.box} ref={dropTarget}>
+    <motion.section
+      className={styles.box}
+      ref={dropTarget}
+      // анимация
+      initial={{ x: "100%" }}
+      animate={{ x: "0" }}
+      transition={{ ease: "easeOut", duration: 1.5 }}
+    >
       {bun || ingredients.length > 0 ? (
         <div className={styles.elements}>
           {bun && (
@@ -95,7 +104,10 @@ const BurgerConstructor = () => {
                 </li>
               ))
             ) : (
-              <div className={styles.chekConstructorTwo} style={{backgroundColor}}>
+              <div
+                className={styles.chekConstructorTwo}
+                style={{ backgroundColor }}
+              >
                 <p
                   className={
                     "text text_type_main-medium text_color_inactive " +
@@ -128,7 +140,7 @@ const BurgerConstructor = () => {
           )}
         </div>
       ) : (
-        <div className={styles.chekConstructorOne} style={{backgroundColor}}>
+        <div className={styles.chekConstructorOne} style={{ backgroundColor }}>
           <p
             className={
               "text text_type_main-medium text_color_inactive " +
@@ -170,7 +182,7 @@ const BurgerConstructor = () => {
           />
         </Modal>
       )}
-    </section>
+    </motion.section>
   );
 };
 
