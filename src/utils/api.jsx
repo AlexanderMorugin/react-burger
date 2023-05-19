@@ -1,16 +1,5 @@
 export const BASE_URL = "https://norma.nomoreparties.space/api";
 
-// export const INGREDIENTS_URL = "/ingredients";
-// export const ORDER_URL = "/orders";
-// export const FORGOT_PASS_URL = "/password-reset";
-// export const RESET_PASS_URL = "/password-reset/reset";
-// export const REGISTER_USER_URL = "/auth/register";
-// export const LOGIN_URL = "/auth/login";
-// export const USER_URL = "/auth/user";
-// export const TOKEN_URL = "/auth/token";
-// export const LOGOUT_URL = "/auth/logout";
-
-
 export const checkResponse = (res) => {
   return res.ok
     ? res.json()
@@ -73,5 +62,50 @@ export const fetchLoginUser = (email, password) => {
   }).then(checkResponse);
 };
 
+export const fetchLogout = (refreshToken) => {
+  return fetch(`${BASE_URL}/auth/logout`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token: refreshToken,
+    }),
+  }).then(checkResponse);
+};
 
+export const fetchGetUser = (accessToken) => {
+  return fetch(`${BASE_URL}/auth/user`, {
+    headers: {
+      "Content-Type": "application/json",
+      authorization: accessToken,
+    },
+  }).then(checkResponse);
+};
 
+export const fetchRefreshToken = (refreshToken) => {
+  return fetch(`${BASE_URL}/auth/token`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token: refreshToken,
+    }),
+  }).then(checkResponse);
+};
+
+export const fetchChangeUser = (name, email, password, accessToken) => {
+  return fetch(`${BASE_URL}/auth/user`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: accessToken,
+    },
+    body: JSON.stringify({
+      name,
+      email,
+      password,
+    }),
+  }).then(checkResponse);
+};

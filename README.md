@@ -1,4 +1,4 @@
 ## Учебный проект "React-Burger"
 
 
-### [Смотреть сайт](https://alexandermorugin.github.io/react-burger/)
+### [Смотреть как получилось](https://alexandermorugin.github.io/react-burger/)

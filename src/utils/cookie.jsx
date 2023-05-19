@@ -10,7 +10,7 @@ export function setCookie(name, value, props) {
   let exp = props.expires;
   if (typeof exp == "number" && exp) {
     const d = new Date();
-    d.setTime(d.getTime() + exp * 1000);
+    d.setTime(d.getTime() + exp * 1200);
     exp = props.expires = d;
   }
   if (exp && exp.toUTCString) {
@@ -29,6 +29,5 @@ export function setCookie(name, value, props) {
 }
 
 export function deleteCookie(name) {
-
-  setCookie(name,null, { expires: -1 });
+  setCookie(name, null, { expires: -1 });
 }

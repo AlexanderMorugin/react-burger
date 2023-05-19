@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
   PasswordInput,
@@ -9,11 +9,8 @@ import {
 import styles from "../pages.module.css";
 
 import { motion } from "framer-motion";
-// import { setNewPassword } from "../../services/actions/password-actions";
 import { fetchResetPassword } from "../../utils/api";
 import {
-  forgotPasswordSucces,
-  resetPasswordAction,
   resetPasswordFailed,
   resetPasswordSucces,
 } from "../../services/actions/auth-actions";
@@ -62,7 +59,6 @@ export const ResetPasswordPage = () => {
             name={"password"}
             type={"text"}
             placeholder={"Введите новый пароль"}
-            // onChange={handleChangePassword}
             onChange={(e) => setPassword(e.target.value)}
             icon={"ShowIcon"}
             value={password}
@@ -83,7 +79,6 @@ export const ResetPasswordPage = () => {
             name={"token"}
             type={"text"}
             placeholder={"Введите код из письма"}
-            // onChange={handleChangeToken}
             onChange={(e) => setToken(e.target.value)}
             value={token}
             errorText={"Введён некорректный код из письма"}

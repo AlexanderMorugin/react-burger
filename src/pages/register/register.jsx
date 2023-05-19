@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
   PasswordInput,
@@ -10,17 +10,10 @@ import {
 import styles from "../pages.module.css";
 
 import { motion } from "framer-motion";
-// import { setNewPassword } from "../../services/actions/password-actions";
-import {
-  fetchRegisterUser,
-  // fetchResetPassword,
-  // registerUserRequest,
-} from "../../utils/api";
+import { fetchRegisterUser } from "../../utils/api";
 import {
   registerFailed,
   registerSuccess,
-  // registerUser,
-  // setRegistration,
 } from "../../services/actions/auth-actions";
 
 import { setCookie } from "../../utils/cookie";
@@ -32,9 +25,6 @@ export const RegisterPage = () => {
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-
-  // const userData = useSelector((state) => state.userInfo.user);
-  // const token = useSelector((state) => state.userInfo.accessToken);
 
   const handleSubmit = (e) => {
     e.preventDefault();

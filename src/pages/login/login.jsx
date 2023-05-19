@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
   PasswordInput,
@@ -9,12 +9,10 @@ import {
 import styles from "../pages.module.css";
 
 import { motion } from "framer-motion";
-// import { setNewPassword } from "../../services/actions/password-actions";
-import { fetchLoginUser, fetchResetPassword } from "../../utils/api";
+import { fetchLoginUser } from "../../utils/api";
 import {
   loginFailed,
   loginSuccess,
-  loginUser,
 } from "../../services/actions/auth-actions";
 import { setCookie } from "../../utils/cookie";
 
@@ -24,13 +22,6 @@ export const LoginPage = () => {
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   dispatch(loginUser(email, password));
-  //   navigate('/');
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,8 +36,6 @@ export const LoginPage = () => {
         dispatch(loginFailed(err));
         console.log(err);
       });
-
-    // dispatch(loginSuccess());
     navigate("/");
   };
 

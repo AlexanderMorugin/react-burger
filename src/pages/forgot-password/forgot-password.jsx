@@ -9,16 +9,12 @@ import styles from "../pages.module.css";
 
 import { motion } from "framer-motion";
 import {
-  postEmailAction,
   forgotPasswordSucces,
   forgotPasswordFailed,
 } from "../../services/actions/auth-actions";
 
 import { fetchForgotPassword } from "../../utils/api";
-import {
-  checkEmailAction,
-  checkEmailSucces,
-} from "../../services/actions/auth-actions";
+
 
 export const ForgotPasswordPage = () => {
   const dispatch = useDispatch();

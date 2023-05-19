@@ -1,27 +1,50 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
-  Input,
-  EmailInput,
+  Button,
+  PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
 
 import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { getCookie } from "../../utils/cookie";
+import {
+  changeUserAction,
+  getUserAction,
+  logoutAction,
+} from "../../services/actions/auth-actions";
 
 export const ProfilePage = () => {
-  const [login, setLogin] = React.useState("mail@stellar.burgers");
-  const onChangeLogin = (e) => {
-    setLogin(e.target.login);
+  const dispatch = useDispatch();
+  // const navigate = useNavigate();
+
+  const token = useSelector((state) => state.authStore.accessToken);
+
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  useEffect((data) => {
+    dispatch(getUserAction(data));
+    // navigate("/profile");
+  }, [dispatch]);
+
+  const handleLogout = () => {
+    const refreshToken = getCookie("refreshToken");
+    dispatch(logoutAction(refreshToken));
   };
 
-  const [name, setName] = React.useState("Марк");
-  const onChangeName = (e) => {
-    setName(e.target.name);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(changeUserAction(name, email, password, token));
   };
 
-  const [password, setPassword] = React.useState("******");
-  const onChangePassword = (e) => {
-    setPassword(e.target.password);
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setName("");
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -29,9 +52,9 @@ export const ProfilePage = () => {
       <div className={styles.profile}>
         <div className={styles.panel}>
           <ul
-            className={`${styles.profile_links} text text_type_main-medium mb-6`}
+            className={`${styles.profile_links} text text_type_main-medium mb-20`}
           >
-            <li>
+            <li className={styles.link_box}>
               <NavLink
                 className={({ isActive }) =>
                   isActive
@@ -50,7 +73,7 @@ export const ProfilePage = () => {
                 </motion.p>
               </NavLink>
             </li>
-            <li>
+            <li className={styles.link_box}>
               <NavLink
                 className={({ isActive }) =>
                   isActive
@@ -69,14 +92,15 @@ export const ProfilePage = () => {
                 </motion.p>
               </NavLink>
             </li>
-            <li>
+            <li className={styles.link_box}>
               <NavLink
                 className={({ isActive }) =>
                   isActive
                     ? `${styles.profile_link_active}`
                     : `${styles.profile_link}`
                 }
-                to="/profile/orders/:id"
+                onClick={handleLogout}
+                to="/login"
               >
                 <motion.p
                   // анимация
@@ -91,10 +115,7 @@ export const ProfilePage = () => {
           </ul>
 
           <motion.p
-            className={
-              "text text_type_main-default text_color_inactive mb-6 " +
-              styles.description
-            }
+            className={`${styles.description} text text_type_main-default text_color_inactive`}
             // анимация
             initial={{ y: "300%", opacity: 0 }}
             animate={{ y: "0", opacity: 1 }}
@@ -104,20 +125,23 @@ export const ProfilePage = () => {
           </motion.p>
         </div>
 
-        <div className={styles.container}>
+        <form className={styles.profile_container} onSubmit={handleSubmit}>
           <motion.div
             // анимация
             initial={{ x: "100%", opacity: 0 }}
             animate={{ x: "0", opacity: 1 }}
             transition={{ ease: "easeOut", duration: 1.5 }}
           >
-            <EmailInput
-              onChange={onChangeName}
-              value={name}
+            <PasswordInput
               name={"name"}
-              placeholder="Имя"
-              isIcon={true}
+              type={"text"}
+              placeholder={"Имя"}
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              errorText={"Разве это ваше настоящее имя?"}
+              icon={"EditIcon"}
               extraClass="mb-6"
+              required
             />
           </motion.div>
 
@@ -127,13 +151,16 @@ export const ProfilePage = () => {
             animate={{ x: "0", opacity: 1 }}
             transition={{ ease: "easeOut", duration: 1 }}
           >
-            <EmailInput
-              onChange={onChangeLogin}
-              value={login}
+            <PasswordInput
               name={"email"}
-              placeholder="Логин"
-              isIcon={true}
+              type={"email"}
+              placeholder={"Логин"}
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              errorText={"Забыли адрес своей почты?"}
+              icon={"EditIcon"}
               extraClass="mb-6"
+              required
             />
           </motion.div>
 
@@ -143,15 +170,54 @@ export const ProfilePage = () => {
             animate={{ x: "0", opacity: 1 }}
             transition={{ ease: "easeOut", duration: 0.5 }}
           >
-            <EmailInput
-              onChange={onChangePassword}
-              value={password}
+            <PasswordInput
               name={"password"}
-              placeholder="Пароль"
-              isIcon={true}
+              type={"text"}
+              placeholder={"Пароль"}
+              onChange={(e) => setPassword(e.target.value)}
+              icon={"EditIcon"}
+              value={password}
+              errorText={"Пароль все таки придется вспомнить"}
+              size={"default"}
+              extraClass="mb-6"
+              required
             />
           </motion.div>
-        </div>
+
+          <div className={styles.buttons}>
+            <motion.div
+              // анимация
+              initial={{ y: "300%", opacity: 0 }}
+              animate={{ y: "0", opacity: 1 }}
+              transition={{ ease: "easeOut", delay: 0.5, duration: 1 }}
+            >
+              <Button
+                type="secondary"
+                size="medium"
+                htmlType="button"
+                onClick={handleCancel}
+                disabled={name && email && password ? false : true}
+              >
+                Отмена
+              </Button>
+            </motion.div>
+            <motion.div
+              // анимация
+              initial={{ y: "300%", opacity: 0 }}
+              animate={{ y: "0", opacity: 1 }}
+              transition={{ ease: "easeOut", duration: 1.5 }}
+            >
+              <Button
+                type="primary"
+                size="medium"
+                htmlType="submit"
+                disabled={name && email && password ? false : true}
+              >
+                Сохранить
+              </Button>
+            </motion.div>
+          </div>
+        </form>
       </div>
     </section>
   );
