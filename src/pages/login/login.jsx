@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   PasswordInput,
   EmailInput,
@@ -19,6 +19,8 @@ import { setCookie } from "../../utils/cookie";
 export const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // const location = useLocation();
+  // const fromPage = location.state?.from?.pathname || "/";
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -36,12 +38,15 @@ export const LoginPage = () => {
         dispatch(loginFailed(err));
         console.log(err);
       });
-    navigate("/");
+    navigate("/profile");
   };
 
   return (
     <section className={styles.box}>
       <form className={styles.container} onSubmit={handleSubmit}>
+
+        {/* {fromPage} */}
+
         <motion.h1
           className="text text_type_main-medium mb-6"
           // анимация

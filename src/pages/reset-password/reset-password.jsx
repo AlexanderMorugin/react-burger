@@ -1,5 +1,5 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
   PasswordInput,
@@ -21,6 +21,14 @@ export const ResetPasswordPage = () => {
 
   const [password, setPassword] = React.useState("");
   const [token, setToken] = React.useState("");
+
+  const email = useSelector((state) => state.authStore.email); 
+
+  useEffect(() => {
+    if (!email) {
+      navigate('/forgot-password')
+    }
+  }, [email])
 
   const handleSubmit = (e) => {
     e.preventDefault();

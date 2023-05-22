@@ -17,17 +17,20 @@ import {
 
 export const ProfilePage = () => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
-
+  const navigate = useNavigate();
+  // const userData = useSelector((state) => state.authStore.user.user);
   const token = useSelector((state) => state.authStore.accessToken);
+
+  // console.log("userData ", userData)
 
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  useEffect((data) => {
-    dispatch(getUserAction(data));
-    // navigate("/profile");
+  useEffect((token) => {
+    // dispatch(getUserAction(userData));
+    dispatch(getUserAction(token));
+    navigate("/profile");
   }, [dispatch]);
 
   const handleLogout = () => {
