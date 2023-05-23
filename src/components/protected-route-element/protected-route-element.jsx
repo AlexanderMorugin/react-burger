@@ -23,10 +23,12 @@ const ProtectedRouteElement = ({children}) => {
   // const location = useLocation();
   // const dispatch = useDispatch();
   const user = useSelector((state) => state.authStore.user);
+
   
   // const user = true;
 
   console.log("ProtectedRouteElement ", user)
+
 
   // useEffect(() => {
   //   if (!user) {

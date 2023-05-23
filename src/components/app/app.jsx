@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   Routes,
   Route,
@@ -24,9 +25,11 @@ import styles from "./app.module.css";
 import ProtectedRouteElement from "../protected-route-element/protected-route-element";
 import { getCookie } from "../../utils/cookie";
 import { getUserAction } from "../../services/actions/auth-actions";
+
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 import { resetCurrentIngredientAction } from "../../services/actions/ingredient-details-actions";
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -39,6 +42,15 @@ const App = () => {
 
   const accessToken = getCookie("accessToken");
   // console.log("accessToken ", accessToken);
+
+  // const login = useSelector((state) => state.authStore.loginSucces);
+  // console.log("login ", login);
+
+  const user = useSelector((state) => state.authStore.user);
+  console.log("APP - user ", user);
+
+  const accessToken = getCookie("accessToken");
+  console.log("accessToken ", accessToken)
 
   // const login = useSelector((state) => state.authStore.loginSucces);
   // console.log("login ", login);
@@ -73,14 +85,17 @@ const App = () => {
               <ProtectedRouteElement element={<ProfilePage />} to={"/login"} />
             }
           /> */}
+
           <Route
             path="/profile"
             element={
+
               <ProtectedRouteElement>
                 <ProfilePage />
               </ProtectedRouteElement>
             }
           />
+
 
           {/* <Route path="/login" element={<LoginPage />} /> */}
           <Route
@@ -111,10 +126,12 @@ const App = () => {
             }
           />
 
+
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           {/* <Route path="/reset-password" element={(!user && !accessToken) ? <ResetPasswordPage /> : <Navigate to={"/"} />} /> */}
 
           <Route path="*" element={<NotFound404 />} />
+
 
           {/* <Route path="/ingredients/:id" element={<IngredientPage />} /> */}
           <Route
@@ -130,6 +147,7 @@ const App = () => {
             </Routes>
           </Modal>
         )}
+
       </main>
     </>
   );
