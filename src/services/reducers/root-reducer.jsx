@@ -13,3 +13,5 @@ export const rootReducer = combineReducers({
   orderStore: orderReducer,
   authStore: authReducer,
 });
+
+export const getAuthData = (state) => state.authStore;

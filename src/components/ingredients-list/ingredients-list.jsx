@@ -15,7 +15,9 @@ const IngredientsList = forwardRef((props, ref) => {
             <IngredientElement
               key={ingredient._id}
               ingredient={ingredient}
-              onClick={() => openModal(ingredient)}
+              onClick={(e) => {
+                openModal(ingredient);
+              }}
             />
           );
         })}

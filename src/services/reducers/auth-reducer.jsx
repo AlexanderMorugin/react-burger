@@ -9,12 +9,42 @@ import {
 } from "../actions/auth-actions";
 
 const initialState = {
-  authRequest: false,
-  authSucces: false,
-  authFailed: false,
+  forgotRequest: false,
+  forgotSucces: false,
+  forgotFailed: false,
 
-  email: "",
+  resetRequest: false,
+  resetSucces: false,
+  resetFailed: false,
+
+  registerRequest: false,
+  registerSucces: false,
+  registerFailed: false,
+
+  loginRequest: false,
+  loginSucces: false,
+  loginFailed: false,
+
+  logoutRequest: false,
+  logoutSucces: false,
+  logoutFailed: false,
+
+  getUserRequest: false,
+  getUserSucces: false,
+  getUserFailed: false,
+
+  changeUserRequest: false,
+  changeUserSucces: false,
+  changeUserFailed: false,
+
+  // email: "",
+  email: false,
+  accessToken: null,
   user: null,
+  // user: {
+  //   email: "",
+  //   name: "",
+  // },
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -22,23 +52,23 @@ export const authReducer = (state = initialState, action) => {
     case FORGOT_PASSWORD_REQUEST: {
       return {
         ...state,
-        authRequest: true,
-        authFailed: false,
+        forgotRequest: true,
+        forgotFailed: false,
       };
     }
     case FORGOT_PASSWORD_SUCCESS: {
       return {
         ...state,
-        authSucces: true,
-        authFailed: false,
+        forgotSucces: true,
+        forgotFailed: false,
         email: action.payload,
       };
     }
     case FORGOT_PASSWORD_FAILED: {
       return {
         ...state,
-        authSucces: false,
-        authFailed: true,
+        forgotSucces: false,
+        forgotFailed: true,
       };
     }
 
@@ -46,22 +76,22 @@ export const authReducer = (state = initialState, action) => {
     case RESET_PASSWORD_REQUEST: {
       return {
         ...state,
-        authRequest: true,
-        authFailed: false,
+        resetRequest: true,
+        resetFailed: false,
       };
     }
     case RESET_PASSWORD_SUCCESS: {
       return {
         ...state,
-        authSucces: true,
-        authFailed: false,
+        resetSucces: true,
+        resetFailed: false,
       };
     }
     case RESET_PASSWORD_FAILED: {
       return {
         ...state,
-        authSucces: false,
-        authFailed: true,
+        resetSucces: false,
+        resetFailed: true,
       };
     }
 
@@ -69,23 +99,23 @@ export const authReducer = (state = initialState, action) => {
     case REGISTER_REQUEST: {
       return {
         ...state,
-        authRequest: true,
-        authFailed: false,
+        registerRequest: true,
+        registerFailed: false,
       };
     }
     case REGISTER_SUCCESS: {
       return {
         ...state,
-        authSucces: true,
-        authFailed: false,
+        registerSucces: true,
+        registerFailed: false,
         user: action.payload,
       };
     }
     case REGISTER_FAILED: {
       return {
         ...state,
-        authSucces: false,
-        authFailed: true,
+        registerSucces: false,
+        registerFailed: true,
       };
     }
 
@@ -93,24 +123,30 @@ export const authReducer = (state = initialState, action) => {
     case LOGIN_REQUEST: {
       return {
         ...state,
-        authRequest: true,
-        authFailed: false,
+        loginRequest: true,
+        loginFailed: false,
       };
     }
     case LOGIN_SUCCESS: {
       return {
         ...state,
-        authSucces: true,
-        authFailed: false,
+        loginSucces: true,
+        loginFailed: false,
         accessToken: action.payload.accessToken,
+        // accessToken: action.payload,
         user: action.payload.user,
+        // user: action.payload,
+        // user: {
+        //   email: action.email,
+        //   name: action.name,
+        // },
       };
     }
     case LOGIN_FAILED: {
       return {
         ...state,
-        authSucces: false,
-        authFailed: true,
+        loginSucces: false,
+        loginFailed: true,
       };
     }
 
@@ -118,15 +154,15 @@ export const authReducer = (state = initialState, action) => {
     case LOGOUT_REQUEST: {
       return {
         ...state,
-        authRequest: true,
-        authFailed: false,
+        logoutRequest: true,
+        logoutFailed: false,
       };
     }
     case LOGOUT_SUCCESS: {
       return {
         ...state,
-        authSucces: true,
-        authFailed: false,
+        logoutSucces: true,
+        logoutFailed: false,
         user: null,
         accessToken: null,
       };
@@ -134,8 +170,8 @@ export const authReducer = (state = initialState, action) => {
     case LOGOUT_FAILED: {
       return {
         ...state,
-        authSucces: false,
-        authFailed: true,
+        logoutSucces: false,
+        logoutFailed: true,
       };
     }
 
@@ -143,23 +179,23 @@ export const authReducer = (state = initialState, action) => {
     case GET_USER_REQUEST: {
       return {
         ...state,
-        authRequest: true,
-        authFailed: false,
+        getUserRequest: true,
+        getUserFailed: false,
       };
     }
     case GET_USER_SUCCESS: {
       return {
         ...state,
-        authSucces: true,
-        authFailed: false,
+        getUserSucces: true,
+        getUserFailed: false,
         user: action.payload,
       };
     }
     case GET_USER_FAILED: {
       return {
         ...state,
-        authSucces: false,
-        authFailed: true,
+        getUserSucces: false,
+        getUserFailed: true,
       };
     }
 
@@ -167,23 +203,23 @@ export const authReducer = (state = initialState, action) => {
     case CHANGE_USER_REQUEST: {
       return {
         ...state,
-        authRequest: true,
-        authFailed: false,
+        changeUserRequest: true,
+        changeUserFailed: false,
       };
     }
     case CHANGE_USER_SUCCESS: {
       return {
         ...state,
-        authSucces: true,
-        authFailed: false,
+        changeUserSucces: true,
+        changeUserFailed: false,
         user: action.payload,
       };
     }
     case CHANGE_USER_FAILED: {
       return {
         ...state,
-        authSucces: false,
-        authFailed: true,
+        changeUserSucces: false,
+        changeUserFailed: true,
       };
     }
 
