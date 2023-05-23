@@ -15,7 +15,7 @@ export const NotFound404 = () => {
         >
           Ошибка
         </motion.h1>
-        <p className={`text text_type_digits-large mb-6 ${styles.not_found}`}>
+        <p className={"text text_type_digits-large mb-6 " + styles.not_found}>
           404
         </p>
 

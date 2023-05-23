@@ -1,10 +1,11 @@
 import {
   SET_CURRENT_INGREDIENT,
   RESET_CURRENT_INGREDIENT,
+  // OPEN_CURRENT_INGREDIENT,
 } from "../actions/ingredient-details-actions";
 
 const initialState = {
-  сurrentIngredient: "",
+  сurrentIngredient: null,
 };
 export const ingredientDetailsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -17,9 +18,15 @@ export const ingredientDetailsReducer = (state = initialState, action) => {
     case RESET_CURRENT_INGREDIENT: {
       return {
         ...state,
-        сurrentIngredient: "",
+        сurrentIngredient: null,
       };
     }
+    // case OPEN_CURRENT_INGREDIENT: {
+    //   return {
+    //     ...state,
+    //     currentIngredient: action.payload
+    //   };
+    // }
     default: {
       return state;
     }

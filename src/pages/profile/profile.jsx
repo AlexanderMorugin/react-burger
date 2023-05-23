@@ -55,7 +55,7 @@ export const ProfilePage = () => {
       <div className={styles.profile}>
         <div className={styles.panel}>
           <ul
-            className={`${styles.profile_links} text text_type_main-medium mb-20`}
+            className={"text text_type_main-medium mb-20 " + styles.profile_links}
           >
             <li className={styles.link_box}>
               <NavLink
@@ -118,7 +118,7 @@ export const ProfilePage = () => {
           </ul>
 
           <motion.p
-            className={`${styles.description} text text_type_main-default text_color_inactive`}
+            className={"text text_type_main-default text_color_inactive " + styles.description}
             // анимация
             initial={{ y: "300%", opacity: 0 }}
             animate={{ y: "0", opacity: 1 }}
