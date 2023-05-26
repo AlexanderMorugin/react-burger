@@ -37,14 +37,10 @@ const initialState = {
   changeUserSucces: false,
   changeUserFailed: false,
 
-  // email: "",
-  email: false,
-  accessToken: null,
+  email: "",
+  // email: false,
+  // accessToken: null,
   user: null,
-  // user: {
-  //   email: "",
-  //   name: "",
-  // },
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -133,13 +129,7 @@ export const authReducer = (state = initialState, action) => {
         loginSucces: true,
         loginFailed: false,
         accessToken: action.payload.accessToken,
-        // accessToken: action.payload,
-        user: action.payload.user,
-        // user: action.payload,
-        // user: {
-        //   email: action.email,
-        //   name: action.name,
-        // },
+        user: action.payload,
       };
     }
     case LOGIN_FAILED: {
