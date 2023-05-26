@@ -5,24 +5,12 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./app-header.module.css";
-
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getAuthData } from "../../services/reducers/root-reducer";
 
 const AppHeader = () => {
   const userData = useSelector((state) => state.authStore.user);
-  console.log("AppHeader ", userData ? userData.user.name : null)
-
-
-  // console.log("AppHeader - Name ", userData.user.user.name)
-
-  // const userName = useSelector((state) => state.authStore.user.user.name);
-  // console.log("AppHeader ", userName)
-
-  // const userData = (state) => state.authStore;
-  // const userInfo = useSelector(userData);
-  // console.log(userInfo.user.user.name)
+  // console.log("AppHeader - userData", userData ? userData.user.name : null);
 
   return (
     <header className={`${styles.header} text text_type_main-default`}>
@@ -57,7 +45,9 @@ const AppHeader = () => {
           to="/profile"
         >
           <ProfileIcon type="secondary" />
-          <span>{userData !== null ? `${userData.user.name}` : 'Личный кабинет'}</span>
+          <span>
+            {userData !== null ? `${userData.user.name}` : "Личный кабинет"}
+          </span>
         </NavLink>
       </div>
     </header>

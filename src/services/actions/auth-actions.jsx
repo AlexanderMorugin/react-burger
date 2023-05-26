@@ -3,9 +3,7 @@ import {
   fetchGetUser,
   fetchRefreshToken,
 } from "../../utils/api";
-
 import { fetchLogout } from "../../utils/api";
-
 import { setCookie, getCookie, deleteCookie } from "../../utils/cookie";
 
 export const FORGOT_PASSWORD_REQUEST = "FORGOT_PASSWORD_REQUEST";
@@ -155,20 +153,20 @@ export const changeUserSuccess = (userData) => ({
 });
 export const changeUserFailed = () => ({ type: CHANGE_USER_FAILED });
 
-export const changeUserAction = (name, email, password, token) => {
-  return function (dispatch) {
-    dispatch(changeUserRequest());
+// export const changeUserAction = (name, email, password, token) => {
+//   return function (dispatch) {
+//     dispatch(changeUserRequest());
 
-    fetchChangeUser(name, email, password, token)
-      .then((res) => {
-        if (res) {
-          dispatch(changeUserSuccess(res));
-          console.log(res);
-        }
-      })
-      .catch((err) => {
-        changeUserFailed();
-        console.log(err);
-      });
-  };
-};
+//     fetchChangeUser(name, email, password, token)
+//       .then((res) => {
+//         if (res) {
+//           dispatch(changeUserSuccess(res));
+//           console.log(res);
+//         }
+//       })
+//       .catch((err) => {
+//         changeUserFailed();
+//         console.log(err);
+//       });
+//   };
+// };

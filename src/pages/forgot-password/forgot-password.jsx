@@ -6,15 +6,12 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
-
 import { motion } from "framer-motion";
 import {
   forgotPasswordSucces,
   forgotPasswordFailed,
 } from "../../services/actions/auth-actions";
-
 import { fetchForgotPassword } from "../../utils/api";
-
 
 export const ForgotPasswordPage = () => {
   const dispatch = useDispatch();
@@ -27,12 +24,12 @@ export const ForgotPasswordPage = () => {
 
     fetchForgotPassword(email)
       .then((res) => {
-        dispatch(forgotPasswordSucces(res))
-        console.log("fetchForgotPassword ", res)
+        dispatch(forgotPasswordSucces(res));
+        console.log("fetchForgotPassword ", res);
       })
       .catch((err) => {
-        dispatch(forgotPasswordFailed(err))
-        console.log(err)
+        dispatch(forgotPasswordFailed(err));
+        console.log(err);
       });
 
     dispatch(forgotPasswordSucces(email));

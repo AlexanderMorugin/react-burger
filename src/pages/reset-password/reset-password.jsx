@@ -22,25 +22,25 @@ export const ResetPasswordPage = () => {
   const [password, setPassword] = React.useState("");
   const [token, setToken] = React.useState("");
 
-  const email = useSelector((state) => state.authStore.email); 
+  const email = useSelector((state) => state.authStore.email);
 
   useEffect(() => {
     if (!email) {
-      navigate('/forgot-password')
+      navigate("/forgot-password");
     }
-  }, [email])
+  }, [email]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchResetPassword(password, token)
-    .then((res) => {
-      dispatch(resetPasswordSucces(res))
-      console.log("fetchResetPassword ", res)
-    })
-    .catch((err) => {
-      dispatch(resetPasswordFailed(err))
-      console.log(err)
-    });
+      .then((res) => {
+        dispatch(resetPasswordSucces(res));
+        console.log("fetchResetPassword ", res);
+      })
+      .catch((err) => {
+        dispatch(resetPasswordFailed(err));
+        console.log(err);
+      });
     navigate("/login");
   };
 

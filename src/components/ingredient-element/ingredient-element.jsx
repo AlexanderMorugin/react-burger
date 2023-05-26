@@ -7,7 +7,6 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Image from "../image/image";
 import styles from "./ingredient-element.module.css";
-
 import PropTypes from "prop-types";
 import ingredientPropTypes from "../../utils/ingredient-prop-types";
 import { useMatch, useNavigate } from "react-router-dom";

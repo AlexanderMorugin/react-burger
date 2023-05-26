@@ -1,4 +1,4 @@
-import { BASE_URL, URL_POST_ORDER, checkResponse } from "../../utils/api";
+import { BASE_URL, checkResponse } from "../../utils/api";
 
 export const POST_ORDER_REQUEST = "POST_ORDER_REQUEST";
 export const POST_ORDER_SUCCESS = "POST_ORDER_SUCCESS";

@@ -10,7 +10,6 @@ import {
   resetCurrentIngredientAction,
 } from "../../services/actions/ingredient-details-actions";
 import styles from "./burger-ingredients.module.css";
-
 import { motion } from "framer-motion";
 
 const BurgerIngredients = () => {

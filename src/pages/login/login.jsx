@@ -1,33 +1,27 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   PasswordInput,
   EmailInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
-
 import { motion } from "framer-motion";
 import { fetchLoginUser } from "../../utils/api";
-import {
-  loginFailed,
-  loginSuccess,
-} from "../../services/actions/auth-actions";
+import { loginFailed, loginSuccess } from "../../services/actions/auth-actions";
 import { setCookie } from "../../utils/cookie";
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const location = useLocation();
-  // const fromPage = location.state?.from?.pathname || "/";
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     fetchLoginUser(email, password)
       .then((res) => {
         dispatch(loginSuccess(res));
@@ -45,8 +39,6 @@ export const LoginPage = () => {
   return (
     <section className={styles.box}>
       <form className={styles.container} onSubmit={handleSubmit}>
-
-        {/* {fromPage} */}
 
         <motion.h1
           className="text text_type_main-medium mb-6"

@@ -8,14 +8,12 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
-
 import { motion } from "framer-motion";
 import { fetchRegisterUser } from "../../utils/api";
 import {
   registerFailed,
   registerSuccess,
 } from "../../services/actions/auth-actions";
-
 import { setCookie } from "../../utils/cookie";
 
 export const RegisterPage = () => {
@@ -88,7 +86,6 @@ export const RegisterPage = () => {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             errorText={"Введите корректный адрес почты"}
-            // icon={false}
             extraClass="mb-6"
             required
           />

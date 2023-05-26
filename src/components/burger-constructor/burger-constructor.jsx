@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
-// import { v4 } from "uuid";
 import {
   ConstructorElement,
   CurrencyIcon,
@@ -20,8 +19,8 @@ import {
 import OrderDetails from "../order-details/order-details";
 import ConstructorIngredient from "../constructor-ingredient/constructor-ingredient";
 import styles from "./burger-constructor.module.css";
-
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const BurgerConstructor = () => {
   const getConstructorData = (state) => state.constructorStore;
@@ -31,8 +30,10 @@ const BurgerConstructor = () => {
   const orderNumber = useSelector(getOrderNumber);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // const [showModal, setShowModal] = useState(false);
+  const userData = useSelector((state) => state.authStore.user);
+
   const [totalPrice, setTotalPrice] = useState(null);
 
   const [{ isHover }, dropTarget] = useDrop({
@@ -63,15 +64,16 @@ const BurgerConstructor = () => {
     const ingredientsId = ingredients.map((item) => item._id);
     const bunId = bun._id;
     const orderItems = [bunId, ...ingredientsId, bunId];
-
-    dispatch(postOrderAction(orderItems));
-    // setShowModal(true);
+    if (!userData) {
+      navigate('/login');
+    } else {
+      dispatch(postOrderAction(orderItems));
+    }
   };
 
   const handleCloseModal = () => {
     dispatch(postOrderResetAction());
     dispatch(resetIngredientAction());
-    // setShowModal(false);
   };
 
   return (
@@ -172,7 +174,6 @@ const BurgerConstructor = () => {
         </Button>
       </div>
 
-      {/* {showModal && ( */}
       {orderNumber && (
         <Modal onClose={handleCloseModal}>
           <OrderDetails
