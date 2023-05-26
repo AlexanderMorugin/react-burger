@@ -11,9 +11,10 @@ import { useSelector } from "react-redux";
 import { getAuthData } from "../../services/reducers/root-reducer";
 
 const AppHeader = () => {
-  // const { userData } = useSelector(getAuthData);
-  // const userData = useSelector((state) => state.authStore);
-  // console.log("AppHeader - userData ", userData)
+  const userData = useSelector((state) => state.authStore.user);
+  console.log("AppHeader ", userData ? userData.user.name : null)
+
+
   // console.log("AppHeader - Name ", userData.user.user.name)
 
   // const userName = useSelector((state) => state.authStore.user.user.name);
@@ -56,8 +57,7 @@ const AppHeader = () => {
           to="/profile"
         >
           <ProfileIcon type="secondary" />
-          <span>Личный кабинет</span>
-          {/* <span>{userData.user !== null ? `${userData.user.user.name}` : 'Личный кабинет'}</span> */}
+          <span>{userData !== null ? `${userData.user.name}` : 'Личный кабинет'}</span>
         </NavLink>
       </div>
     </header>

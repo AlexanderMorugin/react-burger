@@ -17,7 +17,7 @@ export const fetchForgotPassword = (email) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      email: email,
+      email,
     }),
   }).then(checkResponse);
 };
@@ -29,8 +29,8 @@ export const fetchResetPassword = (password, token) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      password: password,
-      token: token,
+      password,
+      token,
     }),
   }).then(checkResponse);
 };

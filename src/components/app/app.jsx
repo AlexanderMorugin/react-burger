@@ -34,19 +34,18 @@ const App = () => {
   const navigate = useNavigate();
   const background = location.state && location.state.modal;
 
-  const user = useSelector((state) => state.authStore.user);
-  // console.log("APP - user ", user);
+  const userData = useSelector((state) => state.authStore.user);
+  console.log("APP - userData ", userData);
 
+  // const accessToken = null;
   const accessToken = getCookie("accessToken");
-  // console.log("accessToken ", accessToken);
-
-  // const login = useSelector((state) => state.authStore.loginSucces);
-  // console.log("login ", login);
+  console.log("APP - accessToken ", accessToken);
 
   useEffect(() => {
     dispatch(getIngredientsAction());
     dispatch(getUserAction());
   }, [dispatch]);
+
 
   const closeModal = () => {
     dispatch(resetCurrentIngredientAction());
@@ -65,62 +64,14 @@ const App = () => {
       <main className={styles.main}>
         <Routes>
           <Route path="/" element={<ConstructorPage />} />
-
-          {/* <Route path="/profile" element={<ProfilePage />} /> */}
-          {/* <Route
-            path="/profile"
-            element={
-              <ProtectedRouteElement element={<ProfilePage />} to={"/login"} />
-            }
-          /> */}
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRouteElement>
-                <ProfilePage />
-              </ProtectedRouteElement>
-            }
-          />
-
-          {/* <Route path="/login" element={<LoginPage />} /> */}
-          <Route
-            path="/login"
-            element={
-              !user && !accessToken ? <LoginPage /> : <Navigate to={"/"} />
-            }
-          />
-          {/* <Route path="/login" element={(!login && !accessToken) ? <LoginPage /> : <Navigate to={"/"} />} /> */}
-
-          {/* <Route path="/register" element={<RegisterPage />} /> */}
-          <Route
-            path="/register"
-            element={
-              !user && !accessToken ? <RegisterPage /> : <Navigate to={"/"} />
-            }
-          />
-
-          {/* <Route path="/forgot-password" element={<ForgotPasswordPage />} /> */}
-          <Route
-            path="/forgot-password"
-            element={
-              !user && !accessToken ? (
-                <ForgotPasswordPage />
-              ) : (
-                <Navigate to={"/"} />
-              )
-            }
-          />
-
+          <Route path="/login" element={(!userData && !accessToken) ? <LoginPage /> : <Navigate to={'/'} /> }/>
+          <Route path="/register" element={(!userData && !accessToken) ? <RegisterPage /> : <Navigate to={'/'} /> }/>
+          <Route path="/forgot-password" element={(!userData && !accessToken) ? <ForgotPasswordPage /> : <Navigate to={'/'}/>} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
-          {/* <Route path="/reset-password" element={(!user && !accessToken) ? <ResetPasswordPage /> : <Navigate to={"/"} />} /> */}
-
+          <Route path='/profile' element={<ProtectedRouteElement element={<ProfilePage />} to={'/login'} />} />
           <Route path="*" element={<NotFound404 />} />
-
-          {/* <Route path="/ingredients/:id" element={<IngredientPage />} /> */}
-          <Route
-            path="/ingredients/:id"
-            element={!background ? <IngredientPage /> : null}
-          />
+          <Route path="/ingredients/:id" element={!background ? <IngredientPage /> : null} />
+          
         </Routes>
 
         {background && (

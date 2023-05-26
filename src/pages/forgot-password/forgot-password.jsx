@@ -35,6 +35,7 @@ export const ForgotPasswordPage = () => {
         console.log(err)
       });
 
+    dispatch(forgotPasswordSucces(email));
     navigate("/reset-password");
   };
 

@@ -27,6 +27,7 @@ export const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     fetchLoginUser(email, password)
       .then((res) => {
         dispatch(loginSuccess(res));
