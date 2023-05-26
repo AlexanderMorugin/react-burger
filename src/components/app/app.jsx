@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   Routes,
   Route,
@@ -24,9 +25,11 @@ import styles from "./app.module.css";
 import ProtectedRouteElement from "../protected-route-element/protected-route-element";
 import { getCookie } from "../../utils/cookie";
 import { getUserAction } from "../../services/actions/auth-actions";
+
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 import { resetCurrentIngredientAction } from "../../services/actions/ingredient-details-actions";
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -40,6 +43,15 @@ const App = () => {
   // const accessToken = null;
   const accessToken = getCookie("accessToken");
   console.log("APP - accessToken ", accessToken);
+
+  const user = useSelector((state) => state.authStore.user);
+  console.log("APP - user ", user);
+
+  const accessToken = getCookie("accessToken");
+  console.log("accessToken ", accessToken)
+
+  // const login = useSelector((state) => state.authStore.loginSucces);
+  // console.log("login ", login);
 
   useEffect(() => {
     dispatch(getIngredientsAction());
@@ -64,14 +76,18 @@ const App = () => {
       <main className={styles.main}>
         <Routes>
           <Route path="/" element={<ConstructorPage />} />
+
           <Route path="/login" element={(!userData && !accessToken) ? <LoginPage /> : <Navigate to={'/'} /> }/>
           <Route path="/register" element={(!userData && !accessToken) ? <RegisterPage /> : <Navigate to={'/'} /> }/>
           <Route path="/forgot-password" element={(!userData && !accessToken) ? <ForgotPasswordPage /> : <Navigate to={'/'}/>} />
+
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path='/profile' element={<ProtectedRouteElement element={<ProfilePage />} to={'/login'} />} />
           <Route path="*" element={<NotFound404 />} />
+
           <Route path="/ingredients/:id" element={!background ? <IngredientPage /> : null} />
           
+
         </Routes>
 
         {background && (
@@ -81,6 +97,7 @@ const App = () => {
             </Routes>
           </Modal>
         )}
+
       </main>
     </>
   );
