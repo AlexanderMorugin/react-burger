@@ -25,6 +25,7 @@ export const LoginPage = () => {
     fetchLoginUser(email, password)
       .then((res) => {
         dispatch(loginSuccess(res));
+        // dispatch(loginSuccess(res.accessToken, res.refreshToken));
         setCookie("accessToken", res.accessToken);
         setCookie("refreshToken", res.refreshToken);
         console.log("fetchLoginUser ", res);
@@ -34,6 +35,7 @@ export const LoginPage = () => {
         console.log(err);
       });
     navigate("/profile");
+    // navigate("/");
   };
 
   return (

@@ -46,6 +46,7 @@ const AppHeader = () => {
         >
           <ProfileIcon type="secondary" />
           <span>
+            {/* Личный кабинет */}
             {userData !== null ? `${userData.user.name}` : "Личный кабинет"}
           </span>
         </NavLink>

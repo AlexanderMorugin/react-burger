@@ -170,7 +170,8 @@ const BurgerConstructor = () => {
           }}
           disabled={bun && ingredients.length > 0 ? false : true}
         >
-          Оформить заказ
+          {/* Оформить заказ */}
+          {userData ? "Оформить заказ" : "Авторизуйтесь"}
         </Button>
       </div>
 

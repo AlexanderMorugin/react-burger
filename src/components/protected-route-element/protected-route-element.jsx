@@ -8,16 +8,20 @@ import PropTypes from 'prop-types';
 
 const ProtectedRouteElement = ({ element, to }) => {
   const dispatch = useDispatch();
-  const token = getCookie("accessToken");
+  const accessToken = getCookie("accessToken");
   const userData = useSelector((state) => state.authStore.user);
+  // const token = true;
+  // const userData = true;
+  // const token = false;
+  // const userData = false;
 
-  useEffect(() => {
-    if (!userData) {
-      dispatch(getUserAction(userData));
-    }
-  }, [dispatch, userData]);
+  // useEffect(() => {
+  //   if (!userData) {
+  //     dispatch(getUserAction(userData));
+  //   }
+  // }, [dispatch, userData]);
 
-  return (userData && token) ? element : <Navigate to={to} replace />;
+  return (userData && accessToken) ? element : <Navigate to={to} replace />;
 };
 
 export default ProtectedRouteElement;

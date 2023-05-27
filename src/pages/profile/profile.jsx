@@ -31,19 +31,19 @@ export const ProfilePage = () => {
     password: "",
   });
 
-  useEffect(() => {
-    dispatch(getUserAction());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getUserAction());
+  // }, [dispatch]);
 
-  useEffect(() => {
-    if (userData) {
-      setUserValues({
-        name: userData.user.name || "",
-        email: userData.user.email || "",
-        password: "",
-      });
-    }
-  }, [userData]);
+  // useEffect(() => {
+  //   if (userData) {
+  //     setUserValues({
+  //       name: userData.user.name || "",
+  //       email: userData.user.email || "",
+  //       password: "",
+  //     });
+  //   }
+  // }, [userData]);
 
   const token = useSelector((state) => state.authStore.accessToken);
   // console.log("ProfilePage - accessToken ", token);

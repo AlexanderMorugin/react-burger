@@ -67,6 +67,13 @@ export const loginSuccess = (token) => ({
   type: LOGIN_SUCCESS,
   payload: token,
 });
+// export const loginSuccess = (accessToken, refreshToken) => ({
+//   type: LOGIN_SUCCESS,
+//   payload: {
+//     accessToken: accessToken,
+//     refreshToken: refreshToken,
+//   },
+// });
 export const loginFailed = () => ({
   type: LOGIN_FAILED,
 });
