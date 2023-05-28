@@ -25,17 +25,16 @@ export const LoginPage = () => {
     fetchLoginUser(email, password)
       .then((res) => {
         dispatch(loginSuccess(res));
-        // dispatch(loginSuccess(res.accessToken, res.refreshToken));
-        setCookie("accessToken", res.accessToken);
-        setCookie("refreshToken", res.refreshToken);
+        setCookie("accessToken", res.accessToken, { path: '/' });
+        setCookie("refreshToken", res.refreshToken, { path: '/' });
         console.log("fetchLoginUser ", res);
       })
       .catch((err) => {
         dispatch(loginFailed(err));
         console.log(err);
       });
-    navigate("/profile");
-    // navigate("/");
+    // navigate("/profile");
+    navigate("/");
   };
 
   return (
