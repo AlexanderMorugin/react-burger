@@ -67,13 +67,6 @@ export const loginSuccess = (token) => ({
   type: LOGIN_SUCCESS,
   payload: token,
 });
-// export const loginSuccess = (accessToken, refreshToken) => ({
-//   type: LOGIN_SUCCESS,
-//   payload: {
-//     accessToken: accessToken,
-//     refreshToken: refreshToken,
-//   },
-// });
 export const loginFailed = () => ({
   type: LOGIN_FAILED,
 });
@@ -96,8 +89,8 @@ export const logoutAction = (token) => {
     fetchLogout(token)
       .then((res) => {
         if (res) {
-          deleteCookie("accessToken");
-          deleteCookie("refreshToken");
+          deleteCookie("accessToken", { path: '/' });
+          deleteCookie("refreshToken", { path: '/' });
           dispatch(logoutSuccess(res));
           console.log(res);
         }
@@ -160,20 +153,3 @@ export const changeUserSuccess = (userData) => ({
 });
 export const changeUserFailed = () => ({ type: CHANGE_USER_FAILED });
 
-// export const changeUserAction = (name, email, password, token) => {
-//   return function (dispatch) {
-//     dispatch(changeUserRequest());
-
-//     fetchChangeUser(name, email, password, token)
-//       .then((res) => {
-//         if (res) {
-//           dispatch(changeUserSuccess(res));
-//           console.log(res);
-//         }
-//       })
-//       .catch((err) => {
-//         changeUserFailed();
-//         console.log(err);
-//       });
-//   };
-// };

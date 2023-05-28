@@ -30,8 +30,8 @@ export const RegisterPage = () => {
     fetchRegisterUser(email, password, name)
       .then((res) => {
         dispatch(registerSuccess(res));
-        setCookie("accessToken", res.accessToken);
-        setCookie("refreshToken", res.refreshToken);
+        setCookie("accessToken", res.accessToken, { path: '/' });
+        setCookie("refreshToken", res.refreshToken, { path: '/' });
         console.log("fetchRegisterUser ", res);
       })
       .catch((err) => {
@@ -67,7 +67,6 @@ export const RegisterPage = () => {
             onChange={(e) => setName(e.target.value)}
             value={name}
             errorText={"Вас правда так зовут?"}
-            // icon={false}
             extraClass="mb-6"
             required
           />

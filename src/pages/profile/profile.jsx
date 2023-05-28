@@ -35,15 +35,16 @@ export const ProfilePage = () => {
   //   dispatch(getUserAction());
   // }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (userData) {
-  //     setUserValues({
-  //       name: userData.user.name || "",
-  //       email: userData.user.email || "",
-  //       password: "",
-  //     });
-  //   }
-  // }, [userData]);
+  useEffect(() => {
+    if (userData) {
+      // dispatch(getUserAction());
+      setUserValues({
+        name: userData.user.name || "",
+        email: userData.user.email || "",
+        password: "",
+      });
+    }
+  }, [userData]);
 
   const token = useSelector((state) => state.authStore.accessToken);
   // console.log("ProfilePage - accessToken ", token);
@@ -179,8 +180,8 @@ export const ProfilePage = () => {
               placeholder={"Имя"}
               onChange={(e) => {
                 const { value } = e.target;
-                setUserValues((prevValues) => ({
-                  ...prevValues,
+                setUserValues((prev) => ({
+                  ...prev,
                   name: value,
                 }));
               }}
@@ -205,8 +206,8 @@ export const ProfilePage = () => {
               placeholder={"Логин"}
               onChange={(e) => {
                 const { value } = e.target;
-                setUserValues((prevValues) => ({
-                  ...prevValues,
+                setUserValues((prev) => ({
+                  ...prev,
                   email: value.trim() !== "" ? value : "",
                 }));
               }}
@@ -230,8 +231,8 @@ export const ProfilePage = () => {
               placeholder={"Пароль"}
               onChange={(e) => {
                 const { value } = e.target;
-                setUserValues((prevValues) => ({
-                  ...prevValues,
+                setUserValues((prev) => ({
+                  ...prev,
                   password: value,
                 }));
               }}
