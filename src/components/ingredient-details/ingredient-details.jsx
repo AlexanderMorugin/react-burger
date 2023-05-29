@@ -1,20 +1,26 @@
 import { useSelector } from "react-redux";
 import Image from "../image/image";
 import styles from "./ingredient-details.module.css";
+import { useParams } from "react-router-dom";
 
 const IngredientDetails = () => {
-  const getCurrentIngredient = (state) =>
-    state.ingredientDetailsStore.сurrentIngredient;
-  const currentIngredient = useSelector(getCurrentIngredient);
+  const ingredients = useSelector(
+    (state) => state.ingredientsStore.ingredients
+  );
+
+  const { id } = useParams();
+
+  const currentIngredient = ingredients.find(
+    (ingredient) => ingredient._id === id
+  );
+
+  if (!currentIngredient) {
+    return null;
+  }
 
   return (
     <>
-      <div className={styles.top}>
-        <h2 className={"text text_type_main-large " + styles.title}>
-          Детали ингредиента
-        </h2>
-      </div>
-      <div className={styles.container} key={currentIngredient._id}>
+      <div className={styles.container}>
         <div className={styles.image}>
           <Image
             image={currentIngredient.image_large}

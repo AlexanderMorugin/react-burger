@@ -10,6 +10,7 @@ import {
   resetCurrentIngredientAction,
 } from "../../services/actions/ingredient-details-actions";
 import styles from "./burger-ingredients.module.css";
+import { motion } from "framer-motion";
 
 const BurgerIngredients = () => {
   const dispatch = useDispatch();
@@ -82,7 +83,13 @@ const BurgerIngredients = () => {
   );
 
   return (
-    <section className={styles.box}>
+    <motion.section
+      className={styles.box}
+      // анимация
+      initial={{ x: "-100%" }}
+      animate={{ x: "0" }}
+      transition={{ ease: "easeOut", duration: .5 }}
+    >
       <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
       <nav className={styles.tabs}>
         {tabs.map((tab) => (
@@ -125,7 +132,7 @@ const BurgerIngredients = () => {
           <IngredientDetails />
         </Modal>
       )}
-    </section>
+    </motion.section>
   );
 };
 

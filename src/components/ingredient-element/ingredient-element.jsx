@@ -7,12 +7,16 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Image from "../image/image";
 import styles from "./ingredient-element.module.css";
-
 import PropTypes from "prop-types";
 import ingredientPropTypes from "../../utils/ingredient-prop-types";
+import { useMatch, useNavigate } from "react-router-dom";
 
 const IngredientElement = ({ ingredient, onClick }) => {
   const { image, price, name } = ingredient;
+
+  const navigate = useNavigate();
+  const match = useMatch("/ingredients/:id");
+  const { id } = match?.params || {};
 
   const getConstructorData = (state) => state.constructorStore;
   const { bun, ingredients } = useSelector(getConstructorData);
@@ -35,10 +39,16 @@ const IngredientElement = ({ ingredient, onClick }) => {
   return (
     <li
       className={styles.element}
-      onClick={onClick}
+      onClick={() => {
+        if (id !== ingredient._id) {
+          navigate(`/ingredients/${ingredient._id}`, {
+            state: { modal: true },
+          });
+          onClick();
+        }
+      }}
       style={{ opacity }}
       ref={dragRef}
-      title="Детали ингредиента"
     >
       {counter > 0 && (
         <Counter count={counter} size="default" extraClass="m-1" />

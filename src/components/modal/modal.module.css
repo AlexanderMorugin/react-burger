@@ -21,3 +21,49 @@
   padding: 0;
   cursor: pointer;
 }
+
+.top {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 64px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  opacity: 0;
+  -webkit-animation-name: scroll_title;
+          animation-name: scroll_title;
+  -webkit-animation-delay: .5s;
+          animation-delay: .5s;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;          
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes scroll_title {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scroll_title {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

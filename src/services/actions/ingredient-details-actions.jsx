@@ -13,3 +13,4 @@ export const resetCurrentIngredientAction = () => {
     type: RESET_CURRENT_INGREDIENT,
   };
 };
+

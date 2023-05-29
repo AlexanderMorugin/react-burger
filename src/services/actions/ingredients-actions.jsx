@@ -1,8 +1,9 @@
-import { URL_GET_INGREDIENTS, checkResponse } from "../../utils/api";
+import { BASE_URL, checkResponse } from "../../utils/api";
 
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
+
 
 export const getIngredientsRequest = () => ({
   type: GET_INGREDIENTS_REQUEST,
@@ -21,7 +22,7 @@ export const getIngredientsAction = () => {
   return async (dispatch) => {
     dispatch(getIngredientsRequest());
     try {
-      const res = await fetch(URL_GET_INGREDIENTS);
+      const res = await fetch(`${BASE_URL}/ingredients`);
       const data = await checkResponse(res);
       dispatch(getIngredientsSuccess(data.data));
     } catch (error) {
@@ -29,3 +30,5 @@ export const getIngredientsAction = () => {
     }
   };
 };
+
+

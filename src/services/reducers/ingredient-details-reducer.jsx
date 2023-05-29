@@ -4,7 +4,7 @@ import {
 } from "../actions/ingredient-details-actions";
 
 const initialState = {
-  сurrentIngredient: "",
+  сurrentIngredient: null,
 };
 export const ingredientDetailsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -17,7 +17,7 @@ export const ingredientDetailsReducer = (state = initialState, action) => {
     case RESET_CURRENT_INGREDIENT: {
       return {
         ...state,
-        сurrentIngredient: "",
+        сurrentIngredient: null,
       };
     }
     default: {
