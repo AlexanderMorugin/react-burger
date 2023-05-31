@@ -1,0 +1,51 @@
+.counts_content {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  width: 580px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.counts_top {
+  display: flex;
+  gap: 36px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.counts_block {
+  display: flex;
+  flex-direction: column;
+  width: 272px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.counts_list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.counts_active {
+  color: #00CCCC;
+  margin: 0;
+  padding: 0;
+}
+
+.counts_middle {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

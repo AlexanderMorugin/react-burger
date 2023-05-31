@@ -1,0 +1,24 @@
+.orders_content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%; 
+  height: 850px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 8px 0 0;
+  list-style: none;
+}
+
+.orders_content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.orders_content::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.orders_content::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+}

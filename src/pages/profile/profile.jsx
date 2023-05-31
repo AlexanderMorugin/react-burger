@@ -6,7 +6,7 @@ import {
   EmailInput,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "../pages.module.css";
+import styles from "./profile.module.css";
 
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +18,7 @@ import {
   logoutAction,
 } from "../../services/actions/auth-actions";
 import { fetchChangeUser } from "../../utils/api";
+import { ProfileMenu } from "../../components/profile-menu/profile-menu";
 
 export const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -49,10 +50,10 @@ export const ProfilePage = () => {
   const token = useSelector((state) => state.authStore.accessToken);
   // console.log("ProfilePage - accessToken ", token);
 
-  const handleLogout = () => {
-    const refreshToken = getCookie("refreshToken");
-    dispatch(logoutAction(refreshToken));
-  };
+  // const handleLogout = () => {
+  //   const refreshToken = getCookie("refreshToken");
+  //   dispatch(logoutAction(refreshToken));
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -87,7 +88,9 @@ export const ProfilePage = () => {
   return (
     <section className={styles.boxProfile}>
       <div className={styles.profile}>
-        <div className={styles.panel}>
+        <ProfileMenu />
+
+        {/* <div className={styles.panel}>          
           <ul
             className={
               "text text_type_main-medium mb-20 " + styles.profile_links
@@ -152,7 +155,6 @@ export const ProfilePage = () => {
               </NavLink>
             </li>
           </ul>
-
           <motion.p
             className={
               "text text_type_main-default text_color_inactive " +
@@ -165,7 +167,9 @@ export const ProfilePage = () => {
           >
             В этом разделе вы можете изменить свои персональные данные
           </motion.p>
-        </div>
+        </div> */}
+
+
 
         <form className={styles.profile_container} onSubmit={handleSubmit}>
           <motion.div

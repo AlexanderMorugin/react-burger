@@ -16,6 +16,9 @@ import {
   ProfilePage,
   IngredientPage,
   NotFound404,
+  FeedPage,
+  OrderInfoPage,
+  OrdersPage,
 } from "../../pages";
 import {
   PATH_INDEX,
@@ -37,6 +40,7 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 import { resetCurrentIngredientAction } from "../../services/actions/ingredient-details-actions";
 
+
 const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -54,7 +58,7 @@ const App = () => {
     if (accessToken) {
       dispatch(getUserAction());
     }
-  }, [dispatch]);
+  }, [dispatch, accessToken]);
 
   const closeModal = () => {
     dispatch(resetCurrentIngredientAction());
@@ -73,51 +77,17 @@ const App = () => {
       <main className={styles.main}>
         <Routes>
           <Route path={PATH_INDEX} element={<ConstructorPage />} />
-          <Route
-            path={PATH_LOGIN}
-            element={
-              !getUserSucces && !accessToken ? (
-                <LoginPage />
-              ) : (
-                <Navigate to={PATH_INDEX} />
-              )
-            }
-          />
-          <Route
-            path={PATH_REGISTER}
-            element={
-              !getUserSucces && !accessToken ? (
-                <RegisterPage />
-              ) : (
-                <Navigate to={PATH_INDEX} />
-              )
-            }
-          />
-          <Route
-            path={PATH_FORGOT_RASSWORD}
-            element={
-              !getUserSucces && !accessToken ? (
-                <ForgotPasswordPage />
-              ) : (
-                <Navigate to={PATH_INDEX} />
-              )
-            }
-          />
+          <Route path={PATH_LOGIN} element={!getUserSucces && !accessToken ? (<LoginPage />) : (<Navigate to={PATH_INDEX} />)} />
+          <Route path={PATH_REGISTER} element={!getUserSucces && !accessToken ? (<RegisterPage />) : (<Navigate to={PATH_INDEX} />)} />
+          <Route path={PATH_FORGOT_RASSWORD} element={!getUserSucces && !accessToken ? (<ForgotPasswordPage />) : (<Navigate to={PATH_INDEX} />)} />
           <Route path={PATH_RESET_RASSWORD} element={<ResetPasswordPage />} />
-          <Route
-            path={PATH_PROFILE}
-            element={
-              <ProtectedRouteElement
-                element={<ProfilePage />}
-                to={PATH_LOGIN}
-              />
-            }
-          />
+          <Route path={PATH_PROFILE} element={<ProtectedRouteElement element={<ProfilePage />} to={PATH_LOGIN} />} />
           <Route path={PATH_NOT_FOUND} element={<NotFound404 />} />
-          <Route
-            path={PATH_INGREDIENT}
-            element={!background ? <IngredientPage /> : null}
-          />
+          <Route path={PATH_INGREDIENT} element={!background ? <IngredientPage /> : null} />
+
+          <Route path='/feed' element={<FeedPage />} />
+          <Route path='/order-info' element={<OrderInfoPage />} />
+          <Route path='/profile/orders' element={<OrdersPage />} />
         </Routes>
 
         {background && (

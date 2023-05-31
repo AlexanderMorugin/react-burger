@@ -1,0 +1,39 @@
+.boxProfile {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 40px 0 0 0;
+}
+
+.profile {
+  display: grid;
+  grid-template-columns: 320px 1fr 320px;
+  grid-column-gap: 60px;
+  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.profile_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 80px 0 0 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

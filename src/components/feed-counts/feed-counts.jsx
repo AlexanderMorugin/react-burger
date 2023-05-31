@@ -1,0 +1,98 @@
+import { motion } from "framer-motion";
+import styles from "./feed-counts.module.css";
+
+export const FeedCounts = () => {
+  return (
+    <div className={styles.counts_content}>
+      <div className={styles.counts_top}>
+        <div className={styles.counts_block}>
+          <motion.p
+            className="text text_type_main-medium mb-6"
+            // анимация
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.7, duration: 0.5 }}
+          >
+            Готовы:
+          </motion.p>
+          <motion.ul
+            className={"text text_type_digits-default " + styles.counts_list}
+            // анимация
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ ease: "easeOut", delay: 0.6, duration: 0.5 }}
+          >
+            <li className={styles.counts_active}>034533</li>
+            <li className={styles.counts_active}>034533</li>
+            <li className={styles.counts_active}>034533</li>
+            <li className={styles.counts_active}>034533</li>
+            <li className={styles.counts_active}>034533</li>
+            <li className={styles.counts_active}>034533</li>
+          </motion.ul>
+        </div>
+        <div className={styles.counts_block}>
+          <motion.p
+            className="text text_type_main-medium mb-6"
+            // анимация
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
+            В работе:
+          </motion.p>
+          <motion.ul
+            className={"text text_type_digits-default " + styles.counts_list}
+            // анимация
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ ease: "easeOut", delay: 0.8, duration: 0.5 }}
+          >
+            <li>034533</li>
+            <li>034533</li>
+            <li>034533</li>
+          </motion.ul>
+        </div>
+      </div>
+      <div className={styles.counts_middle}>
+        <motion.p
+          className="text text_type_main-medium"
+          // анимация
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.9, duration: 0.5 }}
+        >
+          Выполнено за все время:
+        </motion.p>
+        <motion.p
+          className="text text_type_digits-large"
+          // анимация
+          initial={{ x: "100%", opacity: 0 }}
+          animate={{ x: "0", opacity: 1 }}
+          transition={{ ease: "easeOut", delay: 1.3, duration: 0.8 }}
+        >
+          28 752
+        </motion.p>
+      </div>
+      <div className={styles.counts_middle}>
+        <motion.p
+          className="text text_type_main-medium"
+          // анимация
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1.1, duration: 0.5 }}
+        >
+          Выполнено за сегодня:
+        </motion.p>
+        <motion.p
+          className="text text_type_digits-large"
+          // анимация
+          initial={{ y: "200%", opacity: 0 }}
+          animate={{ y: "0", opacity: 1 }}
+          transition={{ ease: "easeOut", delay: 1.5, duration: 1.5 }}
+        >
+          138
+        </motion.p>
+      </div>
+    </div>
+  );
+};

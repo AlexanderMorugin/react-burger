@@ -8,7 +8,7 @@
   padding: 180px 0 0 0;
 }
 
-.boxProfile {
+/* .boxProfile {
   display: flex;
   width: 100%;
   justify-content: center;
@@ -16,7 +16,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 120px 0 0 0;
-}
+} */
 
 .container {
   display: flex;
@@ -29,7 +29,7 @@
   padding: 0;
 }
 
-.profile_container {
+/* .profile_container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -38,9 +38,9 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 
-.profile {
+/* .profile {
   display: grid;
   grid-template-columns: 320px 1fr 320px;
   grid-column-gap: 60px;
@@ -49,25 +49,25 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 
-.buttons {
+/* .buttons {
   display: flex;
   gap: 8px;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 
-.panel {
+/* .panel {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 
-.link_box {
+/* .link_box {
   display: flex;
   align-items: center;
   width: 100%;
@@ -75,7 +75,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 
 .link {
   color: #4c4cff;
@@ -90,17 +90,17 @@
   color: #b1b1f8;
 }
 
-.description {
+/* .description {
   opacity: 0.4;
-}
+} */
 
-.profile_links {
+/* .profile_links {
   box-sizing: border-box;
   padding: 0;
   list-style: none;
-}
+} */
 
-.profile_link {
+/* .profile_link {
   color: var(--text-inactive-color);
   text-decoration: none;
   transition: 0.3s;
@@ -114,7 +114,7 @@
   color: var(--text-primary-color);
   text-decoration: none;
   cursor: auto;
-}
+} */
 
 .not_found {
   /* color: var(--text-inactive-color); */
