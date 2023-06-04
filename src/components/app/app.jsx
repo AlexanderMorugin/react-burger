@@ -19,6 +19,7 @@ import {
   FeedPage,
   OrderInfoPage,
   OrdersPage,
+  ProfileFeedPage,
 } from "../../pages";
 import {
   PATH_INDEX,
@@ -29,6 +30,7 @@ import {
   PATH_PROFILE,
   PATH_NOT_FOUND,
   PATH_INGREDIENT,
+  PATH_PROFILE_ORDERS,
 } from "../../utils/constants";
 import AppHeader from "../app-header/app-header";
 import { getIngredientsAction } from "../../services/actions/ingredients-actions";
@@ -48,9 +50,7 @@ const App = () => {
   const background = location.state && location.state.modal;
 
   const getUserSucces = useSelector((state) => state.authStore.getUserSucces);
-
   const accessToken = getCookie("accessToken", { path: "/" });
-  // console.log("APP - accessToken ", accessToken);
 
   useEffect(() => {
     dispatch(getIngredientsAction());
@@ -81,13 +81,22 @@ const App = () => {
           <Route path={PATH_REGISTER} element={!getUserSucces && !accessToken ? (<RegisterPage />) : (<Navigate to={PATH_INDEX} />)} />
           <Route path={PATH_FORGOT_RASSWORD} element={!getUserSucces && !accessToken ? (<ForgotPasswordPage />) : (<Navigate to={PATH_INDEX} />)} />
           <Route path={PATH_RESET_RASSWORD} element={<ResetPasswordPage />} />
-          <Route path={PATH_PROFILE} element={<ProtectedRouteElement element={<ProfilePage />} to={PATH_LOGIN} />} />
+          <Route path={PATH_PROFILE} element={<ProtectedRouteElement element={<ProfilePage />} to={PATH_LOGIN} />}>
+            <Route path='orders' element={<ProfileFeedPage />} />
+          </Route>
+          <Route path='/feed' element={<FeedPage />} />
+          {/* <Route path="/feed/:id" element={<OrderInfoPage />} /> */}
+
+          {/* <Route path={PATH_PROFILE} element={<ProtectedRouteElement element={<ProfilePage />} to={PATH_LOGIN} />} /> */}
+          {/* <Route path={PATH_PROFILE_ORDERS} element={<OrdersPage />} /> */}
+
+
           <Route path={PATH_NOT_FOUND} element={<NotFound404 />} />
           <Route path={PATH_INGREDIENT} element={!background ? <IngredientPage /> : null} />
 
-          <Route path='/feed' element={<FeedPage />} />
+          
           <Route path='/order-info' element={<OrderInfoPage />} />
-          <Route path='/profile/orders' element={<OrdersPage />} />
+          
         </Routes>
 
         {background && (

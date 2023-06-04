@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, NavLink, useNavigate } from "react-router-dom";
 import {
   Button,
   Input,
@@ -19,9 +19,11 @@ import {
 } from "../../services/actions/auth-actions";
 import { fetchChangeUser } from "../../utils/api";
 import { ProfileMenu } from "../../components/profile-menu/profile-menu";
+import { OrdersPage } from "../orders/orders";
 
 export const ProfilePage = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   // const navigate = useNavigate();
   const userData = useSelector((state) => state.authStore.user);
   // console.log("ProfilePage - userData ", userData ? userData.user : null);
@@ -86,92 +88,14 @@ export const ProfilePage = () => {
   };
 
   return (
-    <section className={styles.boxProfile}>
+    <section className={styles.box}>
       <div className={styles.profile}>
         <ProfileMenu />
 
-        {/* <div className={styles.panel}>          
-          <ul
-            className={
-              "text text_type_main-medium mb-20 " + styles.profile_links
-            }
-          >
-            <li className={styles.link_box}>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? `${styles.profile_link_active}`
-                    : `${styles.profile_link}`
-                }
-                to="/profile"
-              >
-                <motion.p
-                  // анимация
-                  initial={{ y: "300%", opacity: 0 }}
-                  animate={{ y: "0", opacity: 1 }}
-                  transition={{ ease: "easeOut", duration: 1.5 }}
-                >
-                  Профиль
-                </motion.p>
-              </NavLink>
-            </li>
-            <li className={styles.link_box}>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? `${styles.profile_link_active}`
-                    : `${styles.profile_link}`
-                }
-                to="/profile/orders"
-              >
-                <motion.p
-                  // анимация
-                  initial={{ y: "300%", opacity: 0 }}
-                  animate={{ y: "0", opacity: 1 }}
-                  transition={{ ease: "easeOut", delay: 0.5, duration: 1 }}
-                >
-                  История заказов
-                </motion.p>
-              </NavLink>
-            </li>
-            <li className={styles.link_box}>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? `${styles.profile_link_active}`
-                    : `${styles.profile_link}`
-                }
-                onClick={handleLogout}
-                to="/login"
-              >
-                <motion.p
-                  // анимация
-                  initial={{ y: "300%", opacity: 0 }}
-                  animate={{ y: "0", opacity: 1 }}
-                  transition={{ ease: "easeOut", delay: 1, duration: 0.5 }}
-                >
-                  Выход
-                </motion.p>
-              </NavLink>
-            </li>
-          </ul>
-          <motion.p
-            className={
-              "text text_type_main-default text_color_inactive " +
-              styles.description
-            }
-            // анимация
-            initial={{ y: "300%", opacity: 0 }}
-            animate={{ y: "0", opacity: 1 }}
-            transition={{ ease: "easeOut", delay: 1.5 }}
-          >
-            В этом разделе вы можете изменить свои персональные данные
-          </motion.p>
-        </div> */}
+        {/* {location.pathname === '/profile/orders' ? <OrdersPage /> : ( */}
+        {location.pathname === '/profile/orders' ? <OrdersPage /> : (
 
-
-
-        <form className={styles.profile_container} onSubmit={handleSubmit}>
+        <form className={styles.container} onSubmit={handleSubmit}>
           <motion.div
             // анимация
             initial={{ x: "100%", opacity: 0 }}
@@ -291,6 +215,7 @@ export const ProfilePage = () => {
             </motion.div>
           </div>
         </form>
+)}
       </div>
     </section>
   );

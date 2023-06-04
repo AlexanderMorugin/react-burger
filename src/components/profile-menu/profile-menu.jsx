@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useMatch, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import styles from "./profile-menu.module.css";
 import { useDispatch } from "react-redux";
@@ -13,6 +13,10 @@ export const ProfileMenu = () => {
     dispatch(logoutAction(refreshToken));
   };
 
+  const matchProfile = useMatch('/profile');
+  const matchOrders = useMatch('/profile/orders');
+
+
   return (
     <div className={styles.panel}>
       <ul
@@ -20,8 +24,7 @@ export const ProfileMenu = () => {
       >
         <li className={styles.link_box}>
           <NavLink
-            className={({ isActive }) =>
-              isActive
+            className={Boolean(matchProfile)
                 ? `${styles.profile_link_active}`
                 : `${styles.profile_link}`
             }
@@ -37,14 +40,18 @@ export const ProfileMenu = () => {
             </motion.p>
           </NavLink>
         </li>
+
+
+
+
         <li className={styles.link_box}>
           <NavLink
-            className={({ isActive }) =>
-              isActive
+            className={Boolean(matchOrders)
                 ? `${styles.profile_link_active}`
                 : `${styles.profile_link}`
             }
             to="/profile/orders"
+            // to="orders"
           >
             <motion.p
               // анимация

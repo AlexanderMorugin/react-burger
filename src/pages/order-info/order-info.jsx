@@ -1,7 +1,20 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./order-info.module.css";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getCookie } from "../../utils/cookie";
 
 export const OrderInfoPage = () => {
+  // const location = useLocation();
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  // const background = location.state.background;
+  // const { id } = useParams();
+  // const accessToken = getCookie('accessToken');
+  // const userOrders = useSelector(state => state.wsUser.data?.orders);
+  // const { orders } = useSelector((state) => state.socketStore);
+  // console.log(orders)
+
   return (
     <section className={styles.box}>
       <p className={"text text_type_digits-default mb-10 " + styles.id}>

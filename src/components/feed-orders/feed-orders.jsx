@@ -2,7 +2,7 @@ import { FeedCard } from "../feed-card/feed-card";
 import { motion } from "framer-motion";
 import styles from "./feed-orders.module.css";
 
-export const FeedOrders = () => {
+export const FeedOrders = ({ orders }) => {
   return (
     <motion.ul
       className={styles.orders_content}
@@ -11,60 +11,9 @@ export const FeedOrders = () => {
       animate={{ x: "0" }}
       transition={{ ease: "easeOut", duration: 1 }}
     >
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
-      <li>
-        <FeedCard />
-      </li>
+      {orders.map((order) => {
+        return <FeedCard key={order._id} order={order} />;
+      })}
     </motion.ul>
   );
 };

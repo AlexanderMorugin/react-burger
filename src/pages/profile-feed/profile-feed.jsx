@@ -1,8 +1,7 @@
-import { ProfileMenu } from "../../components/profile-menu/profile-menu";
 import { FeedOrders } from "../../components/feed-orders/feed-orders";
-import styles from "./orders.module.css";
+import styles from "./profile-feed.module.css";
 
-export const OrdersPage = () => {
+export const ProfileFeedPage = () => {
   return (
     <section className={styles.box}>
       <div className={styles.container}>

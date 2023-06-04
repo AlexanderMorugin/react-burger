@@ -1,6 +1,7 @@
 .panel {
   display: flex;
   flex-direction: column;
+  width: 320px;
   box-sizing: border-box;
   margin: 0;
   padding: 80px 0 0 0;

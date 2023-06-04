@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import styles from "./feed-counts.module.css";
 
-export const FeedCounts = () => {
+export const FeedCounts = ({ doneList, preparingList, total, totalToday }) => {
+
   return (
     <div className={styles.counts_content}>
       <div className={styles.counts_top}>
@@ -22,12 +23,13 @@ export const FeedCounts = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ ease: "easeOut", delay: 0.6, duration: 0.5 }}
           >
-            <li className={styles.counts_active}>034533</li>
-            <li className={styles.counts_active}>034533</li>
-            <li className={styles.counts_active}>034533</li>
-            <li className={styles.counts_active}>034533</li>
-            <li className={styles.counts_active}>034533</li>
-            <li className={styles.counts_active}>034533</li>
+            {doneList.map((item, index) => {
+              return (
+                <li className={styles.counts_active} key={index}>
+                  {item}
+                </li>
+              );
+            })}
           </motion.ul>
         </div>
         <div className={styles.counts_block}>
@@ -47,9 +49,9 @@ export const FeedCounts = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ ease: "easeOut", delay: 0.8, duration: 0.5 }}
           >
-            <li>034533</li>
-            <li>034533</li>
-            <li>034533</li>
+            {preparingList.map((item, index) => {
+              return <li key={index}>{item}</li>;
+            })}
           </motion.ul>
         </div>
       </div>
@@ -70,7 +72,7 @@ export const FeedCounts = () => {
           animate={{ x: "0", opacity: 1 }}
           transition={{ ease: "easeOut", delay: 1.3, duration: 0.8 }}
         >
-          28 752
+          {total}
         </motion.p>
       </div>
       <div className={styles.counts_middle}>
@@ -90,7 +92,7 @@ export const FeedCounts = () => {
           animate={{ y: "0", opacity: 1 }}
           transition={{ ease: "easeOut", delay: 1.5, duration: 1.5 }}
         >
-          138
+          {totalToday}
         </motion.p>
       </div>
     </div>

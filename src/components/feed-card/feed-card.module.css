@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  /* gap: 24px; */
   background: #1C1C21;
   border-radius: 40px;
   box-sizing: border-box;
@@ -21,7 +20,6 @@
 }
 
 .card_id {
-  /* transform: translateY(-100%); */
   opacity: 0;
   -webkit-animation-name: fade;
           animation-name: fade;
@@ -118,7 +116,6 @@
 
 .card_result {
   margin: 8px 0 0 0;
-  /* transform: translateX(100%); */
   opacity: 0;
   -webkit-animation-name: fade;
           animation-name: fade;
@@ -199,57 +196,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 24px 0 0 0;
-}
-
-.ingredients {
-  display: flex;
-  justify-self: flex-start;
-  align-items: center;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.ingredient {
-  width: 64px;
-  height: 64px;
-  background: linear-gradient(#131316, #131316) padding-box,
-              linear-gradient(60deg, #801AB2, #4C4CFF) border-box;
-  border: 2px solid transparent;
-  border-radius: 50%;
-  box-sizing: border-box;
-  margin: 0 0 0 -15px;
-  padding: 0;
-  animation: pulse 3s linear infinite;
-}
-
-.ingredient:first-child {
-  margin: 0;
-}
-
-@-webkit-keyframes pulse {
-  0% {
-    transform: scale(0.9);
-  }
-  50% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0.9);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(0.9);
-  }
-  50% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0.9);
-  }
 }
 
 .price {
