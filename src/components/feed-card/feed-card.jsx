@@ -9,23 +9,25 @@ import { FeedImageList } from "../feed-image-list/feed-image-list";
 import { useLocation, useMatch, useNavigate } from "react-router-dom";
 
 export const FeedCard = ({ order }) => {
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const match = useMatch('/feed/:id');
-  // const { id } = match?.params || {};
+  const navigate = useNavigate();
+  const location = useLocation();
+  const match = useMatch('/feed/:id');
+  const { id } = match?.params || {};
 
-  const { orderIngredients, orderStatus, orderPrice, time, matchProfile } =
+  const { orderIngredients, orderStatus, orderPrice, time, 
+    // matchProfile 
+  } =
     useOrderData(order);
 
-    // const handleClick = () => {
-    //   if (id !== order._id) {
-    //     navigate(`/feed/${order._id}`, { state: { modal: true, background: location } });
-    //   }
-    // };
+    const handleClick = () => {
+      if (id !== order._id) {
+        navigate(`/feed/${order._id}`, { state: { modal: true, background: location } });
+      }
+    };
 
   return (
     <div className={styles.card}
-    // onClick={handleClick}
+    onClick={handleClick}
     >
       <div className={styles.top}>
         <p className={"text text_type_digits-default " + styles.card_id}>

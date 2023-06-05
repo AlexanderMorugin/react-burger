@@ -3,113 +3,40 @@ import styles from "./order-info.module.css";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCookie } from "../../utils/cookie";
+import { FeedOrderCard } from "../../components/feed-order-card/feed-order-card";
+import { useEffect } from "react";
+import { wsConnectionClosed, wsConnectionStart } from "../../services/actions/ws-actions";
+import { wsUrl } from "../../utils/constants";
+import { getIngredientsAction } from "../../services/actions/ingredients-actions";
 
-export const OrderInfoPage = () => {
+export const OrderInfoPage = ({ isLogin }) => {
   // const location = useLocation();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const navigate = useNavigate();
   // const background = location.state.background;
-  // const { id } = useParams();
+  const { id } = useParams();
   // const accessToken = getCookie('accessToken');
   // const userOrders = useSelector(state => state.wsUser.data?.orders);
-  // const { orders } = useSelector((state) => state.socketStore);
+  const { orders } = useSelector((state) => state.socketStore);
   // console.log(orders)
+  const order = orders.find((item) => item._id === id);
+  // console.log(order)
+
+  useEffect(() => {
+    dispatch(getIngredientsAction());
+    isLogin
+      ? dispatch(wsConnectionStart(`${wsUrl}?token=${getCookie("accessToken").split("Bearer ")[1]}`))
+      : dispatch(wsConnectionStart(`${wsUrl}/all`));
+    return () => {
+      dispatch(wsConnectionClosed());
+    };
+  }, [dispatch, isLogin]);
 
   return (
+    order && (
     <section className={styles.box}>
-      <p className={"text text_type_digits-default mb-10 " + styles.id}>
-        #034535
-      </p>
-      <p className="text text_type_main-medium mb-3">
-        Death Star Starship Main бургер
-      </p>
-      <p className={"text text_type_main-default mb-15 " + styles.active}>
-        Выполнен
-      </p>
-      <p className="text text_type_main-medium mb-6">Состав:</p>
-      <ul className={styles.order_content}>
-        <li className={styles.order_block}>
-          <div className={styles.order_ingredient}>
-            <div className={styles.order_image}></div>
-            <p className="text text_type_main-default ml-4">
-              Флюоресцентная булка R2-D3
-            </p>
-          </div>
-          <div className={styles.order_price}>
-            <p className="text text_type_digits-default ml-4">2 x 20</p>
-            <CurrencyIcon type="primary" />
-          </div>
-        </li>
-        <li className={styles.order_block}>
-          <div className={styles.order_ingredient}>
-            <div className={styles.order_image}></div>
-            <p className="text text_type_main-default ml-4">
-              Флюоресцентная булка R2-D3
-            </p>
-          </div>
-          <div className={styles.order_price}>
-            <p className="text text_type_digits-default ml-4">2 x 20</p>
-            <CurrencyIcon type="primary" />
-          </div>
-        </li>
-        <li className={styles.order_block}>
-          <div className={styles.order_ingredient}>
-            <div className={styles.order_image}></div>
-            <p className="text text_type_main-default ml-4">
-              Флюоресцентная булка R2-D3
-            </p>
-          </div>
-          <div className={styles.order_price}>
-            <p className="text text_type_digits-default ml-4">2 x 20</p>
-            <CurrencyIcon type="primary" />
-          </div>
-        </li>
-        <li className={styles.order_block}>
-          <div className={styles.order_ingredient}>
-            <div className={styles.order_image}></div>
-            <p className="text text_type_main-default ml-4">
-              Флюоресцентная булка R2-D3
-            </p>
-          </div>
-          <div className={styles.order_price}>
-            <p className="text text_type_digits-default ml-4">2 x 20</p>
-            <CurrencyIcon type="primary" />
-          </div>
-        </li>
-        <li className={styles.order_block}>
-          <div className={styles.order_ingredient}>
-            <div className={styles.order_image}></div>
-            <p className="text text_type_main-default ml-4">
-              Флюоресцентная булка R2-D3
-            </p>
-          </div>
-          <div className={styles.order_price}>
-            <p className="text text_type_digits-default ml-4">2 x 20</p>
-            <CurrencyIcon type="primary" />
-          </div>
-        </li>
-        <li className={styles.order_block}>
-          <div className={styles.order_ingredient}>
-            <div className={styles.order_image}></div>
-            <p className="text text_type_main-default ml-4">
-              Флюоресцентная булка R2-D3
-            </p>
-          </div>
-          <div className={styles.order_price}>
-            <p className="text text_type_digits-default ml-4">2 x 20</p>
-            <CurrencyIcon type="primary" />
-          </div>
-        </li>
-      </ul>
-      <div className={styles.order_footer}>
-        <p className="text text_type_main-default text_color_inactive">
-          Сегодня, 16:20 i-GMT+3
-        </p>
-        <div className={styles.order_total}>
-          <p className="text text_type_digits-default">510</p>
-          <CurrencyIcon type="primary" />
-        </div>
-      </div>
+      <FeedOrderCard />
     </section>
+    )
   );
 };

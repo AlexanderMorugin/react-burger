@@ -1,12 +1,3 @@
-.box {
-  display: flex;
-  flex-direction: column;
-  width: 640px;
-  box-sizing: border-box;
-  margin: 0 auto;
-  padding: 122px 0 0 0;
-}
-/* 
 .id {
   text-align: center;
 }
@@ -15,7 +6,7 @@
   color: #00CCCC
 }
 
-.order_content {
+/* .order_content {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -38,9 +29,9 @@
 
 .order_content::-webkit-scrollbar-thumb {
   background-color: #8585AD;
-}
+} */
 
-.order_block {
+/* .order_block {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -48,17 +39,17 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 
-.order_ingredient {
+/* .order_ingredient {
   display: flex;
   align-items: center;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 
-.order_image {
+/* .order_image {
   width: 64px;
   height: 64px;
   background: linear-gradient(#131316, #131316) padding-box,
@@ -68,15 +59,15 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 
-.order_price {
+/* .order_price {
   display: flex;
   gap: 8px;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 
 .order_footer {
   display: flex;
@@ -95,4 +86,4 @@
   margin: 0;
   padding: 0;
 }
- */
+

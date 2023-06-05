@@ -48,6 +48,7 @@ const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const background = location.state && location.state.modal;
+  // const backgroundFeedOrderInfo = location.state && location.state.modal;
 
   const getUserSucces = useSelector((state) => state.authStore.getUserSucces);
   const accessToken = getCookie("accessToken", { path: "/" });
@@ -85,7 +86,8 @@ const App = () => {
             <Route path='orders' element={<ProfileFeedPage />} />
           </Route>
           <Route path='/feed' element={<FeedPage />} />
-          {/* <Route path="/feed/:id" element={<OrderInfoPage />} /> */}
+          <Route path="/feed/:id" element={<OrderInfoPage />} />
+          {/* <Route path="/feed/:id" element={!backgroundFeedOrderInfo ? <OrderInfoPage /> : null} /> */}
 
           {/* <Route path={PATH_PROFILE} element={<ProtectedRouteElement element={<ProfilePage />} to={PATH_LOGIN} />} /> */}
           {/* <Route path={PATH_PROFILE_ORDERS} element={<OrdersPage />} /> */}
@@ -99,13 +101,13 @@ const App = () => {
           
         </Routes>
 
-        {background && (
+        {/* {background && (
           <Modal onClose={() => closeModal(location)}>
             <Routes>
               <Route path={PATH_INGREDIENT} element={<IngredientDetails />} />
             </Routes>
           </Modal>
-        )}
+        )} */}
       </main>
     </>
   );
