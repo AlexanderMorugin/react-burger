@@ -20,6 +20,11 @@ const IngredientDetails = () => {
 
   return (
     <>
+      {/* <div className={styles.top}>
+        <h2 className={"text text_type_main-large " + styles.title}>
+          Детали ингредиента
+        </h2>
+      </div> */}
       <div className={styles.container}>
         <div className={styles.image}>
           <Image

@@ -50,8 +50,8 @@ export const ProfileMenu = () => {
                 ? `${styles.profile_link_active}`
                 : `${styles.profile_link}`
             }
-            to="/profile/orders"
-            // to="orders"
+            // to="/profile/orders"
+            to="orders"
           >
             <motion.p
               // анимация

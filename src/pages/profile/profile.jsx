@@ -92,8 +92,7 @@ export const ProfilePage = () => {
       <div className={styles.profile}>
         <ProfileMenu />
 
-        {/* {location.pathname === '/profile/orders' ? <OrdersPage /> : ( */}
-        {location.pathname === '/profile/orders' ? <OrdersPage /> : (
+        {location.pathname === '/profile/orders' ? <Outlet /> : (
 
         <form className={styles.container} onSubmit={handleSubmit}>
           <motion.div

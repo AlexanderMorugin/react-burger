@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 const modalRootElement = document.querySelector("#react-modals");
 
-const Modal = ({ children, onClose }) => {
+const Modal = ({ title, children, onClose }) => {
   React.useEffect(() => {
     const closeOnEscapeKeyDown = (evt) => {
       if (evt.key === "Escape") {
@@ -37,13 +37,15 @@ const Modal = ({ children, onClose }) => {
       >
         <div className={styles.top}>
           <h2 className={"text text_type_main-large " + styles.title}>
-            Детали ингредиента
+            {/* Детали ингредиента */}
+            {title}
           </h2>
         </div>
 
         <button className={styles.button} type="button" onClick={onClose}>
           <CloseIcon type="primary" />
         </button>
+        
         {children}
       </motion.div>
     </ModalOverlay>,
@@ -57,3 +59,4 @@ Modal.propTypes = {
 };
 
 export default Modal;
+

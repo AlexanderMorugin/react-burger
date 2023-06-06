@@ -4,20 +4,24 @@ import { FeedCounts } from "../../components/feed-counts/feed-counts";
 import { FeedOrders } from "../../components/feed-orders/feed-orders";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo } from "react";
-import { wsConnectionClosed, wsConnectionStart } from "../../services/actions/ws-actions";
+import {
+  wsConnectionClosed,
+  wsConnectionStart,
+} from "../../services/actions/ws-actions";
 import { wsUrl } from "../../utils/constants";
 
 export const FeedPage = () => {
   const dispatch = useDispatch();
-  const { orders, total, totalToday } = useSelector((state) => state.socketStore);
-  // console.log(totalToday)
+  const { orders, total, totalToday } = useSelector(
+    (state) => state.socketStore
+  );
 
   useEffect(() => {
-    dispatch(wsConnectionStart(`${wsUrl}/all`))
+    dispatch(wsConnectionStart(`${wsUrl}/all`));
     return () => {
-      dispatch(wsConnectionClosed())
-    }
-  }, [])
+      dispatch(wsConnectionClosed());
+    };
+  }, []);
 
   const { doneList, preparingList } = useMemo(() => {
     return orders.reduce(
@@ -38,27 +42,26 @@ export const FeedPage = () => {
 
   return (
     orders && (
-    <section className={styles.box}>
-      <motion.h1
-        className="text text_type_main-large mb-5"
-        // анимация
-        initial={{ y: "-100%", opacity: 0 }}
-        animate={{ y: "0", opacity: 1 }}
-        transition={{ ease: "easeOut", duration: 1 }}
-      >
-        Лента заказов
-      </motion.h1>
-      <div className={styles.container}>
-        <FeedOrders orders={orders} />
-        <FeedCounts
-        doneList={doneList}
-        preparingList={preparingList}
-        total={total}
-        totalToday={totalToday} />
-      </div>
-    </section>
+      <section className={styles.box}>
+        <motion.h1
+          className="text text_type_main-large mb-5"
+          // анимация
+          initial={{ y: "-100%", opacity: 0 }}
+          animate={{ y: "0", opacity: 1 }}
+          transition={{ ease: "easeOut", duration: 1 }}
+        >
+          Лента заказов
+        </motion.h1>
+        <div className={styles.container}>
+          <FeedOrders orders={orders} />
+          <FeedCounts
+            doneList={doneList}
+            preparingList={preparingList}
+            total={total}
+            totalToday={totalToday}
+          />
+        </div>
+      </section>
     )
-
   );
-
 };

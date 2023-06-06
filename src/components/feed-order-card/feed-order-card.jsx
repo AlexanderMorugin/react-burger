@@ -27,7 +27,7 @@ export const FeedOrderCard = () => {
         // анимация
         initial={{ y: "-100%", opacity: 0 }}
         animate={{ y: "0", opacity: 1 }}
-        transition={{ ease: "easeOut", delay: 0.5, duration: 1.5 }}
+        transition={{ ease: "easeOut", delay: 0.5, duration: 1 }}
       >
         {`#${order.number}`}
       </motion.p>
