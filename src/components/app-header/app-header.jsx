@@ -26,12 +26,22 @@ const AppHeader = () => {
             <span>Конструктор</span>
           </NavLink>
 
-          <div className={styles.button}>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? `${styles.button_active}` : `${styles.button}`
+            }
+            to="/feed"
+          >
+            <BurgerIcon type="secondary" />
+            <span>Лента&nbsp;заказов</span>
+          </NavLink>
+
+          {/* <div className={styles.button}>
             <ListIcon type="secondary" />
             <p className="text text_type_main-default text_color_inactive">
               Лента&nbsp;заказов
             </p>
-          </div>
+          </div> */}
         </div>
 
         <Link to={"/"} className={styles.logoBlock}>

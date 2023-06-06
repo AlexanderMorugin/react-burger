@@ -60,7 +60,7 @@ export const FeedCard = ({ order }) => {
         <p className={"text text_type_main-medium " + styles.card_title}>
           {order.name}
         </p>
-        <p className={"text text_type_main-default " + styles.card_result}>
+        <p className={"text text_type_main-default " + styles.card_result} style={{ color: order.status === "done" && "#00cccc" }}>
           {orderStatus}
           {/* Создан */}
           {/* Готовится */}

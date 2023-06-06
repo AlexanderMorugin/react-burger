@@ -33,6 +33,9 @@ export const FeedPage = () => {
           case "pending":
             count.preparingList.push(element.number);
             break;
+          case "created":
+            count.preparingList.push(element.number);
+            break;
         }
         return count;
       },

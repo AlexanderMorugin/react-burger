@@ -21,10 +21,13 @@ export function useOrderData(order) {
   const getOrderStatus = () => {
     if (order.status === "done") {
       return "Выполнен";
-    } else {
+    } else if (order.status === "pending") {
       return "Готовится";
+    } else if (order.status === "created") {
+      return "Создан";
     }
   };
+
   const orderStatus = getOrderStatus();
 
   const orderPrice = orderIngredients.reduce((count, item) => {

@@ -12,29 +12,29 @@ export const ProfileFeedPage = () => {
   const accessToken = getCookie("accessToken").split("Bearer ")[1];
   const { orders, error } = useSelector((state) => state.socketStore);
   
-  // useEffect(() => {
-  //   dispatch(wsConnectionStart(`${wsUrl}?token=${accessToken}`))
-  // }, [dispatch, accessToken])
-
   useEffect(() => {
-    dispatch(wsConnectionStart(`${wsUrl}/all`));
-    return () => {
-      dispatch(wsConnectionClosed());
-    };
-  }, []);
+    dispatch(wsConnectionStart(`${wsUrl}?token=${accessToken}`))
+  }, [dispatch, accessToken])
 
   // useEffect(() => {
-  //   if (error) {
-  //     dispatch(wsConnectionClosed());
-  //     dispatch(getUserAction())
-  //       .then(() => dispatch(wsConnectionStart(`${wsUrl}?token=${accessToken}`)))
-  //       .catch(() => dispatch(wsConnectionClosed()));
-  //   }
+  //   dispatch(wsConnectionStart(`${wsUrl}/all`));
   //   return () => {
   //     dispatch(wsConnectionClosed());
   //   };
-  // }, [dispatch, accessToken, error]);
-// }, [dispatch, accessToken]);
+  // }, []);
+
+  useEffect(() => {
+    if (error) {
+      dispatch(wsConnectionClosed());
+      dispatch(getUserAction())
+        .then(() => dispatch(wsConnectionStart(`${wsUrl}?token=${accessToken}`)))
+        .catch(() => dispatch(wsConnectionClosed()));
+    }
+    return () => {
+      dispatch(wsConnectionClosed());
+    };
+  }, [dispatch, accessToken, error]);
+// }, [dispatch, accessToken, , error]);
 
 
   return (

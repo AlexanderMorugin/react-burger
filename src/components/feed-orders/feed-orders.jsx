@@ -1,5 +1,5 @@
-import { FeedCard } from "../feed-card/feed-card";
 import { motion } from "framer-motion";
+import { FeedCard } from "../feed-card/feed-card";
 import styles from "./feed-orders.module.css";
 
 export const FeedOrders = ({ orders }) => {
