@@ -109,3 +109,16 @@ export const fetchChangeUser = (name, email, password, accessToken) => {
     }),
   }).then(checkResponse);
 };
+
+// export const fetchPostOrder = (data, accessToken) => {
+//   return fetch(`${BASE_URL}/orders`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       'authorization': accessToken
+//     },
+//     body: JSON.stringify({
+//       "ingredients": data
+//     }),
+//   }).then(checkResponse);
+// };
