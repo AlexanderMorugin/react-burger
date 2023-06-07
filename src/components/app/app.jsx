@@ -18,7 +18,6 @@ import {
   NotFound404,
   FeedPage,
   OrderInfoPage,
-  OrdersPage,
   ProfileFeedPage,
 } from "../../pages";
 import {
@@ -29,8 +28,11 @@ import {
   PATH_RESET_RASSWORD,
   PATH_PROFILE,
   PATH_NOT_FOUND,
-  PATH_INGREDIENT,
+  PATH_INGREDIENT_ID,
   PATH_PROFILE_ORDERS,
+  PATH_PROFILE_ORDERS_ID,
+  PATH_FEED,
+  PATH_FEED_ID,
 } from "../../utils/constants";
 import AppHeader from "../app-header/app-header";
 import { getIngredientsAction } from "../../services/actions/ingredients-actions";
@@ -51,11 +53,8 @@ const App = () => {
 
   const background =
   location.state?.locationFeedOrderCard ||
-  // location.state?.locationProfileFeed ||
+  location.state?.locationProfileFeed ||
   location.state && location.state.modal;
-
-
-  // const background = location.state && location.state.modal;
 
   const getUserSucces = useSelector((state) => state.authStore.getUserSucces);
   const accessToken = getCookie("accessToken", { path: "/" });
@@ -79,11 +78,6 @@ const App = () => {
     }
   };
 
-  // const closeModal = () => {
-  //   return navigate(-1);
-  // }
-
-
   return (
     <>
       <AppHeader />
@@ -95,33 +89,36 @@ const App = () => {
           <Route path={PATH_FORGOT_RASSWORD} element={!getUserSucces && !accessToken ? (<ForgotPasswordPage />) : (<Navigate to={PATH_INDEX} />)} />
           <Route path={PATH_RESET_RASSWORD} element={<ResetPasswordPage />} />
           <Route path={PATH_PROFILE} element={<ProtectedRouteElement element={<ProfilePage />} to={PATH_LOGIN} />}>
-            <Route path='orders' element={<ProfileFeedPage />} />
+            <Route path={PATH_PROFILE_ORDERS} element={<ProfileFeedPage />} />
           </Route>
-          <Route path='/feed' element={<FeedPage />} />
-          <Route path="/feed/:id" element={<OrderInfoPage />} />
-
-          <Route path={PATH_NOT_FOUND} element={<NotFound404 />} />
-          <Route path={PATH_INGREDIENT} element={!background ? <IngredientPage /> : null} />
-          
-          <Route path='/order-info' element={<OrderInfoPage />} />
-
-          {/* <Route path='/profile/orders' element={<ProfileFeedPage />} /> */}
-          
+          <Route path={PATH_INGREDIENT_ID} element={!background ? <IngredientPage /> : null} />
+          <Route path={PATH_FEED} element={<FeedPage />} />
+          <Route path={PATH_FEED_ID} element={<OrderInfoPage isLogin={false} />} />
+          <Route path={PATH_PROFILE_ORDERS_ID} element={(!getUserSucces && !accessToken) ? <LoginPage /> : <OrderInfoPage isLogin={true} />} />
+          <Route path={PATH_NOT_FOUND} element={<NotFound404 />} /> 
         </Routes>
         {location.state?.locationFeedOrderCard && (
           <Routes>
-            <Route path="/feed/:id" element={
+            <Route path={PATH_FEED_ID} element={
               <Modal onClose={() => closeModal(location)} title="">
                 <FeedOrderCard />
               </Modal>
             } />
           </Routes>
         )}
-
+        {location.state?.locationProfileFeed && (
+          <Routes>
+            <Route path={PATH_PROFILE_ORDERS_ID} element={
+              <Modal onClose={() => closeModal(location)} title="">
+                <FeedOrderCard />
+              </Modal>
+            } />
+          </Routes>
+        )}
         {location.state && location.state.modal && (
           <Modal onClose={() => closeModal(location)} title="Детали ингредиента" >
             <Routes>
-              <Route path={PATH_INGREDIENT} element={<IngredientDetails />} />
+              <Route path={PATH_INGREDIENT_ID} element={<IngredientDetails />} />
             </Routes>
           </Modal>
         )}

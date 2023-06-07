@@ -71,7 +71,6 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  /* color: var(--text-primary-color); */
   box-sizing: border-box;
   margin: 0;
   padding: 16px 20px; 
