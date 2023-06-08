@@ -48,7 +48,6 @@ export const ForgotPasswordPage = () => {
         >
           Восстановление пароля
         </motion.h1>
-
         <motion.div
           // анимация
           initial={{ x: "100%", opacity: 0 }}
@@ -67,7 +66,6 @@ export const ForgotPasswordPage = () => {
             required
           />
         </motion.div>
-
         <motion.div
           // анимация
           initial={{ y: "200%", opacity: 0 }}
@@ -84,7 +82,6 @@ export const ForgotPasswordPage = () => {
             Восстановить
           </Button>
         </motion.div>
-
         <motion.p
           className="text text_type_main-default text_color_inactive"
           // анимация

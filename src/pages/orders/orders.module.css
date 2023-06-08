@@ -11,9 +11,7 @@
 
 .container {
   display: flex;
-  /* flex-direction: column; */
   justify-content: space-between;
-  /* align-items: center; */
   gap: 60px;
   width: 100%;
   box-sizing: border-box;

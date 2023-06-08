@@ -9,7 +9,6 @@ export const PATH_PROFILE = "/profile";
 export const PATH_NOT_FOUND = "*";
 export const PATH_INGREDIENT_ID = "ingredients/:id";
 
-// WebSocket
 export const wsUrl = "wss://norma.nomoreparties.space/orders";
 
 export const PATH_PROFILE_ORDERS = "orders";

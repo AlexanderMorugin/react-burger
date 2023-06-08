@@ -18,8 +18,6 @@ export const FeedOrderCard = () => {
   const { orderIngredients, orderStatus, orderPrice, time } =
     useOrderData(order);
 
-  // console.log(time)
-
   return (
     <>
       <motion.p
@@ -38,9 +36,6 @@ export const FeedOrderCard = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.9, duration: 0.5 }}
       >{`${order.name}`}</motion.p>
-      {/* <p className={"text text_type_main-default mb-15 " + styles.active}> */}
-      {/* Выполнен */}
-      {/* {orderStatus} */}
       {order.status === "done" ? (
         <motion.p
           className={"text text_type_main-default mb-15 " + styles.active}
@@ -54,9 +49,7 @@ export const FeedOrderCard = () => {
       ) : (
         <p className="text text_type_main-default mb-15 ">{orderStatus}</p>
       )}
-      {/* </p> */}
       <FeedOrderIngredients ingredients={orderIngredients} />
-
       <div className={styles.order_footer}>
         <motion.p
           className="text text_type_main-default text_color_inactive"

@@ -11,6 +11,17 @@ import { OrderInfoPage } from "./order-info/order-info";
 import { OrdersPage } from "./orders/orders";
 import { ProfileFeedPage } from "./profile-feed/profile-feed";
 
-
-export { ConstructorPage, ForgotPasswordPage, IngredientPage, LoginPage, ProfilePage, RegisterPage, ResetPasswordPage, NotFound404, FeedPage, OrderInfoPage, OrdersPage, ProfileFeedPage };
-
+export {
+  ConstructorPage,
+  ForgotPasswordPage,
+  IngredientPage,
+  LoginPage,
+  ProfilePage,
+  RegisterPage,
+  ResetPasswordPage,
+  NotFound404,
+  FeedPage,
+  OrderInfoPage,
+  OrdersPage,
+  ProfileFeedPage,
+};

@@ -2,8 +2,8 @@ import {
   WS_CONNECTION_SUCCESS,
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
-  WS_GET_MESSAGE
-} from '../actions/ws-actions';
+  WS_GET_MESSAGE,
+} from "../actions/ws-actions";
 
 const initialState = {
   wsConnected: false,
@@ -11,29 +11,29 @@ const initialState = {
   total: 0,
   totalToday: 0,
   error: false,
-  errMessage: null
+  errMessage: null,
 };
 
 export const wsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case WS_CONNECTION_SUCCESS: 
+    case WS_CONNECTION_SUCCESS:
       return {
         ...state,
         error: undefined,
-        wsConnected: true
+        wsConnected: true,
       };
     case WS_CONNECTION_ERROR:
       return {
         ...state,
         error: true,
         errMessage: action.payload,
-        wsConnected: false
+        wsConnected: false,
       };
     case WS_CONNECTION_CLOSED:
       return {
         ...state,
         error: undefined,
-        wsConnected: false
+        wsConnected: false,
       };
     case WS_GET_MESSAGE:
       return {
@@ -41,10 +41,9 @@ export const wsReducer = (state = initialState, action) => {
         error: undefined,
         orders: action.payload.orders,
         total: action.payload.total,
-        totalToday: action.payload.totalToday
+        totalToday: action.payload.totalToday,
       };
     default:
       return state;
   }
 };
-

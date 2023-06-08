@@ -1,4 +1,4 @@
-export const socketMiddleware = (WS_URL, wsActions) => {
+export const socketMiddleware = (wsUrl, wsActions) => {
   return store => {
     let socket = null;
     let url = undefined;
@@ -35,7 +35,6 @@ export const socketMiddleware = (WS_URL, wsActions) => {
           socket.send(JSON.stringify(message));
         }
       }
-
       next(action);
     };
   };

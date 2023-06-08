@@ -30,14 +30,13 @@ export const postOrderAction = (data) => async (dispatch) => {
   try {
     dispatch(postOrderRequestAction());
 
-    const accessTokenWithBearer = getCookie('accessToken');
-    const accessToken = accessTokenWithBearer.replace('Bearer ', '');
-
+    const accessTokenWithBearer = getCookie("accessToken");
+    const accessToken = accessTokenWithBearer.replace("Bearer ", "");
 
     const response = await fetch(`${BASE_URL}/orders`, {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({
@@ -45,7 +44,7 @@ export const postOrderAction = (data) => async (dispatch) => {
       }),
     });
     const result = await checkResponse(response);
-    console.log('Заказ успешно отправлен. Результат:', result);
+    console.log("Заказ успешно отправлен. Результат:", result);
     dispatch(postOrderSuccessAction(result));
     return result;
   } catch (error) {

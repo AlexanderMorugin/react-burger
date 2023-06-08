@@ -88,7 +88,7 @@ const BurgerIngredients = () => {
       // анимация
       initial={{ x: "-100%" }}
       animate={{ x: "0" }}
-      transition={{ ease: "easeOut", duration: .5 }}
+      transition={{ ease: "easeOut", duration: 0.5 }}
     >
       <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
       <nav className={styles.tabs}>

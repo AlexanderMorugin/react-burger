@@ -1,8 +1,8 @@
 import styles from "./feed-image.module.css";
 import PropTypes from "prop-types";
-// import { IngredientPropTypes } from '../../utils/constants';
+import ingredientPropTypes from "../../utils/ingredient-prop-types";
 
-export function FeedImage({ viewMore, length, ingredient, index }) {
+export const FeedImage = ({ viewMore, length, ingredient, index }) => {
   return (
     <li className={styles.ingredient} style={{ zIndex: 20 - index }}>
       <img
@@ -17,11 +17,11 @@ export function FeedImage({ viewMore, length, ingredient, index }) {
       )}
     </li>
   );
-}
+};
 
-// OrderIngredientImage.propTypes = {
-//   ingredient: IngredientPropTypes,
-//   index: PropTypes.number.isRequired,
-//   showMore: PropTypes.bool.isRequired,
-//   length: PropTypes.number.isRequired
-// }
+FeedImage.propTypes = {
+  viewMore: PropTypes.bool.isRequired,
+  length: PropTypes.number.isRequired,
+  ingredient: ingredientPropTypes,
+  index: PropTypes.number.isRequired,
+};

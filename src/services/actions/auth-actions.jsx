@@ -1,8 +1,4 @@
-import {
-  fetchChangeUser,
-  fetchGetUser,
-  fetchRefreshToken,
-} from "../../utils/api";
+import { fetchGetUser, fetchRefreshToken } from "../../utils/api";
 import { fetchLogout } from "../../utils/api";
 import { setCookie, getCookie, deleteCookie } from "../../utils/cookie";
 
@@ -89,8 +85,8 @@ export const logoutAction = (token) => {
     fetchLogout(token)
       .then((res) => {
         if (res) {
-          deleteCookie("accessToken", { path: '/' });
-          deleteCookie("refreshToken", { path: '/' });
+          deleteCookie("accessToken", { path: "/" });
+          deleteCookie("refreshToken", { path: "/" });
           dispatch(logoutSuccess(res));
           console.log(res);
         }
@@ -152,4 +148,3 @@ export const changeUserSuccess = (userData) => ({
   payload: userData,
 });
 export const changeUserFailed = () => ({ type: CHANGE_USER_FAILED });
-

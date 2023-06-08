@@ -7,20 +7,9 @@ import styles from "./feed-card.module.css";
 import PropTypes from "prop-types";
 import { useOrderData } from "../../hooks/useOrderData";
 import { FeedImageList } from "../feed-image-list/feed-image-list";
-import { Link, useLocation, useMatch, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export const FeedCard = ({ order }) => {
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const match = useMatch('/feed/:id');
-  // const { id } = match?.params || {};
-
-  //   const handleClick = () => {
-  //     if (id !== order._id) {
-  //       navigate(`/feed/${order._id}`, { state: { modal: true, background: location } });
-  //     }
-  //   };
-
   const location = useLocation();
   const [isProfile, setIsProfile] = useState(false);
 
@@ -60,16 +49,15 @@ export const FeedCard = ({ order }) => {
         <p className={"text text_type_main-medium " + styles.card_title}>
           {order.name}
         </p>
-        <p className={"text text_type_main-default " + styles.card_result} style={{ color: order.status === "done" && "#00cccc" }}>
+        <p
+          className={"text text_type_main-default " + styles.card_result}
+          style={{ color: order.status === "done" && "#00cccc" }}
+        >
           {orderStatus}
-          {/* Создан */}
-          {/* Готовится */}
-          {/* Выполнен */}
         </p>
 
         <div className={styles.bottom}>
           <FeedImageList ingredients={orderIngredients} />
-
           <div className={styles.price}>
             <p className={"text text_type_digits-default " + styles.number}>
               {orderPrice}
@@ -85,13 +73,5 @@ export const FeedCard = ({ order }) => {
 };
 
 FeedCard.propTypes = {
-  order: PropTypes.shape({
-    createdAt: PropTypes.string.isRequired,
-    ingredients: PropTypes.array.isRequired,
-    name: PropTypes.string.isRequired,
-    number: PropTypes.number.isRequired,
-    status: PropTypes.string.isRequired,
-    updatedAt: PropTypes.string.isRequired,
-    _id: PropTypes.string.isRequired,
-  }),
+  order: PropTypes.object.isRequired,
 };

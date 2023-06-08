@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import styles from "./feed-order-ingredients.module.css";
 import { FeedOrderIngredient } from "../feed-order-ingredient/feed-order-ingredient";
+import PropTypes from "prop-types";
 
 export const FeedOrderIngredients = ({ ingredients }) => {
   function counter(ingredient) {
@@ -43,4 +44,8 @@ export const FeedOrderIngredients = ({ ingredients }) => {
       </motion.ul>
     </>
   );
+};
+
+FeedOrderIngredients.propTypes = {
+  ingredients: PropTypes.array.isRequired,
 };

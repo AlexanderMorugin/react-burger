@@ -37,15 +37,12 @@ const Modal = ({ title, children, onClose }) => {
       >
         <div className={styles.top}>
           <h2 className={"text text_type_main-large " + styles.title}>
-            {/* Детали ингредиента */}
             {title}
           </h2>
         </div>
-
         <button className={styles.button} type="button" onClick={onClose}>
           <CloseIcon type="primary" />
         </button>
-        
         {children}
       </motion.div>
     </ModalOverlay>,
@@ -59,4 +56,3 @@ Modal.propTypes = {
 };
 
 export default Modal;
-

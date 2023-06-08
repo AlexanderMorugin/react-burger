@@ -7,7 +7,6 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
-
 import { motion } from "framer-motion";
 import { fetchResetPassword } from "../../utils/api";
 import {
@@ -56,7 +55,6 @@ export const ResetPasswordPage = () => {
         >
           Восстановление пароля
         </motion.h1>
-
         <motion.div
           // анимация
           initial={{ x: "100%", opacity: 0 }}
@@ -76,7 +74,6 @@ export const ResetPasswordPage = () => {
             required
           />
         </motion.div>
-
         <motion.div
           // анимация
           initial={{ x: "-100%", opacity: 0 }}
@@ -95,7 +92,6 @@ export const ResetPasswordPage = () => {
             required
           />
         </motion.div>
-
         <motion.div
           // анимация
           initial={{ y: "200%", opacity: 0 }}
@@ -112,7 +108,6 @@ export const ResetPasswordPage = () => {
             Сохранить
           </Button>
         </motion.div>
-
         <motion.p
           className="text text_type_main-default text_color_inactive"
           // анимация

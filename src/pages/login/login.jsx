@@ -25,22 +25,20 @@ export const LoginPage = () => {
     fetchLoginUser(email, password)
       .then((res) => {
         dispatch(loginSuccess(res));
-        setCookie("accessToken", res.accessToken, { path: '/' });
-        setCookie("refreshToken", res.refreshToken, { path: '/' });
+        setCookie("accessToken", res.accessToken, { path: "/" });
+        setCookie("refreshToken", res.refreshToken, { path: "/" });
         console.log("fetchLoginUser ", res);
       })
       .catch((err) => {
         dispatch(loginFailed(err));
         console.log(err);
       });
-    // navigate("/profile");
     navigate("/");
   };
 
   return (
     <section className={styles.box}>
       <form className={styles.container} onSubmit={handleSubmit}>
-
         <motion.h1
           className="text text_type_main-medium mb-6"
           // анимация
@@ -50,7 +48,6 @@ export const LoginPage = () => {
         >
           Вход
         </motion.h1>
-
         <motion.div
           // анимация
           initial={{ x: "100%", opacity: 0 }}
@@ -69,7 +66,6 @@ export const LoginPage = () => {
             required
           />
         </motion.div>
-
         <motion.div
           // анимация
           initial={{ x: "-200%", opacity: 0 }}
@@ -89,7 +85,6 @@ export const LoginPage = () => {
             required
           />
         </motion.div>
-
         <motion.div
           // анимация
           initial={{ y: "200%", opacity: 0 }}
@@ -106,7 +101,6 @@ export const LoginPage = () => {
             Войти
           </Button>
         </motion.div>
-
         <motion.p
           className="text text_type_main-default text_color_inactive mb-4"
           // анимация
@@ -122,7 +116,6 @@ export const LoginPage = () => {
             Зарегистрироваться
           </Link>
         </motion.p>
-
         <motion.p
           className="text text_type_main-default text_color_inactive"
           // анимация
