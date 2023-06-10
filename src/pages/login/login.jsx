@@ -1,16 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  PasswordInput,
-  EmailInput,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { PasswordInput, EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
 import { motion } from "framer-motion";
-import { fetchLoginUser } from "../../utils/api";
-import { loginFailed, loginSuccess } from "../../services/actions/auth-actions";
-import { setCookie } from "../../utils/cookie";
+import { loginAction } from "../../services/actions/auth-actions";
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
@@ -21,18 +15,7 @@ export const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    fetchLoginUser(email, password)
-      .then((res) => {
-        dispatch(loginSuccess(res));
-        setCookie("accessToken", res.accessToken, { path: "/" });
-        setCookie("refreshToken", res.refreshToken, { path: "/" });
-        console.log("fetchLoginUser ", res);
-      })
-      .catch((err) => {
-        dispatch(loginFailed(err));
-        console.log(err);
-      });
+    dispatch(loginAction(email, password));
     navigate("/");
   };
 

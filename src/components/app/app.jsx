@@ -54,7 +54,9 @@ const App = () => {
   const background =
   location.state?.locationFeedOrderCard ||
   location.state?.locationProfileFeed ||
-  location.state && location.state.modal;
+  // location.state && location.state.modal ||
+  location;
+  
 
   const getUserSucces = useSelector((state) => state.authStore.getUserSucces);
   const accessToken = getCookie("accessToken", { path: "/" });
@@ -82,7 +84,9 @@ const App = () => {
     <>
       <AppHeader />
       <main className={styles.main}>
-        <Routes location={background}>
+        <Routes 
+        location={background}
+        >
           <Route path={PATH_INDEX} element={<ConstructorPage />} />
           <Route path={PATH_LOGIN} element={!getUserSucces && !accessToken ? (<LoginPage />) : (<Navigate to={PATH_INDEX} />)} />
           <Route path={PATH_REGISTER} element={!getUserSucces && !accessToken ? (<RegisterPage />) : (<Navigate to={PATH_INDEX} />)} />
@@ -91,10 +95,13 @@ const App = () => {
           <Route path={PATH_PROFILE} element={<ProtectedRouteElement element={<ProfilePage />} to={PATH_LOGIN} />}>
             <Route path={PATH_PROFILE_ORDERS} element={<ProfileFeedPage />} />
           </Route>
-          <Route path={PATH_INGREDIENT_ID} element={!background ? <IngredientPage /> : null} />
+          <Route path={PATH_INGREDIENT_ID} element={!(location.state && location.state.modal) ? <IngredientPage /> : null} />
           <Route path={PATH_FEED} element={<FeedPage />} />
-          <Route path={PATH_FEED_ID} element={<OrderInfoPage isLogin={false} />} />
-          <Route path={PATH_PROFILE_ORDERS_ID} element={(!getUserSucces && !accessToken) ? <LoginPage /> : <OrderInfoPage isLogin={true} />} />
+          <Route path={PATH_FEED_ID} element={!(location.state?.locationFeedOrderCard) ? <OrderInfoPage isLogin={false} /> : null} />
+
+          {/* <Route path={PATH_PROFILE_ORDERS_ID} element={(!getUserSucces && !accessToken) ? <LoginPage /> : <OrderInfoPage isLogin={true} />} /> */}
+          <Route path={PATH_PROFILE_ORDERS_ID} element={!(location.state?.locationProfileFeed) ? <OrderInfoPage isLogin={true} /> : null} />
+
           <Route path={PATH_NOT_FOUND} element={<NotFound404 />} /> 
         </Routes>
         {location.state?.locationFeedOrderCard && (

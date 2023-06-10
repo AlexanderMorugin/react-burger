@@ -1,21 +1,12 @@
 import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import {
-  Button,
-  Input,
-  EmailInput,
-  PasswordInput,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button, Input, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./profile.module.css";
-
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  changeUserFailed,
-  changeUserSuccess,
-} from "../../services/actions/auth-actions";
-import { fetchChangeUser } from "../../utils/api";
+import { changeUserAction } from "../../services/actions/auth-actions";
 import { ProfileMenu } from "../../components/profile-menu/profile-menu";
+import { getCookie } from "../../utils/cookie";
 
 export const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -38,27 +29,11 @@ export const ProfilePage = () => {
     }
   }, [userData]);
 
-  const token = useSelector((state) => state.authStore.accessToken);
+  const accessToken = getCookie("accessToken");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    fetchChangeUser(
-      userValues.name,
-      userValues.email,
-      userValues.password,
-      token
-    )
-      .then((res) => {
-        if (res) {
-          dispatch(changeUserSuccess(res));
-          console.log("fetchChangeUser ", res);
-        }
-      })
-      .catch((err) => {
-        changeUserFailed();
-        console.log(err);
-      });
+    dispatch(changeUserAction(userValues.name, userValues.email, userValues.password, accessToken));
   };
 
   const handleCancel = (e) => {
