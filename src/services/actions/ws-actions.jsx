@@ -20,4 +20,3 @@ export const wsGetMessage = (message) => ({
   type: WS_GET_MESSAGE,
   payload: message,
 });
-

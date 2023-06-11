@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { FeedCard } from "../feed-card/feed-card";
 import styles from "./feed-orders.module.css";
+import PropTypes from "prop-types";
 
 export const FeedOrders = ({ orders }) => {
   return (
@@ -16,4 +17,8 @@ export const FeedOrders = ({ orders }) => {
       })}
     </motion.ul>
   );
+};
+
+FeedOrders.propTypes = {
+  orders: PropTypes.array.isRequired,
 };

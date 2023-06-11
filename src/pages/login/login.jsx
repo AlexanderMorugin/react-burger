@@ -8,9 +8,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
 import { motion } from "framer-motion";
-import { fetchLoginUser } from "../../utils/api";
-import { loginFailed, loginSuccess } from "../../services/actions/auth-actions";
-import { setCookie } from "../../utils/cookie";
+import { loginAction } from "../../services/actions/auth-actions";
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
@@ -21,26 +19,13 @@ export const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    fetchLoginUser(email, password)
-      .then((res) => {
-        dispatch(loginSuccess(res));
-        setCookie("accessToken", res.accessToken, { path: '/' });
-        setCookie("refreshToken", res.refreshToken, { path: '/' });
-        console.log("fetchLoginUser ", res);
-      })
-      .catch((err) => {
-        dispatch(loginFailed(err));
-        console.log(err);
-      });
-    // navigate("/profile");
+    dispatch(loginAction(email, password));
     navigate("/");
   };
 
   return (
     <section className={styles.box}>
       <form className={styles.container} onSubmit={handleSubmit}>
-
         <motion.h1
           className="text text_type_main-medium mb-6"
           // анимация
@@ -50,7 +35,6 @@ export const LoginPage = () => {
         >
           Вход
         </motion.h1>
-
         <motion.div
           // анимация
           initial={{ x: "100%", opacity: 0 }}
@@ -69,7 +53,6 @@ export const LoginPage = () => {
             required
           />
         </motion.div>
-
         <motion.div
           // анимация
           initial={{ x: "-200%", opacity: 0 }}
@@ -89,7 +72,6 @@ export const LoginPage = () => {
             required
           />
         </motion.div>
-
         <motion.div
           // анимация
           initial={{ y: "200%", opacity: 0 }}
@@ -106,7 +88,6 @@ export const LoginPage = () => {
             Войти
           </Button>
         </motion.div>
-
         <motion.p
           className="text text_type_main-default text_color_inactive mb-4"
           // анимация
@@ -122,7 +103,6 @@ export const LoginPage = () => {
             Зарегистрироваться
           </Link>
         </motion.p>
-
         <motion.p
           className="text text_type_main-default text_color_inactive"
           // анимация

@@ -12,6 +12,7 @@ import { wsUrl } from "../../utils/constants";
 
 export const FeedPage = () => {
   const dispatch = useDispatch();
+
   const { orders, total, totalToday } = useSelector(
     (state) => state.socketStore
   );

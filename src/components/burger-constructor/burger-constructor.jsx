@@ -65,7 +65,7 @@ const BurgerConstructor = () => {
     const bunId = bun._id;
     const orderItems = [bunId, ...ingredientsId, bunId];
     if (!userData) {
-      navigate('/login');
+      navigate("/login");
     } else {
       dispatch(postOrderAction(orderItems));
     }
@@ -170,7 +170,6 @@ const BurgerConstructor = () => {
           }}
           disabled={bun && ingredients.length > 0 ? false : true}
         >
-          {/* Оформить заказ */}
           {userData ? "Оформить заказ" : "Авторизуйтесь"}
         </Button>
       </div>
