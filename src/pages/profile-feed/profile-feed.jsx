@@ -38,7 +38,7 @@ export const ProfileFeedPage = () => {
     orders && (
       <section className={styles.box}>
         <div className={styles.container}>
-          <FeedOrders orders={orders} />
+          <FeedOrders orders={orders.reverse()} />
         </div>
       </section>
     )

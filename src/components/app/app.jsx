@@ -54,9 +54,8 @@ const App = () => {
   const background =
   location.state?.locationFeedOrderCard ||
   location.state?.locationProfileFeed ||
-  // location.state && location.state.modal ||
   location;
-  
+  // location.state && location.state.modal;
 
   const getUserSucces = useSelector((state) => state.authStore.getUserSucces);
   const accessToken = getCookie("accessToken", { path: "/" });

@@ -9,17 +9,16 @@ import {
   wsConnectionStart,
 } from "../../services/actions/ws-actions";
 import { wsUrl } from "../../utils/constants";
-import { getIngredientsAction } from "../../services/actions/ingredients-actions";
+// import { getIngredientsAction } from "../../services/actions/ingredients-actions";
 
 export const OrderInfoPage = ({ isLogin }) => {
   const dispatch = useDispatch();
-
   const { id } = useParams();
-  const { orders } = useSelector((state) => state.socketStore);
+  const { orders } = useSelector((state) => state.socketStore.orders);
   const order = orders.find((item) => item._id === id);
 
   useEffect(() => {
-    dispatch(getIngredientsAction());
+    // dispatch(getIngredientsAction());
     isLogin
       ? dispatch(
           wsConnectionStart(

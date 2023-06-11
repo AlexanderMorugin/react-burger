@@ -1,4 +1,4 @@
-import { BASE_URL, checkResponse } from "../../utils/api";
+import { baseUrl, checkResponse } from "../../utils/api";
 import { getCookie } from "../../utils/cookie";
 
 export const POST_ORDER_REQUEST = "POST_ORDER_REQUEST";
@@ -33,7 +33,7 @@ export const postOrderAction = (data) => async (dispatch) => {
     const accessTokenWithBearer = getCookie("accessToken");
     const accessToken = accessTokenWithBearer.replace("Bearer ", "");
 
-    const response = await fetch(`${BASE_URL}/orders`, {
+    const response = await fetch(`${baseUrl}/orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
