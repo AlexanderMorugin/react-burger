@@ -4,10 +4,7 @@ import { FeedCounts } from "../../components/feed-counts/feed-counts";
 import { FeedOrders } from "../../components/feed-orders/feed-orders";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo } from "react";
-import {
-  wsConnectionClosed,
-  wsConnectionStart,
-} from "../../services/actions/ws-actions";
+import { wsConnectionClosed, wsConnectionStart } from "../../services/actions/ws-actions";
 import { wsUrl } from "../../utils/constants";
 
 export const FeedPage = () => {

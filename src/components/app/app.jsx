@@ -121,13 +121,13 @@ const App = () => {
             } />
           </Routes>
         )}
-        {location.state && location.state.modal && (
+        {/* {location.state && location.state.modal && (
           <Modal onClose={() => closeModal(location)} title="Детали ингредиента" >
             <Routes>
               <Route path={PATH_INGREDIENT_ID} element={<IngredientDetails />} />
             </Routes>
           </Modal>
-        )}
+        )} */}
       </main>
     </>
   );

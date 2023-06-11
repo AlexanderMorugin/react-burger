@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { changeUserAction } from "../../services/actions/auth-actions";
 import { ProfileMenu } from "../../components/profile-menu/profile-menu";
+import { getCookie } from "../../utils/cookie";
 
 export const ProfilePage = () => {
   const dispatch = useDispatch();

@@ -4,17 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCookie } from "../../utils/cookie";
 import { FeedOrderCard } from "../../components/feed-order-card/feed-order-card";
 import { useEffect } from "react";
-import {
-  wsConnectionClosed,
-  wsConnectionStart,
-} from "../../services/actions/ws-actions";
+import { wsConnectionClosed, wsConnectionStart } from "../../services/actions/ws-actions";
 import { wsUrl } from "../../utils/constants";
 // import { getIngredientsAction } from "../../services/actions/ingredients-actions";
 
 export const OrderInfoPage = ({ isLogin }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { orders } = useSelector((state) => state.socketStore.orders);
+  const { orders } = useSelector((state) => state.socketStore);
   const order = orders.find((item) => item._id === id);
 
   useEffect(() => {
