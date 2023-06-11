@@ -1,18 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  PasswordInput,
-  EmailInput,
-  Input,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { PasswordInput, EmailInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
 import { motion } from "framer-motion";
-import {
-  registerAction,
-} from "../../services/actions/auth-actions";
-import { setCookie } from "../../utils/cookie";
+import { registerAction } from "../../services/actions/auth-actions";
 
 export const RegisterPage = () => {
   const dispatch = useDispatch();

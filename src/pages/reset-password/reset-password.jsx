@@ -1,17 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  PasswordInput,
-  Input,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
 import { motion } from "framer-motion";
 import { fetchResetPassword } from "../../utils/api";
-import {
-  forgotPasswordSucces,
-} from "../../services/actions/auth-actions";
+import { forgotPasswordSucces } from "../../services/actions/auth-actions";
 
 export const ResetPasswordPage = () => {
   const dispatch = useDispatch();
