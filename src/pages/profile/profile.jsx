@@ -1,19 +1,12 @@
 import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import {
-  Button,
-  Input,
-  EmailInput,
-  PasswordInput,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button, Input, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./profile.module.css";
-
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  changeUserAction,
-} from "../../services/actions/auth-actions";
+import { changeUserAction } from "../../services/actions/auth-actions";
 import { ProfileMenu } from "../../components/profile-menu/profile-menu";
+import { getCookie } from "../../utils/cookie";
 
 export const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -36,7 +29,7 @@ export const ProfilePage = () => {
     }
   }, [userData]);
 
-  const accessToken  = useSelector((state) => state.authStore.accessToken);
+  const accessToken = getCookie("accessToken");
 
   const handleSubmit = (e) => {
     e.preventDefault();

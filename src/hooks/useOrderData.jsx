@@ -1,10 +1,8 @@
 import { useSelector } from "react-redux";
 import { useMatch } from "react-router-dom";
 
-export const useOrderData = (order) => {
-  const ingredients = useSelector(
-    (state) => state.ingredientsStore.ingredients
-  );
+export function useOrderData(order) {
+  const ingredients = useSelector((state) => state.ingredientsStore.ingredients);
 
   const getOrderList = () => {
     const elements = [];
@@ -15,9 +13,9 @@ export const useOrderData = (order) => {
         }
       });
     });
+
     return elements;
   };
-
   const orderIngredients = getOrderList();
 
   const getOrderStatus = () => {
@@ -29,7 +27,6 @@ export const useOrderData = (order) => {
       return "Создан";
     }
   };
-
   const orderStatus = getOrderStatus();
 
   const orderPrice = orderIngredients.reduce((count, item) => {
@@ -37,18 +34,10 @@ export const useOrderData = (order) => {
   }, 0);
 
   const currentDate = new Date().getTimezoneOffset() / 60;
-  const time =
-    "i-GMT" + (currentDate > 0 ? "-" + currentDate : "+" + -currentDate);
+  const time = "i-GMT" + (currentDate > 0 ? "-" + currentDate : "+" + -currentDate);
 
-  const matchProfile = useMatch("/profile/orders/");
-  const feedMatch = useMatch("/feed");
+  const matchProfile = useMatch('/profile/orders/');
+  const feedMatch = useMatch('/feed');
 
-  return {
-    orderIngredients,
-    orderPrice,
-    orderStatus,
-    time,
-    feedMatch,
-    matchProfile,
-  };
-};
+  return { orderIngredients, orderPrice, orderStatus, time, feedMatch, matchProfile };
+}

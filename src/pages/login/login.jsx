@@ -1,11 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  PasswordInput,
-  EmailInput,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { PasswordInput, EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
 import { motion } from "framer-motion";
 import { loginAction } from "../../services/actions/auth-actions";

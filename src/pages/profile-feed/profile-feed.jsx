@@ -3,10 +3,7 @@ import { FeedOrders } from "../../components/feed-orders/feed-orders";
 import styles from "./profile-feed.module.css";
 import { getCookie } from "../../utils/cookie";
 import { useEffect } from "react";
-import {
-  wsConnectionClosed,
-  wsConnectionStart,
-} from "../../services/actions/ws-actions";
+import { wsConnectionClosed, wsConnectionStart } from "../../services/actions/ws-actions";
 import { wsUrl } from "../../utils/constants";
 import { getUserAction } from "../../services/actions/auth-actions";
 
