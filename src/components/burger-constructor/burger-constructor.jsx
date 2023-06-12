@@ -10,6 +10,7 @@ import ConstructorIngredient from "../constructor-ingredient/constructor-ingredi
 import styles from "./burger-constructor.module.css";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { Spinner } from "../spinner/spinner";
 
 const BurgerConstructor = () => {
   const getConstructorData = (state) => state.constructorStore;
@@ -17,6 +18,9 @@ const BurgerConstructor = () => {
 
   const getOrderNumber = (state) => state.orderStore.data;
   const orderNumber = useSelector(getOrderNumber);
+
+  const orderRequest = useSelector((state) => state.orderStore.orderRequest);
+  console.log(orderRequest)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -162,6 +166,20 @@ const BurgerConstructor = () => {
           {userData ? "Оформить заказ" : "Авторизуйтесь"}
         </Button>
       </div>
+
+      {orderRequest ? (
+        <Modal>
+          <div className={styles.container}>
+            <p className="text text_type_main-medium mt-8">
+              Ваш заказ отправляется на космическую кухню!
+            </p>
+            <Spinner />
+            <p className="text text_type_main-default text_color_inactive mt-2">
+              Ожидайте номера заказа
+            </p>
+          </div>          
+        </Modal>
+      ) : null }
 
       {orderNumber && (
         <Modal onClose={handleCloseModal}>

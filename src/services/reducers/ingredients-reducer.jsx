@@ -9,6 +9,7 @@ import {
 const initialState = {
   ingredients: [],
   ingredientsRequest: false,
+  ingredientsSuccess: false,
   ingredientsFailed: false,
   сurrentIngredient: null,
 };
@@ -19,19 +20,22 @@ export const ingredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         ingredientsFailed: false,
-        ingredientsRequest: false,
+        ingredientsRequest: true,
       };
     case GET_INGREDIENTS_SUCCESS:
       return {
         ...state,
         ingredients: action.payload,
         ingredientsFailed: false,
-        ingredientsRequest: true,
+        ingredientsRequest: false,
+        ingredientsSuccess: true,
       };
     case GET_INGREDIENTS_FAILED:
       return {
         ...state,
         ingredientsFailed: true,
+        ingredientsRequest: false,
+        ingredientsSuccess: false,
       };
     case SET_CURRENT_INGREDIENT: {
       return {

@@ -44,6 +44,7 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 // import { resetCurrentIngredientAction } from "../../services/actions/ingredient-details-actions";
 import { FeedOrderCard } from "../feed-order-card/feed-order-card";
+import { Spinner } from "../spinner/spinner";
 
 
 const App = () => {
@@ -51,10 +52,21 @@ const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const background =
-  location.state?.locationFeedOrderCard ||
-  location.state?.locationProfileFeed ||
-  location;
+  const { ingredientsRequest, ingredientsSuccess, ingredientsFailed } = useSelector((state) => state.ingredientsStore);
+  // console.log(ingredientsSuccess)
+
+  // const background = location.state && location.state.background;
+
+  const background = location.state && (
+    location.state?.locationFeedOrderCard ||
+    location.state?.locationProfileFeed
+  );
+
+  // const background =
+  // location.state?.locationFeedOrderCard ||
+  // location.state?.locationProfileFeed ||
+  // location;
+
   // location.state && location.state.modal;
 
   const getUserSucces = useSelector((state) => state.authStore.getUserSucces);
@@ -87,36 +99,37 @@ const App = () => {
     <>
       <AppHeader />
       <main className={styles.main}>
-        <Routes 
-        location={background}
-        >
-          <Route path={PATH_INDEX} element={<ConstructorPage />} />
-          <Route path={PATH_LOGIN} element={!getUserSucces && !accessToken ? (<LoginPage />) : (<Navigate to={PATH_INDEX} />)} />
-          <Route path={PATH_REGISTER} element={!getUserSucces && !accessToken ? (<RegisterPage />) : (<Navigate to={PATH_INDEX} />)} />
-          <Route path={PATH_FORGOT_RASSWORD} element={!getUserSucces && !accessToken ? (<ForgotPasswordPage />) : (<Navigate to={PATH_INDEX} />)} />
-          <Route path={PATH_RESET_RASSWORD} element={<ResetPasswordPage />} />
-          <Route path={PATH_PROFILE} element={<ProtectedRouteElement element={<ProfilePage />} to={PATH_LOGIN} />}>
-            <Route path={PATH_PROFILE_ORDERS} element={<ProfileFeedPage />} />
-          </Route>
-          <Route path={PATH_INGREDIENT_ID} element={!(location.state && location.state.modal) ? <IngredientPage /> : null} />
-          <Route path={PATH_FEED} element={<FeedPage />} />
-          <Route path={PATH_FEED_ID} element={!(location.state?.locationFeedOrderCard) ? <OrderInfoPage isLogin={false} /> : null} />
 
-          {/* <Route path={PATH_PROFILE_ORDERS_ID} element={(!getUserSucces && !accessToken) ? <LoginPage /> : <OrderInfoPage isLogin={true} />} /> */}
-          <Route path={PATH_PROFILE_ORDERS_ID} element={!(location.state?.locationProfileFeed) ? <OrderInfoPage isLogin={true} /> : null} />
+        {ingredientsRequest && <Spinner />}
+        {ingredientsFailed && <p>Произошла ошибка</p>}
+        {ingredientsSuccess && (      
+          <Routes location={background || location}>
+            <Route path={PATH_INDEX} element={<ConstructorPage />} />
+            <Route path={PATH_LOGIN} element={!getUserSucces && !accessToken ? (<LoginPage />) : (<Navigate to={PATH_INDEX} />)} />
+            <Route path={PATH_REGISTER} element={!getUserSucces && !accessToken ? (<RegisterPage />) : (<Navigate to={PATH_INDEX} />)} />
+            <Route path={PATH_FORGOT_RASSWORD} element={!getUserSucces && !accessToken ? (<ForgotPasswordPage />) : (<Navigate to={PATH_INDEX} />)} />
+            <Route path={PATH_RESET_RASSWORD} element={<ResetPasswordPage />} />
+            <Route path={PATH_PROFILE} element={<ProtectedRouteElement element={<ProfilePage />} to={PATH_LOGIN} />}>
+              <Route path={PATH_PROFILE_ORDERS} element={<ProfileFeedPage />} />
+            </Route>
+            <Route path={PATH_INGREDIENT_ID} element={!(location.state && location.state.modal) ? <IngredientPage /> : null} />
+            <Route path={PATH_FEED} element={<FeedPage />} />
+            <Route path={PATH_FEED_ID} element={<OrderInfoPage isLogin={false} />} />
+            <Route path={PATH_PROFILE_ORDERS_ID} element={(!getUserSucces && !accessToken) ? <LoginPage /> : <OrderInfoPage isLogin={true} />} />
+            <Route path={PATH_NOT_FOUND} element={<NotFound404 />} /> 
+          </Routes>
+        )}
 
-          <Route path={PATH_NOT_FOUND} element={<NotFound404 />} /> 
-        </Routes>
         {location.state?.locationFeedOrderCard && (
-          <Modal onClose={closeModal}>
+          <Modal onClose={() => closeModal(location)} title="">
             <Routes>
-              <Route path={PATH_FEED_ID} element={<FeedOrderCard title="" />} />
+              <Route path={PATH_FEED_ID} element={<FeedOrderCard />} />
             </Routes>
           </Modal>
         )}
-        {/* {location.state?.locationFeedOrderCard && (
+        {/* {!background && (
           <Routes>
-            <Route path="/feed/:id" element={
+            <Route path={PATH_FEED_ID} element={
               <Modal onClose={closeModal}>
                 <FeedOrderCard title="" />
               </Modal>
@@ -125,12 +138,22 @@ const App = () => {
         )} */}
         
         {location.state?.locationProfileFeed && (
-          <Modal onClose={closeModal}>
+          <Modal onClose={() => closeModal(location)} title="">
             <Routes>
-              <Route path={PATH_PROFILE_ORDERS_ID} element={<FeedOrderCard title="" />} />
+              <Route path={PATH_PROFILE_ORDERS_ID} element={<FeedOrderCard />} />
             </Routes>
           </Modal>
         )}
+        {/* {background && (
+          <Routes>
+            <Route path={PATH_PROFILE_ORDERS_ID} element={
+              <Modal onClose={closeModal}>
+                <FeedOrderCard title="" />
+              </Modal>
+            } />
+          </Routes>
+        )} */}
+
         {location.state && location.state.modal && (
           <Modal onClose={() => closeModal(location)} title="Детали ингредиента" >
             <Routes>
@@ -138,6 +161,7 @@ const App = () => {
             </Routes>
           </Modal>
         )}
+      
       </main>
     </>
   );

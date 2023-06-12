@@ -20,8 +20,6 @@ export const ProfilePage = () => {
     password: "",
   });
 
-  // const {values, handleChange, setValues} = useForm({ email: '', name: '', password: ''});
-
   useEffect(() => {
     if (userData) {
       setUserValues({
