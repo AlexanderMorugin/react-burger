@@ -1,21 +1,10 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
-import {
-  ConstructorElement,
-  CurrencyIcon,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { ConstructorElement, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modal/modal";
-import {
-  addIngridientAction,
-  addBunAction,
-  resetIngredientAction,
-} from "../../services/actions/constructor-actions";
-import {
-  postOrderAction,
-  postOrderResetAction,
-} from "../../services/actions/order-actions";
+import { addIngridientAction, addBunAction, resetIngredientAction } from "../../services/actions/constructor-actions";
+import { postOrderAction, postOrderResetAction } from "../../services/actions/order-actions";
 import OrderDetails from "../order-details/order-details";
 import ConstructorIngredient from "../constructor-ingredient/constructor-ingredient";
 import styles from "./burger-constructor.module.css";

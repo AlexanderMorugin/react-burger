@@ -1,10 +1,7 @@
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import styles from "./feed-order-card.module.css";
-import {
-  FormattedDate,
-  CurrencyIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { FormattedDate, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector } from "react-redux";
 import { useOrderData } from "../../hooks/useOrderData";
 import { FeedOrderIngredients } from "../feed-order-ingredients/feed-order-ingredients";

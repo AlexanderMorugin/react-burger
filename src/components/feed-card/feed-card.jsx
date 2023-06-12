@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  CurrencyIcon,
-  FormattedDate,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./feed-card.module.css";
 import PropTypes from "prop-types";
 import { useOrderData } from "../../hooks/useOrderData";

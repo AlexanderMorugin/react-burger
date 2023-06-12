@@ -4,6 +4,9 @@ export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
 
+export const SET_CURRENT_INGREDIENT = "SET_CURRENT_INGREDIENT";
+export const RESET_CURRENT_INGREDIENT = "RESET_CURRENT_INGREDIENT";
+
 
 export const getIngredientsRequest = () => ({
   type: GET_INGREDIENTS_REQUEST,
@@ -31,4 +34,15 @@ export const getIngredientsAction = () => {
   };
 };
 
+export const setCurrentIngredientAction = (ingredient) => {
+  return {
+    type: SET_CURRENT_INGREDIENT,
+    data: ingredient,
+  };
+};
 
+export const resetCurrentIngredientAction = () => {
+  return {
+    type: RESET_CURRENT_INGREDIENT,
+  };
+};

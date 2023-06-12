@@ -11,9 +11,10 @@ export const socketMiddleware = (wsUrl, wsActions) => {
       if (type === wsStart) {
         url = payload;
         socket = new WebSocket(url);
-      } else if (type === onClose) {
-        socket.close(1000, 'CLOSE_NORMAL')
       }
+      // else if (type === onClose) {
+      //   socket.close(1000, 'CLOSE_NORMAL')
+      // }
       if (socket) {
         socket.onopen = event => {
           dispatch({ type: onOpen, payload: event });

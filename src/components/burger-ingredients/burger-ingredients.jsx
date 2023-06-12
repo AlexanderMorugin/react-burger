@@ -5,10 +5,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientsList from "../ingredients-list/ingredients-list";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
-import {
-  setCurrentIngredientAction,
-  resetCurrentIngredientAction,
-} from "../../services/actions/ingredient-details-actions";
+import { setCurrentIngredientAction, resetCurrentIngredientAction } from "../../services/actions/ingredients-actions";
 import styles from "./burger-ingredients.module.css";
 import { motion } from "framer-motion";
 

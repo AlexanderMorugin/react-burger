@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -9,18 +9,18 @@ import { motion } from "framer-motion";
 const modalRootElement = document.querySelector("#react-modals");
 
 const Modal = ({ title, children, onClose }) => {
-  React.useEffect(() => {
-    const closeOnEscapeKeyDown = (evt) => {
-      if (evt.key === "Escape") {
-        onClose();
-      }
-    };
-    document.body.addEventListener("keydown", closeOnEscapeKeyDown);
 
-    return function cleanup() {
-      document.body.removeEventListener("keydown", closeOnEscapeKeyDown);
-    };
-  }, []);
+  useEffect(() => {
+    const closeOnEscapeKeyDown = (evt) => {
+      if (evt.key === 'Escape') {
+        onClose()
+      }
+    }
+    document.addEventListener('keydown', closeOnEscapeKeyDown);
+    return () => {
+      document.removeEventListener('keydown', closeOnEscapeKeyDown); 
+    }
+  }, [onClose])
 
   return createPortal(
     <ModalOverlay onClick={onClose}>
