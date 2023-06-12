@@ -2,12 +2,15 @@ import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_FAILED,
+  SET_CURRENT_INGREDIENT,
+  RESET_CURRENT_INGREDIENT,
 } from "../actions/ingredients-actions";
 
 const initialState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
+  сurrentIngredient: null,
 };
 
 export const ingredientsReducer = (state = initialState, action) => {
@@ -30,6 +33,18 @@ export const ingredientsReducer = (state = initialState, action) => {
         ...state,
         ingredientsFailed: true,
       };
+    case SET_CURRENT_INGREDIENT: {
+      return {
+        ...state,
+        сurrentIngredient: { ...state.сurrentIngredient, ...action.data },
+      };
+    }
+    case RESET_CURRENT_INGREDIENT: {
+      return {
+        ...state,
+        сurrentIngredient: null,
+      };
+    }
     default:
       return state;
   }

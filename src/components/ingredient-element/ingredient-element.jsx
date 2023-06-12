@@ -1,10 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
-import {
-  CurrencyIcon,
-  Counter,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import Image from "../image/image";
 import styles from "./ingredient-element.module.css";
 import PropTypes from "prop-types";
