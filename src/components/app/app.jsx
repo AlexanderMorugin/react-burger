@@ -99,6 +99,7 @@ const App = () => {
     <>
       <AppHeader />
       <main className={styles.main}>
+
         {ingredientsRequest && <Spinner />}
         {ingredientsFailed && <p>Произошла ошибка</p>}
         {ingredientsSuccess && (      
@@ -118,6 +119,7 @@ const App = () => {
             <Route path={PATH_NOT_FOUND} element={<NotFound404 />} /> 
           </Routes>
         )}
+
         {location.state?.locationFeedOrderCard && (
           <Modal onClose={() => closeModal(location)} title="">
             <Routes>

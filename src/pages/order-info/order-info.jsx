@@ -10,7 +10,6 @@ import { wsUrl } from "../../utils/constants";
 
 export const OrderInfoPage = ({ isLogin }) => {
   const dispatch = useDispatch();
-
   const { id } = useParams();
   const { orders } = useSelector((state) => state.socketStore);
   const order = orders.find((item) => item._id === id);
