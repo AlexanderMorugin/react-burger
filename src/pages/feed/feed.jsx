@@ -10,9 +10,7 @@ import { wsUrl } from "../../utils/constants";
 export const FeedPage = () => {
   const dispatch = useDispatch();
 
-  const { orders, total, totalToday } = useSelector(
-    (state) => state.socketStore
-  );
+  const { orders, total, totalToday } = useSelector((state) => state.socketStore);
 
   useEffect(() => {
     dispatch(wsConnectionStart(`${wsUrl}/all`));
@@ -42,7 +40,7 @@ export const FeedPage = () => {
   }, [orders]);
 
   return (
-    orders && (
+    orders.length && (
       <section className={styles.box}>
         <motion.h1
           className="text text_type_main-large mb-5"

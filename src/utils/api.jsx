@@ -114,3 +114,11 @@ export const fetchChangeUser = (name, email, password, accessToken) => {
     }),
   })
 };
+
+export const fetchOrder = (number) => {
+  return request(`${baseUrl}/orders/${number}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}

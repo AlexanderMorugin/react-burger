@@ -62,24 +62,6 @@ export const registerAction = (email, password, name) => {
   };
 };
 
-export const registerAction = (email, password, name) => {
-  return function (dispatch) {
-    dispatch(registerRequest());
-
-    fetchRegisterUser(email, password, name)
-      .then((res) => {
-        dispatch(registerSuccess(res));
-        setCookie("accessToken", res.accessToken, { path: "/" });
-        setCookie("refreshToken", res.refreshToken, { path: "/" });
-        console.log("fetchRegisterUser ", res);
-      })
-      .catch((err) => {
-        dispatch(registerFailed(err));
-        console.log(err);
-      });
-  };
-};
-
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILED = "LOGIN_FAILED";

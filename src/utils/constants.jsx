@@ -10,6 +10,6 @@ export const PATH_INGREDIENT_ID = "ingredients/:id";
 export const wsUrl = "wss://norma.nomoreparties.space/orders";
 
 export const PATH_PROFILE_ORDERS = "orders";
-export const PATH_PROFILE_ORDERS_ID = "profile/orders/:id";
+export const PATH_PROFILE_ORDERS_NUMBER = "profile/orders/:number";
 export const PATH_FEED = "/feed";
-export const PATH_FEED_ID = "/feed/:id";
+export const PATH_FEED_NUMBER = "/feed/:number";

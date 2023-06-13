@@ -5,10 +5,12 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import styles from "./modal.module.css";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
 
 const modalRootElement = document.querySelector("#react-modals");
 
 const Modal = ({ title, children, onClose }) => {
+  const orderRequest = useSelector((state) => state.orderStore.orderRequest);
 
   useEffect(() => {
     const closeOnEscapeKeyDown = (evt) => {
@@ -40,9 +42,11 @@ const Modal = ({ title, children, onClose }) => {
             {title}
           </h2>
         </div>
+        {!orderRequest ? (
         <button className={styles.button} type="button" onClick={onClose}>
           <CloseIcon type="primary" />
         </button>
+        ) : null}
         {children}
       </motion.div>
     </ModalOverlay>,
