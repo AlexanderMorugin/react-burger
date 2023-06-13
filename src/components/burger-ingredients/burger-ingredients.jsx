@@ -8,22 +8,18 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import { setCurrentIngredientAction, resetCurrentIngredientAction } from "../../services/actions/ingredients-actions";
 import styles from "./burger-ingredients.module.css";
 import { motion } from "framer-motion";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const BurgerIngredients = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const getIngredientsData = (state) => state.ingredientsStore;
   const ingredientsData = useSelector(getIngredientsData);
 
-  const [showModal, setShowModal] = useState(false);
-
   const openModal = (ingredient) => {
-    dispatch(setCurrentIngredientAction(ingredient));
-    setShowModal(true);
-  };
-  const closeModal = () => {
-    dispatch(resetCurrentIngredientAction());
-    setShowModal(false);
+    navigate(`/ingredients/${ingredient._id}`, { state: {background: location}, replace: true});
   };
 
   // Работа Табов с прокруткой ингредиентов
@@ -123,12 +119,6 @@ const BurgerIngredients = () => {
           id="main"
         />
       </div>
-
-      {showModal && (
-        <Modal onClose={closeModal}>
-          <IngredientDetails />
-        </Modal>
-      )}
     </motion.section>
   );
 };

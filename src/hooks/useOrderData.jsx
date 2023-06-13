@@ -1,11 +1,26 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useMatch } from "react-router-dom";
+
 
 export function useOrderData(order) {
   const ingredients = useSelector(
     (state) => state.ingredientsStore.ingredients
   );
-  // console.log(ingredients)
+
+  const matchProfile = useMatch("/profile/orders/");
+  const feedMatch = useMatch("/feed");
+
+  if (!order) {
+    return {
+      isValid: false,
+      orderIngredients: [],
+      orderPrice: 0,
+      orderStatus: "",
+      time: "",
+      feedMatch,
+      matchProfile,
+    };
+  }
 
   const getOrderList = () => {
     const elements = [];
@@ -19,6 +34,7 @@ export function useOrderData(order) {
 
     return elements;
   };
+
   const orderIngredients = getOrderList();
 
   const getOrderStatus = () => {
@@ -42,10 +58,8 @@ export function useOrderData(order) {
   const time =
     "i-GMT" + (currentDate > 0 ? "-" + currentDate : "+" + -currentDate);
 
-  const matchProfile = useMatch("/profile/orders/");
-  const feedMatch = useMatch("/feed");
-
   return {
+    isValid: true,
     orderIngredients,
     orderPrice,
     orderStatus,

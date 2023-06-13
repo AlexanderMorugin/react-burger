@@ -30,9 +30,9 @@ import {
   PATH_NOT_FOUND,
   PATH_INGREDIENT_ID,
   PATH_PROFILE_ORDERS,
-  PATH_PROFILE_ORDERS_ID,
+  PATH_PROFILE_ORDERS_NUMBER,
   PATH_FEED,
-  PATH_FEED_ID,
+  PATH_FEED_NUMBER,
 } from "../../utils/constants";
 import AppHeader from "../app-header/app-header";
 import { getIngredientsAction } from "../../services/actions/ingredients-actions";
@@ -42,9 +42,7 @@ import { getCookie } from "../../utils/cookie";
 import { getUserAction } from "../../services/actions/auth-actions";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
-// import { resetCurrentIngredientAction } from "../../services/actions/ingredient-details-actions";
 import { FeedOrderCard } from "../feed-order-card/feed-order-card";
-import { Spinner } from "../spinner/spinner";
 
 
 const App = () => {
@@ -52,22 +50,9 @@ const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { ingredientsRequest, ingredientsSuccess, ingredientsFailed } = useSelector((state) => state.ingredientsStore);
-  // console.log(ingredientsSuccess)
-
-  // const background = location.state && location.state.background;
-
-  const background = location.state && (
-    location.state?.locationFeedOrderCard ||
-    location.state?.locationProfileFeed
-  );
-
-  // const background =
-  // location.state?.locationFeedOrderCard ||
-  // location.state?.locationProfileFeed ||
-  // location;
-
-  // location.state && location.state.modal;
+  const { ingredientsSuccess } = useSelector((state) => state.ingredientsStore);
+  
+  const background = location.state && location.state.background;
 
   const getUserSucces = useSelector((state) => state.authStore.getUserSucces);
   const accessToken = getCookie("accessToken", { path: "/" });
@@ -80,88 +65,54 @@ const App = () => {
     }
   }, [dispatch, accessToken]);
 
-  // const closeModal = () => {
-  //   dispatch(resetCurrentIngredientAction());
-  //   window.removeEventListener("popstate", closeModal);
-  //   const background = location.state && location.state.background;
-  //   if (background) {
-  //     navigate(background, { replace: true });
-  //   } else {
-  //     navigate(-1, { state: { modal: false } });
-  //   }
-  // };
-
   const closeModal = () => {
     return navigate(-1);
+    // navigate(-1, { state: { background: null } });
   }
 
   return (
     <>
       <AppHeader />
       <main className={styles.main}>
-
-        {ingredientsRequest && <Spinner />}
-        {ingredientsFailed && <p>Произошла ошибка</p>}
-        {ingredientsSuccess && (      
-          <Routes location={background || location}>
-            <Route path={PATH_INDEX} element={<ConstructorPage />} />
-            <Route path={PATH_LOGIN} element={!getUserSucces && !accessToken ? (<LoginPage />) : (<Navigate to={PATH_INDEX} />)} />
-            <Route path={PATH_REGISTER} element={!getUserSucces && !accessToken ? (<RegisterPage />) : (<Navigate to={PATH_INDEX} />)} />
-            <Route path={PATH_FORGOT_RASSWORD} element={!getUserSucces && !accessToken ? (<ForgotPasswordPage />) : (<Navigate to={PATH_INDEX} />)} />
-            <Route path={PATH_RESET_RASSWORD} element={<ResetPasswordPage />} />
-            <Route path={PATH_PROFILE} element={<ProtectedRouteElement element={<ProfilePage />} to={PATH_LOGIN} />}>
-              <Route path={PATH_PROFILE_ORDERS} element={<ProfileFeedPage />} />
-            </Route>
-            <Route path={PATH_INGREDIENT_ID} element={!(location.state && location.state.modal) ? <IngredientPage /> : null} />
-            <Route path={PATH_FEED} element={<FeedPage />} />
-            <Route path={PATH_FEED_ID} element={<OrderInfoPage isLogin={false} />} />
-            <Route path={PATH_PROFILE_ORDERS_ID} element={(!getUserSucces && !accessToken) ? <LoginPage /> : <OrderInfoPage isLogin={true} />} />
-            <Route path={PATH_NOT_FOUND} element={<NotFound404 />} /> 
-          </Routes>
-        )}
-
-        {location.state?.locationFeedOrderCard && (
-          <Modal onClose={() => closeModal(location)} title="">
-            <Routes>
-              <Route path={PATH_FEED_ID} element={<FeedOrderCard />} />
+        {ingredientsSuccess && (
+          <>
+            <Routes location={background || location}>
+              <Route path={PATH_INDEX} element={<ConstructorPage />} />
+              <Route path={PATH_LOGIN} element={!getUserSucces && !accessToken ? (<LoginPage />) : (<Navigate to={PATH_INDEX} />)} />
+              <Route path={PATH_REGISTER} element={!getUserSucces && !accessToken ? (<RegisterPage />) : (<Navigate to={PATH_INDEX} />)} />
+              <Route path={PATH_FORGOT_RASSWORD} element={!getUserSucces && !accessToken ? (<ForgotPasswordPage />) : (<Navigate to={PATH_INDEX} />)} />
+              <Route path={PATH_RESET_RASSWORD} element={<ResetPasswordPage />} />
+              <Route path={PATH_PROFILE} element={<ProtectedRouteElement element={<ProfilePage />} to={PATH_LOGIN} />}>
+                <Route path={PATH_PROFILE_ORDERS} element={<ProfileFeedPage />} />
+              </Route>
+              <Route path={PATH_INGREDIENT_ID} element={!(location.state && location.state.modal) ? (<IngredientPage />) : null} />
+              <Route path={PATH_FEED} element={<FeedPage />} />
+              <Route path={PATH_FEED_NUMBER} element={<OrderInfoPage/>} />
+              <Route path={PATH_PROFILE_ORDERS_NUMBER} element={!getUserSucces && !accessToken ? (<LoginPage />) : (<OrderInfoPage/>)} />
+              <Route path={PATH_NOT_FOUND} element={<NotFound404 />} />
             </Routes>
-          </Modal>
-        )}
-        {/* {!background && (
-          <Routes>
-            <Route path={PATH_FEED_ID} element={
-              <Modal onClose={closeModal}>
-                <FeedOrderCard title="" />
-              </Modal>
-            } />
-          </Routes>
-        )} */}
-        
-        {location.state?.locationProfileFeed && (
-          <Modal onClose={() => closeModal(location)} title="">
-            <Routes>
-              <Route path={PATH_PROFILE_ORDERS_ID} element={<FeedOrderCard />} />
-            </Routes>
-          </Modal>
-        )}
-        {/* {background && (
-          <Routes>
-            <Route path={PATH_PROFILE_ORDERS_ID} element={
-              <Modal onClose={closeModal}>
-                <FeedOrderCard title="" />
-              </Modal>
-            } />
-          </Routes>
-        )} */}
 
-        {location.state && location.state.modal && (
-          <Modal onClose={() => closeModal(location)} title="Детали ингредиента" >
-            <Routes>
-              <Route path={PATH_INGREDIENT_ID} element={<IngredientDetails />} />
-            </Routes>
-          </Modal>
+            {background && (
+              <Routes>
+                <Route path={PATH_FEED_NUMBER} element={
+                  <Modal onClose={() => closeModal()}>
+                    <FeedOrderCard/>
+                  </Modal>}
+                />
+                <Route path={PATH_PROFILE_ORDERS_NUMBER} element={
+                  <Modal onClose={() => closeModal()}>
+                    <FeedOrderCard />
+                  </Modal>}
+                />
+                <Route path={PATH_INGREDIENT_ID} element={
+                  <Modal onClose={() => closeModal(location)} title="Детали ингредиента">
+                    <IngredientDetails />
+                  </Modal>}
+                />
+              </Routes>
+            )}
+          </>
         )}
-      
       </main>
     </>
   );

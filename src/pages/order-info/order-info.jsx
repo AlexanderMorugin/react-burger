@@ -8,31 +8,10 @@ import { wsConnectionClosed, wsConnectionStart } from "../../services/actions/ws
 import { wsUrl } from "../../utils/constants";
 // import { getIngredientsAction } from "../../services/actions/ingredients-actions";
 
-export const OrderInfoPage = ({ isLogin }) => {
-  const dispatch = useDispatch();
-  const { id } = useParams();
-  const { orders } = useSelector((state) => state.socketStore);
-  const order = orders.find((item) => item._id === id);
-
-  useEffect(() => {
-    // dispatch(getIngredientsAction());
-    isLogin
-      ? dispatch(
-          wsConnectionStart(
-            `${wsUrl}?token=${getCookie("accessToken").split("Bearer ")[1]}`
-          )
-        )
-      : dispatch(wsConnectionStart(`${wsUrl}/all`));
-    return () => {
-      dispatch(wsConnectionClosed());
-    };
-  }, [dispatch, isLogin]);
-
+export const OrderInfoPage = () => {
   return (
-    order && (
       <section className={styles.box}>
         <FeedOrderCard />
       </section>
-    )
-  );
+    );
 };

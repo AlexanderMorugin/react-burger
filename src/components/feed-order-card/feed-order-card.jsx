@@ -2,18 +2,44 @@ import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import styles from "./feed-order-card.module.css";
 import { FormattedDate, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useOrderData } from "../../hooks/useOrderData";
 import { FeedOrderIngredients } from "../feed-order-ingredients/feed-order-ingredients";
+import { useEffect } from "react";
+import { getOrder } from "../../services/actions/order-actions";
 
 export const FeedOrderCard = () => {
-  const { id } = useParams();
-  const orders = useSelector((state) => state.socketStore.orders);
+  const { number } = useParams();
 
-  const order = orders.find((item) => item._id === id);
+  const dispatch = useDispatch();
 
-  const { orderIngredients, orderStatus, orderPrice, time } =
+  const order = useSelector((state) => {
+    if (state.socketStore.wsConnect && state.socketStore.orders.length) {
+      const data = state.socketStore.orders.find(
+        (item) => item.number === +number
+      );
+      if (data) return data;
+    }
+
+    if (state.orderStore.order?.number === +number) {
+      return state.orderStore.order;
+    }
+
+    return null;
+  });
+
+  useEffect(() => {
+    if (!order) {
+      dispatch(getOrder(number));
+    }
+  }, [dispatch, order, number]);
+  
+  const { isValid, orderIngredients, orderStatus, orderPrice, time } =
     useOrderData(order);
+
+  if (!isValid) {
+    return null;
+  }  
 
   return (
     <>

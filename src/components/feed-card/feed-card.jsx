@@ -10,7 +10,7 @@ export const FeedCard = ({ order }) => {
   const location = useLocation();
   const [isProfile, setIsProfile] = useState(false);
 
-  const { orderIngredients, orderStatus, orderPrice, time, matchProfile } =
+  const { isValid, orderIngredients, orderStatus, orderPrice, time, matchProfile } =
     useOrderData(order);
 
   useEffect(() => {
@@ -19,16 +19,16 @@ export const FeedCard = ({ order }) => {
     }
   }, [matchProfile]);
 
+  if (!isValid) {
+    return null;
+  }
+
   return (
     <div className={styles.card}>
       <Link
         className={styles.link}
-        to={isProfile ? `/profile/orders/${order._id}` : `/feed/${order._id}`}
-        state={
-          isProfile
-            ? { locationProfileFeed: location }
-            : { locationFeedOrderCard: location }
-        }
+        to={isProfile ? `/profile/orders/${order.number}` : `/feed/${order.number}`}
+        state={{background: location}}
       >
         <div className={styles.top}>
           <p className={"text text_type_digits-default " + styles.card_id}>
