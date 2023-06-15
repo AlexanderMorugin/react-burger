@@ -3,11 +3,18 @@
   flex-direction: column;
   width: 100%;
   background: #1C1C21;
+  border: 2px solid #1C1C21;
   border-radius: 40px;
   box-sizing: border-box;
   margin: 0;
   padding: 24px;
   cursor: pointer;
+  transition: .5s;
+}
+
+.card:hover {
+  transform: scale(.98);
+  border: 2px solid rgb(73, 72, 72);
 }
 
 .link {

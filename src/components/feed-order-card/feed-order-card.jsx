@@ -10,6 +10,8 @@ import { getOrder } from "../../services/actions/order-actions";
 
 export const FeedOrderCard = () => {
   const { number } = useParams();
+  // const orders = useSelector((state) => state.socketReducer.orders);
+  // const order = orders.find((item) => item._id === id);
 
   const dispatch = useDispatch();
 

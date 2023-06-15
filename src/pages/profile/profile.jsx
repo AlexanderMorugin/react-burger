@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeUserAction } from "../../services/actions/auth-actions";
 import { ProfileMenu } from "../../components/profile-menu/profile-menu";
 import { getCookie } from "../../utils/cookie";
-import { useForm } from "../../hooks/useForm";
 
 export const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -19,8 +18,6 @@ export const ProfilePage = () => {
     email: "",
     password: "",
   });
-
-  // const {values, handleChange, setValues} = useForm({ email: '', name: '', password: ''});
 
   useEffect(() => {
     if (userData) {
