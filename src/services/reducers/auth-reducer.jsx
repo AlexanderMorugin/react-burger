@@ -20,6 +20,8 @@ import {
   CHANGE_USER_REQUEST,
   CHANGE_USER_SUCCESS,
   CHANGE_USER_FAILED,
+  SET_AUTH_CHECKED, // добавлено
+  SET_USER, // добавлено
 } from "../actions/auth-actions";
 
 const initialState = {
@@ -53,6 +55,7 @@ const initialState = {
 
   email: "",
   user: null,
+  isAuthChecked: false, // добавлено
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -134,7 +137,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loginSucces: true,
         loginFailed: false,
-        accessToken: action.payload.accessToken,
+        // accessToken: action.payload.accessToken,
         user: action.payload,
       };
     }
@@ -158,7 +161,7 @@ export const authReducer = (state = initialState, action) => {
         logoutSucces: true,
         logoutFailed: false,
         user: null,
-        accessToken: null,
+        // accessToken: null,
       };
     }
     case LOGOUT_FAILED: {
@@ -212,6 +215,17 @@ export const authReducer = (state = initialState, action) => {
         changeUserFailed: true,
       };
     }
+    // добавлено
+    case SET_AUTH_CHECKED:
+      return {
+        ...state,
+        isAuthChecked: action.payload
+      }
+    case SET_USER:
+      return {
+        ...state,
+        user: action.payload
+      }
     default: {
       return state;
     }

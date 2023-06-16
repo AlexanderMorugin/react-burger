@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   Routes,
   Route,
-  Navigate,
   useLocation,
   useNavigate,
 } from "react-router-dom";
@@ -38,11 +37,11 @@ import AppHeader from "../app-header/app-header";
 import { getIngredientsAction } from "../../services/actions/ingredients-actions";
 import styles from "./app.module.css";
 import ProtectedRouteElement from "../protected-route-element/protected-route-element";
-import { getCookie } from "../../utils/cookie";
-import { getUserAction } from "../../services/actions/auth-actions";
+import { checkUserAuth } from "../../services/actions/auth-actions";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 import { FeedOrderCard } from "../feed-order-card/feed-order-card";
+import { Spinner } from "../spinner/spinner";
 
 
 const App = () => {
@@ -50,64 +49,113 @@ const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { ingredientsSuccess } = useSelector((state) => state.ingredientsStore);
-  
-  const background = location.state && location.state.background;
+  const { ingredientsRequest, ingredientsSuccess, ingredientsFailed } = useSelector((state) => state.ingredientsStore);
 
-  const getUserSucces = useSelector((state) => state.authStore.getUserSucces);
-  const accessToken = getCookie("accessToken", { path: "/" });
+  const background = location.state && location.state.background;
 
   useEffect(() => {
     dispatch(getIngredientsAction());
-
-    if (accessToken) {
-      dispatch(getUserAction());
-    }
-  }, [dispatch, accessToken]);
+    dispatch(checkUserAuth())
+  }, []);
 
   const closeModal = () => {
     return navigate(-1);
-    // navigate(-1, { state: { background: null } });
   }
 
   return (
     <>
       <AppHeader />
       <main className={styles.main}>
+        {/* {ingredientsRequest && <Spinner />}
+        {ingredientsFailed && <p>Произошла ошибка</p>} */}
         {ingredientsSuccess && (
           <>
             <Routes location={background || location}>
               <Route path={PATH_INDEX} element={<ConstructorPage />} />
-              <Route path={PATH_LOGIN} element={!getUserSucces && !accessToken ? (<LoginPage />) : (<Navigate to={PATH_INDEX} />)} />
-              <Route path={PATH_REGISTER} element={!getUserSucces && !accessToken ? (<RegisterPage />) : (<Navigate to={PATH_INDEX} />)} />
-              <Route path={PATH_FORGOT_RASSWORD} element={!getUserSucces && !accessToken ? (<ForgotPasswordPage />) : (<Navigate to={PATH_INDEX} />)} />
-              <Route path={PATH_RESET_RASSWORD} element={<ResetPasswordPage />} />
-              <Route path={PATH_PROFILE} element={<ProtectedRouteElement element={<ProfilePage />} to={PATH_LOGIN} />}>
-                <Route path={PATH_PROFILE_ORDERS} element={<ProfileFeedPage />} />
+              <Route
+                path={PATH_LOGIN}
+                element={
+                  <ProtectedRouteElement onlyUnAuth component={<LoginPage />} />
+                }
+              />
+              <Route
+                path={PATH_REGISTER}
+                element={
+                  <ProtectedRouteElement
+                    onlyUnAuth
+                    component={<RegisterPage />}
+                  />
+                }
+              />
+              <Route
+                path={PATH_FORGOT_RASSWORD}
+                element={
+                  <ProtectedRouteElement
+                    onlyUnAuth
+                    component={<ForgotPasswordPage />}
+                  />
+                }
+              />
+              <Route
+                path={PATH_RESET_RASSWORD}
+                element={
+                  <ProtectedRouteElement
+                    onlyUnAuth
+                    component={<ResetPasswordPage />}
+                  />
+                }
+              />
+              <Route
+                path={PATH_PROFILE}
+                element={<ProtectedRouteElement component={<ProfilePage />} />}
+              >
+                <Route
+                  path={PATH_PROFILE_ORDERS}
+                  element={<ProtectedRouteElement component={<ProfileFeedPage />} />}
+                />
               </Route>
-              <Route path={PATH_INGREDIENT_ID} element={!(location.state && location.state.modal) ? (<IngredientPage />) : null} />
+              <Route
+                path={PATH_INGREDIENT_ID}
+                element={<IngredientPage />}
+              />
               <Route path={PATH_FEED} element={<FeedPage />} />
-              <Route path={PATH_FEED_NUMBER} element={<OrderInfoPage/>} />
-              <Route path={PATH_PROFILE_ORDERS_NUMBER} element={!getUserSucces && !accessToken ? (<LoginPage />) : (<OrderInfoPage/>)} />
+              <Route path={PATH_FEED_NUMBER} element={<OrderInfoPage />} />
+              <Route
+                path={PATH_PROFILE_ORDERS_NUMBER}
+                element={<ProtectedRouteElement component={<OrderInfoPage />} />}
+              />  
               <Route path={PATH_NOT_FOUND} element={<NotFound404 />} />
             </Routes>
-
             {background && (
               <Routes>
-                <Route path={PATH_FEED_NUMBER} element={
-                  <Modal onClose={() => closeModal()}>
-                    <FeedOrderCard/>
-                  </Modal>}
+                <Route
+                  path={PATH_FEED_NUMBER}
+                  element={
+                    <Modal onClose={() => closeModal()}>
+                      <FeedOrderCard />
+                    </Modal>
+                  }
                 />
-                <Route path={PATH_PROFILE_ORDERS_NUMBER} element={
-                  <Modal onClose={() => closeModal()}>
-                    <FeedOrderCard />
-                  </Modal>}
+                <Route
+                  path={PATH_PROFILE_ORDERS_NUMBER}
+                  element={
+                    <ProtectedRouteElement component={
+                      <Modal onClose={() => closeModal()}>
+                        <FeedOrderCard />
+                      </Modal>
+                    }/>
+                  }
                 />
-                <Route path={PATH_INGREDIENT_ID} element={
-                  <Modal onClose={() => closeModal(location)} title="Детали ингредиента">
-                    <IngredientDetails />
-                  </Modal>}
+                <Route
+                  path={PATH_INGREDIENT_ID}
+                  element={
+                    <Modal
+                      onClose={() => closeModal(location)}
+                      title="Детали ингредиента"
+                    >
+                      <IngredientDetails />
+                    </Modal>
+                  }
                 />
               </Routes>
             )}

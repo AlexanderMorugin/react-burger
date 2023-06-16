@@ -79,6 +79,8 @@ export const loginAction = (email, password) => {
         dispatch(loginSuccess(res));
         setCookie("accessToken", res.accessToken, { path: "/" });
         setCookie("refreshToken", res.refreshToken, { path: "/" });
+        // dispatch(setUser(res.user)); // добавлено
+        // dispatch(setAuthChecked(true)); // добавлено
       })
       .catch((err) => {
         loginFailed();
@@ -105,6 +107,7 @@ export const logoutAction = (token) => {
           deleteCookie("accessToken", { path: "/" });
           deleteCookie("refreshToken", { path: "/" });
           dispatch(logoutSuccess(res));
+          // dispatch(setUser(null)); // добавлено
           console.log(res);
         }
       })
@@ -126,10 +129,11 @@ export const getUserFailed = () => ({ type: GET_USER_FAILED });
 export const getUserAction = () => {
   return function (dispatch) {
     dispatch(getUserRequest());
-    fetchGetUser(getCookie("accessToken"))
+    return fetchGetUser(getCookie("accessToken"))
       .then((res) => {
         if (res) {
           dispatch(getUserSuccess(res));
+          // dispatch(setUser(res.user)); // добавлено
           console.log(res);
         }
       })
@@ -175,5 +179,36 @@ export const changeUserAction = (name, email, password, token) => {
         changeUserFailed();
         console.log(err);
       });
+  };
+};
+
+
+// добавлено от наставника
+export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
+export const SET_USER = "SET_USER";
+
+export const setAuthChecked = (value) => ({
+  type: SET_AUTH_CHECKED,
+  payload: value,
+});
+
+export const setUser = (user) => ({
+  type: SET_USER,
+  payload: user,
+});
+
+export const checkUserAuth = () => {
+  return (dispatch) => {
+    if (getCookie("accessToken")) {
+      dispatch(getUserAction())
+        .catch(() => {
+          deleteCookie("accessToken");
+          deleteCookie("refreshToken");
+          dispatch(setUser(null));
+        })
+        .finally(() => dispatch(setAuthChecked(true)));
+    } else {
+      dispatch(setAuthChecked(true));
+    }
   };
 };

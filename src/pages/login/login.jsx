@@ -8,7 +8,7 @@ import { loginAction } from "../../services/actions/auth-actions";
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -16,7 +16,7 @@ export const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(loginAction(email, password));
-    navigate("/");
+    // navigate("/");
   };
 
   return (
