@@ -1,11 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Routes,
-  Route,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import {
   ConstructorPage,
   LoginPage,
@@ -41,33 +36,29 @@ import { checkUserAuth } from "../../services/actions/auth-actions";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 import { FeedOrderCard } from "../feed-order-card/feed-order-card";
-import { Spinner } from "../spinner/spinner";
-
 
 const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { ingredientsRequest, ingredientsSuccess, ingredientsFailed } = useSelector((state) => state.ingredientsStore);
+  const { ingredientsSuccess } = useSelector((state) => state.ingredientsStore);
 
   const background = location.state && location.state.background;
 
   useEffect(() => {
     dispatch(getIngredientsAction());
-    dispatch(checkUserAuth())
+    dispatch(checkUserAuth());
   }, []);
 
   const closeModal = () => {
     return navigate(-1);
-  }
+  };
 
   return (
     <>
       <AppHeader />
       <main className={styles.main}>
-        {/* {ingredientsRequest && <Spinner />}
-        {ingredientsFailed && <p>Произошла ошибка</p>} */}
         {ingredientsSuccess && (
           <>
             <Routes location={background || location}>
@@ -111,19 +102,20 @@ const App = () => {
               >
                 <Route
                   path={PATH_PROFILE_ORDERS}
-                  element={<ProtectedRouteElement component={<ProfileFeedPage />} />}
+                  element={
+                    <ProtectedRouteElement component={<ProfileFeedPage />} />
+                  }
                 />
               </Route>
-              <Route
-                path={PATH_INGREDIENT_ID}
-                element={<IngredientPage />}
-              />
+              <Route path={PATH_INGREDIENT_ID} element={<IngredientPage />} />
               <Route path={PATH_FEED} element={<FeedPage />} />
               <Route path={PATH_FEED_NUMBER} element={<OrderInfoPage />} />
               <Route
                 path={PATH_PROFILE_ORDERS_NUMBER}
-                element={<ProtectedRouteElement component={<OrderInfoPage />} />}
-              />  
+                element={
+                  <ProtectedRouteElement component={<OrderInfoPage />} />
+                }
+              />
               <Route path={PATH_NOT_FOUND} element={<NotFound404 />} />
             </Routes>
             {background && (
@@ -139,11 +131,13 @@ const App = () => {
                 <Route
                   path={PATH_PROFILE_ORDERS_NUMBER}
                   element={
-                    <ProtectedRouteElement component={
-                      <Modal onClose={() => closeModal()}>
-                        <FeedOrderCard />
-                      </Modal>
-                    }/>
+                    <ProtectedRouteElement
+                      component={
+                        <Modal onClose={() => closeModal()}>
+                          <FeedOrderCard />
+                        </Modal>
+                      }
+                    />
                   }
                 />
                 <Route

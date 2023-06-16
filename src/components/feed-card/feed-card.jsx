@@ -10,7 +10,7 @@ export const FeedCard = ({ order }) => {
   const location = useLocation();
   const [isProfile, setIsProfile] = useState(false);
 
-  const { isValid, orderIngredients, orderStatus, orderPrice, time, matchProfile } =
+  const { orderIngredients, orderStatus, orderPrice, time, matchProfile } =
     useOrderData(order);
 
   useEffect(() => {
@@ -18,10 +18,6 @@ export const FeedCard = ({ order }) => {
       setIsProfile(true);
     }
   }, [matchProfile]);
-
-  if (!isValid) {
-    return null;
-  }
 
   return (
     <div className={styles.card}>
