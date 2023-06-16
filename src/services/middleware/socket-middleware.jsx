@@ -1,4 +1,4 @@
-export const socketMiddleware = (WS_URL, wsActions) => {
+export const socketMiddleware = (wsUrl, wsActions) => {
   return store => {
     let socket = null;
     let url = undefined;
@@ -11,9 +11,10 @@ export const socketMiddleware = (WS_URL, wsActions) => {
       if (type === wsStart) {
         url = payload;
         socket = new WebSocket(url);
-      } else if (type === onClose) {
-        socket.close(1000, 'CLOSE_NORMAL')
       }
+      // else if (type === onClose) {
+      //   socket.close(1000, 'CLOSE_NORMAL')
+      // }
       if (socket) {
         socket.onopen = event => {
           dispatch({ type: onOpen, payload: event });
@@ -35,7 +36,6 @@ export const socketMiddleware = (WS_URL, wsActions) => {
           socket.send(JSON.stringify(message));
         }
       }
-
       next(action);
     };
   };

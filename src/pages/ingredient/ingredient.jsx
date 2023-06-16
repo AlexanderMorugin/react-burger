@@ -1,7 +1,5 @@
-// import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styles from "./ingredient.module.css";
 import IngredientDetails from "../../components/ingredient-details/ingredient-details";
-// import Modal from "../../components/modal/modal";
 
 export const IngredientPage = () => {
   return (

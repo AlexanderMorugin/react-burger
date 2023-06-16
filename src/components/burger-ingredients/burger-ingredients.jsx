@@ -1,32 +1,21 @@
 import { useMemo, useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientsList from "../ingredients-list/ingredients-list";
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
-import {
-  setCurrentIngredientAction,
-  resetCurrentIngredientAction,
-} from "../../services/actions/ingredient-details-actions";
 import styles from "./burger-ingredients.module.css";
 import { motion } from "framer-motion";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const BurgerIngredients = () => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const getIngredientsData = (state) => state.ingredientsStore;
   const ingredientsData = useSelector(getIngredientsData);
 
-  const [showModal, setShowModal] = useState(false);
-
   const openModal = (ingredient) => {
-    dispatch(setCurrentIngredientAction(ingredient));
-    setShowModal(true);
-  };
-  const closeModal = () => {
-    dispatch(resetCurrentIngredientAction());
-    setShowModal(false);
+    navigate(`/ingredients/${ingredient._id}`, { state: {background: location}, replace: true});
   };
 
   // Работа Табов с прокруткой ингредиентов
@@ -88,7 +77,7 @@ const BurgerIngredients = () => {
       // анимация
       initial={{ x: "-100%" }}
       animate={{ x: "0" }}
-      transition={{ ease: "easeOut", duration: .5 }}
+      transition={{ ease: "easeOut", duration: 0.5 }}
     >
       <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
       <nav className={styles.tabs}>
@@ -126,12 +115,6 @@ const BurgerIngredients = () => {
           id="main"
         />
       </div>
-
-      {showModal && (
-        <Modal onClose={closeModal}>
-          <IngredientDetails />
-        </Modal>
-      )}
     </motion.section>
   );
 };

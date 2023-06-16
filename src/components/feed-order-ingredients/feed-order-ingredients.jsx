@@ -1,17 +1,9 @@
 import { motion } from "framer-motion";
 import styles from "./feed-order-ingredients.module.css";
 import { FeedOrderIngredient } from "../feed-order-ingredient/feed-order-ingredient";
+import PropTypes from "prop-types";
 
-export const FeedOrderIngredients = ({ ingredients }) => {
-  function counter(ingredient) {
-    let counter = 0;
-    ingredients.forEach((el) => {
-      if (el._id === ingredient._id) {
-        counter += 1;
-      }
-    });
-    return counter;
-  }
+export const FeedOrderIngredients = ({ ingredients, statistics }) => {
 
   return (
     <>
@@ -34,7 +26,7 @@ export const FeedOrderIngredients = ({ ingredients }) => {
         {ingredients.map((ingredient, index) => {
           return (
             <FeedOrderIngredient
-              counter={counter(ingredient)}
+              counter={statistics.get(ingredient._id)}
               ingredient={ingredient}
               key={index}
             />
@@ -43,4 +35,9 @@ export const FeedOrderIngredients = ({ ingredients }) => {
       </motion.ul>
     </>
   );
+};
+
+FeedOrderIngredients.propTypes = {
+  ingredients: PropTypes.array.isRequired,
+  statistics: PropTypes.instanceOf(Map).isRequired
 };

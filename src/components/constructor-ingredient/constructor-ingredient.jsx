@@ -1,14 +1,8 @@
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
-import {
-  ConstructorElement,
-  DragIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import {
-  deleteIngredientAction,
-  moveIngredientAction,
-} from "../../services/actions/constructor-actions";
+import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { deleteIngredientAction, moveIngredientAction } from "../../services/actions/constructor-actions";
 import ingredientPropTypes from "../../utils/ingredient-prop-types";
 import PropTypes from "prop-types";
 import styles from "./constructor-ingredient.module.css";

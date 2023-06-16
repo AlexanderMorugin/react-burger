@@ -1,5 +1,7 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./feed-order-ingredient.module.css";
+import PropTypes from "prop-types";
+import ingredientPropTypes from "../../utils/ingredient-prop-types";
 
 export const FeedOrderIngredient = ({ ingredient, counter }) => {
   return (
@@ -22,4 +24,9 @@ export const FeedOrderIngredient = ({ ingredient, counter }) => {
       </div>
     </li>
   );
+};
+
+FeedOrderIngredient.propTypes = {
+  ingredient: ingredientPropTypes,
+  counter: PropTypes.number.isRequired,
 };

@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.text_top {
+  background: linear-gradient(to left, var(--text-inactive-color), rgb(214, 248, 246));
+  background-size: 100% 1000px;
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: background 15s linear infinite;
+}
+
+.text_bottom{
+  background: linear-gradient(to right, var(--text-primary-color), #876fb3);
+  background-size: 100% 1000px;
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: background 12s linear infinite;
+}
+
+@keyframes background {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: 2000px;
+  }
+}

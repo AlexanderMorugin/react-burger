@@ -1,26 +1,16 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
-import {
-  ConstructorElement,
-  CurrencyIcon,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { ConstructorElement, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modal/modal";
-import {
-  addIngridientAction,
-  addBunAction,
-  resetIngredientAction,
-} from "../../services/actions/constructor-actions";
-import {
-  postOrderAction,
-  postOrderResetAction,
-} from "../../services/actions/order-actions";
+import { addIngridientAction, addBunAction, resetIngredientAction } from "../../services/actions/constructor-actions";
+import { postOrderAction, postOrderResetAction } from "../../services/actions/order-actions";
 import OrderDetails from "../order-details/order-details";
 import ConstructorIngredient from "../constructor-ingredient/constructor-ingredient";
 import styles from "./burger-constructor.module.css";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { ModalOrderRequest } from "../modal-order-request/modal-order-request";
 
 const BurgerConstructor = () => {
   const getConstructorData = (state) => state.constructorStore;
@@ -28,6 +18,8 @@ const BurgerConstructor = () => {
 
   const getOrderNumber = (state) => state.orderStore.data;
   const orderNumber = useSelector(getOrderNumber);
+
+  const orderRequest = useSelector((state) => state.orderStore.orderRequest);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -65,7 +57,7 @@ const BurgerConstructor = () => {
     const bunId = bun._id;
     const orderItems = [bunId, ...ingredientsId, bunId];
     if (!userData) {
-      navigate('/login');
+      navigate("/login");
     } else {
       dispatch(postOrderAction(orderItems));
     }
@@ -170,10 +162,13 @@ const BurgerConstructor = () => {
           }}
           disabled={bun && ingredients.length > 0 ? false : true}
         >
-          {/* Оформить заказ */}
           {userData ? "Оформить заказ" : "Авторизуйтесь"}
         </Button>
       </div>
+
+      {orderRequest ? (
+        <ModalOrderRequest />
+      ) : null }
 
       {orderNumber && (
         <Modal onClose={handleCloseModal}>

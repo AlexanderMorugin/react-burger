@@ -1,14 +1,14 @@
 import { FeedImage } from "../feed-image/feed-image";
 import styles from "./feed-image-list.module.css";
+import PropTypes from "prop-types";
 
 export const FeedImageList = ({ ingredients }) => {
-
   const viewMore = () => {
     if (ingredients.length - 6 === 0) {
       return false;
     }
     return true;
-  }
+  };
 
   return (
     <ul className={styles.ingredients}>
@@ -37,4 +37,8 @@ export const FeedImageList = ({ ingredients }) => {
       })}
     </ul>
   );
+};
+
+FeedImageList.propTypes = {
+  ingredients: PropTypes.array.isRequired,
 };

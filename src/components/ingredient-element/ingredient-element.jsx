@@ -1,21 +1,16 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
-import {
-  CurrencyIcon,
-  Counter,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import Image from "../image/image";
 import styles from "./ingredient-element.module.css";
 import PropTypes from "prop-types";
 import ingredientPropTypes from "../../utils/ingredient-prop-types";
-import { useLocation, useMatch, useNavigate } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
 
 const IngredientElement = ({ ingredient, onClick }) => {
-// const IngredientElement = ({ ingredient }) => {
   const { _id, image, price, name } = ingredient;
 
-  const location = useLocation();
   const navigate = useNavigate();
   const match = useMatch("/ingredients/:id");
   const { id } = match?.params || {};
@@ -38,12 +33,6 @@ const IngredientElement = ({ ingredient, onClick }) => {
     return count;
   }, [bun, ingredient._id, ingredients]);
 
-  // const handleClick = () => {
-  //   if (id !== _id) {
-  //     navigate(`/ingredients/${_id}`, { state: { modal: true, background: location } });
-  //   }
-  // };
-
   return (
     <li
       className={styles.element}
@@ -55,7 +44,6 @@ const IngredientElement = ({ ingredient, onClick }) => {
           onClick();
         }
       }}
-      // onClick={handleClick}
       style={{ opacity }}
       ref={dragRef}
     >

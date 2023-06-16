@@ -1,26 +1,28 @@
-import React from "react";
+import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import styles from "./modal.module.css";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
 
 const modalRootElement = document.querySelector("#react-modals");
 
 const Modal = ({ title, children, onClose }) => {
-  React.useEffect(() => {
-    const closeOnEscapeKeyDown = (evt) => {
-      if (evt.key === "Escape") {
-        onClose();
-      }
-    };
-    document.body.addEventListener("keydown", closeOnEscapeKeyDown);
+  const orderRequest = useSelector((state) => state.orderStore.orderRequest);
 
-    return function cleanup() {
-      document.body.removeEventListener("keydown", closeOnEscapeKeyDown);
-    };
-  }, []);
+  useEffect(() => {
+    const closeOnEscapeKeyDown = (evt) => {
+      if (evt.key === 'Escape') {
+        onClose()
+      }
+    }
+    document.addEventListener('keydown', closeOnEscapeKeyDown);
+    return () => {
+      document.removeEventListener('keydown', closeOnEscapeKeyDown); 
+    }
+  }, [onClose])
 
   return createPortal(
     <ModalOverlay onClick={onClose}>
@@ -37,15 +39,14 @@ const Modal = ({ title, children, onClose }) => {
       >
         <div className={styles.top}>
           <h2 className={"text text_type_main-large " + styles.title}>
-            {/* Детали ингредиента */}
             {title}
           </h2>
         </div>
-
+        {!orderRequest ? (
         <button className={styles.button} type="button" onClick={onClose}>
           <CloseIcon type="primary" />
         </button>
-        
+        ) : null}
         {children}
       </motion.div>
     </ModalOverlay>,
@@ -59,4 +60,3 @@ Modal.propTypes = {
 };
 
 export default Modal;
-
