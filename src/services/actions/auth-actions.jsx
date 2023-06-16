@@ -79,8 +79,6 @@ export const loginAction = (email, password) => {
         dispatch(loginSuccess(res));
         setCookie("accessToken", res.accessToken, { path: "/" });
         setCookie("refreshToken", res.refreshToken, { path: "/" });
-        // dispatch(setUser(res.user)); // добавлено
-        // dispatch(setAuthChecked(true)); // добавлено
       })
       .catch((err) => {
         loginFailed();
@@ -107,7 +105,6 @@ export const logoutAction = (token) => {
           deleteCookie("accessToken", { path: "/" });
           deleteCookie("refreshToken", { path: "/" });
           dispatch(logoutSuccess(res));
-          // dispatch(setUser(null)); // добавлено
           console.log(res);
         }
       })
@@ -133,7 +130,6 @@ export const getUserAction = () => {
       .then((res) => {
         if (res) {
           dispatch(getUserSuccess(res));
-          // dispatch(setUser(res.user)); // добавлено
           console.log(res);
         }
       })
@@ -183,7 +179,6 @@ export const changeUserAction = (name, email, password, token) => {
 };
 
 
-// добавлено от наставника
 export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
 export const SET_USER = "SET_USER";
 

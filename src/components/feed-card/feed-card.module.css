@@ -9,7 +9,7 @@
   margin: 0;
   padding: 24px;
   cursor: pointer;
-  transition: .5s;
+  transition: .2s;
 }
 
 .card:hover {

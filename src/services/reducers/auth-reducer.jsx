@@ -137,7 +137,6 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loginSucces: true,
         loginFailed: false,
-        // accessToken: action.payload.accessToken,
         user: action.payload,
       };
     }
@@ -161,7 +160,6 @@ export const authReducer = (state = initialState, action) => {
         logoutSucces: true,
         logoutFailed: false,
         user: null,
-        // accessToken: null,
       };
     }
     case LOGOUT_FAILED: {

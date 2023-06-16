@@ -4,6 +4,8 @@ import styles from "./feed-orders.module.css";
 import PropTypes from "prop-types";
 
 export const FeedOrders = ({ orders }) => {
+  // console.log(orders);
+  
   return (
     <motion.ul
       className={styles.orders_content}
