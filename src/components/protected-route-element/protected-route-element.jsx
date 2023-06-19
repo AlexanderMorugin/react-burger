@@ -1,22 +1,31 @@
-import { Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getCookie } from "../../utils/cookie";
-// import { useEffect } from "react";
-// import { getUserAction } from "../../services/actions/auth-actions";
-import PropTypes from 'prop-types';
+import { Navigate, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
+const ProtectedRouteElement = ({ onlyUnAuth = false, component }) => {
+  const isAuthChecked = useSelector((store) => store.authStore.isAuthChecked);
+  const user = useSelector((store) => store.authStore.user);
+  const location = useLocation();
 
-const ProtectedRouteElement = ({ element, to }) => {
-  // const dispatch = useDispatch();
-  const accessToken = getCookie("accessToken");
-  const userData = useSelector((state) => state.authStore.user);
+  if (!isAuthChecked) {
+    return null;
+  }
 
-  return (userData && accessToken) ? element : <Navigate to={to} replace />;
+  if (onlyUnAuth && user) {
+    const { from } = location.state || { from: { pathname: "/" } };
+    return <Navigate to={from} />;
+  }
+
+  if (!onlyUnAuth && !user) {
+    return <Navigate to="/login" state={{ from: location }} />;
+  }
+
+  return component;
 };
 
 export default ProtectedRouteElement;
 
 ProtectedRouteElement.propTypes = {
-  element: PropTypes.object.isRequired,
-  to: PropTypes.string.isRequired
-}
+  onlyUnAuth: PropTypes.bool,
+  component: PropTypes.element.isRequired,
+};

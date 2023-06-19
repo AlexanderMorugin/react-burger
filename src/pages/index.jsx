@@ -6,11 +6,22 @@ import { ProfilePage } from "./profile/profile";
 import { RegisterPage } from "./register/register";
 import { ResetPasswordPage } from "./reset-password/reset-password";
 import { NotFound404 } from "./not-found/not-found";
+import { FeedPage } from "./feed/feed";
+import { OrderInfoPage } from "./order-info/order-info";
+import { OrdersPage } from "./orders/orders";
+import { ProfileFeedPage } from "./profile-feed/profile-feed";
 
-
-// import { OrderFeedPage } from "./order-feed/order-feed";
-// import { OrderHistoryPage } from "./order-history/order-history";
-
-
-export { ConstructorPage, ForgotPasswordPage, IngredientPage, LoginPage, ProfilePage, RegisterPage, ResetPasswordPage, NotFound404 };
-
+export {
+  ConstructorPage,
+  ForgotPasswordPage,
+  IngredientPage,
+  LoginPage,
+  ProfilePage,
+  RegisterPage,
+  ResetPasswordPage,
+  NotFound404,
+  FeedPage,
+  OrderInfoPage,
+  OrdersPage,
+  ProfileFeedPage,
+};

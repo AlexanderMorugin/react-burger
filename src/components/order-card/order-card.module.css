@@ -1,0 +1,26 @@
+.id {
+  text-align: center;
+}
+
+.active {
+  color: #00CCCC
+}
+
+.order_footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 40px 0 0 0;
+}
+
+.order_total {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+

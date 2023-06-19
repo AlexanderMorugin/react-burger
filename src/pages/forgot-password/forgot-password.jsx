@@ -1,16 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  EmailInput,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
 import { motion } from "framer-motion";
-import {
-  forgotPasswordSucces,
-  forgotPasswordFailed,
-} from "../../services/actions/auth-actions";
+import { forgotPasswordSucces } from "../../services/actions/auth-actions";
 import { fetchForgotPassword } from "../../utils/api";
 
 export const ForgotPasswordPage = () => {
@@ -21,18 +15,8 @@ export const ForgotPasswordPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    fetchForgotPassword(email)
-      .then((res) => {
-        dispatch(forgotPasswordSucces(res));
-        console.log("fetchForgotPassword ", res);
-      })
-      .catch((err) => {
-        dispatch(forgotPasswordFailed(err));
-        console.log(err);
-      });
-
-    dispatch(forgotPasswordSucces(email));
+    fetchForgotPassword(email);
+    dispatch(forgotPasswordSucces(true));
     navigate("/reset-password");
   };
 
@@ -48,7 +32,6 @@ export const ForgotPasswordPage = () => {
         >
           Восстановление пароля
         </motion.h1>
-
         <motion.div
           // анимация
           initial={{ x: "100%", opacity: 0 }}
@@ -67,7 +50,6 @@ export const ForgotPasswordPage = () => {
             required
           />
         </motion.div>
-
         <motion.div
           // анимация
           initial={{ y: "200%", opacity: 0 }}
@@ -84,7 +66,6 @@ export const ForgotPasswordPage = () => {
             Восстановить
           </Button>
         </motion.div>
-
         <motion.p
           className="text text_type_main-default text_color_inactive"
           // анимация

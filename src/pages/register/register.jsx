@@ -1,20 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  PasswordInput,
-  EmailInput,
-  Input,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { PasswordInput, EmailInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
 import { motion } from "framer-motion";
-import { fetchRegisterUser } from "../../utils/api";
-import {
-  registerFailed,
-  registerSuccess,
-} from "../../services/actions/auth-actions";
-import { setCookie } from "../../utils/cookie";
+import { registerAction } from "../../services/actions/auth-actions";
 
 export const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -26,18 +16,7 @@ export const RegisterPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    fetchRegisterUser(email, password, name)
-      .then((res) => {
-        dispatch(registerSuccess(res));
-        setCookie("accessToken", res.accessToken, { path: '/' });
-        setCookie("refreshToken", res.refreshToken, { path: '/' });
-        console.log("fetchRegisterUser ", res);
-      })
-      .catch((err) => {
-        dispatch(registerFailed(err));
-        console.log(err);
-      });
+    dispatch(registerAction(email, password, name));
     navigate("/profile");
   };
 
@@ -53,7 +32,6 @@ export const RegisterPage = () => {
         >
           Регистрация
         </motion.h1>
-
         <motion.div
           // анимация
           initial={{ y: "-200%", opacity: 0 }}
@@ -71,7 +49,6 @@ export const RegisterPage = () => {
             required
           />
         </motion.div>
-
         <motion.div
           // анимация
           initial={{ x: "100%", opacity: 0 }}
@@ -89,7 +66,6 @@ export const RegisterPage = () => {
             required
           />
         </motion.div>
-
         <motion.div
           // анимация
           initial={{ x: "-200%", opacity: 0 }}
@@ -109,7 +85,6 @@ export const RegisterPage = () => {
             required
           />
         </motion.div>
-
         <motion.div
           // анимация
           initial={{ y: "200%", opacity: 0 }}
@@ -126,7 +101,6 @@ export const RegisterPage = () => {
             Войти
           </Button>
         </motion.div>
-
         <motion.p
           className="text text_type_main-default text_color_inactive mb-4"
           // анимация

@@ -1,0 +1,20 @@
+.box {
+  display: flex;
+  width: 100%;
+  max-width: 860px;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 40px 0 0 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

@@ -1,11 +1,27 @@
 import {
-  FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAILED,
-  RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED,
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED,
-  REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILED,
-  LOGOUT_REQUEST, LOGOUT_FAILED, LOGOUT_SUCCESS,
-  GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILED,
-  CHANGE_USER_REQUEST, CHANGE_USER_SUCCESS, CHANGE_USER_FAILED,  
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAILED,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAILED,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS,
+  REGISTER_FAILED,
+  LOGOUT_REQUEST,
+  LOGOUT_FAILED,
+  LOGOUT_SUCCESS,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_FAILED,
+  CHANGE_USER_REQUEST,
+  CHANGE_USER_SUCCESS,
+  CHANGE_USER_FAILED,
+  SET_AUTH_CHECKED, // добавлено
+  SET_USER, // добавлено
 } from "../actions/auth-actions";
 
 const initialState = {
@@ -38,9 +54,8 @@ const initialState = {
   changeUserFailed: false,
 
   email: "",
-  // email: false,
-  // accessToken: null,
   user: null,
+  isAuthChecked: false, // добавлено
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -67,8 +82,6 @@ export const authReducer = (state = initialState, action) => {
         forgotFailed: true,
       };
     }
-
-
     case RESET_PASSWORD_REQUEST: {
       return {
         ...state,
@@ -90,8 +103,6 @@ export const authReducer = (state = initialState, action) => {
         resetFailed: true,
       };
     }
-
-
     case REGISTER_REQUEST: {
       return {
         ...state,
@@ -114,8 +125,6 @@ export const authReducer = (state = initialState, action) => {
         registerFailed: true,
       };
     }
-
-
     case LOGIN_REQUEST: {
       return {
         ...state,
@@ -128,7 +137,6 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loginSucces: true,
         loginFailed: false,
-        accessToken: action.payload.accessToken,
         user: action.payload,
       };
     }
@@ -139,8 +147,6 @@ export const authReducer = (state = initialState, action) => {
         loginFailed: true,
       };
     }
-
-
     case LOGOUT_REQUEST: {
       return {
         ...state,
@@ -154,7 +160,6 @@ export const authReducer = (state = initialState, action) => {
         logoutSucces: true,
         logoutFailed: false,
         user: null,
-        accessToken: null,
       };
     }
     case LOGOUT_FAILED: {
@@ -164,8 +169,6 @@ export const authReducer = (state = initialState, action) => {
         logoutFailed: true,
       };
     }
-
-
     case GET_USER_REQUEST: {
       return {
         ...state,
@@ -188,8 +191,6 @@ export const authReducer = (state = initialState, action) => {
         getUserFailed: true,
       };
     }
-
-
     case CHANGE_USER_REQUEST: {
       return {
         ...state,
@@ -212,11 +213,19 @@ export const authReducer = (state = initialState, action) => {
         changeUserFailed: true,
       };
     }
-
-
+    // добавлено
+    case SET_AUTH_CHECKED:
+      return {
+        ...state,
+        isAuthChecked: action.payload
+      }
+    case SET_USER:
+      return {
+        ...state,
+        user: action.payload
+      }
     default: {
       return state;
     }
   }
 };
-

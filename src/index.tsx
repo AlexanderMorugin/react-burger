@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter basename="/react-burger">
       <DndProvider backend={HTML5Backend}>
         <Provider store={store}>
@@ -21,7 +21,7 @@ root.render(
         </Provider>
       </DndProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 reportWebVitals();

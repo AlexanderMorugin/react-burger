@@ -1,0 +1,8 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  width: 640px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 122px 0 0 0;
+}
