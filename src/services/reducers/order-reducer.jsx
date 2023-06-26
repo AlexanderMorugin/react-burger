@@ -4,9 +4,9 @@ import {
   POST_ORDER_FAILED,
   POST_ORDER_RESET,
   GET_ORDER_REQUEST,
+  GET_ORDER_SUCCESS,
   GET_ORDER_FAILED,
-  GET_ORDER_SUCCESS
-} from "../actions/order-actions";
+} from "../../utils/constants";
 
 const initialState = {
   data: null,

@@ -4,7 +4,7 @@ import {
   GET_INGREDIENTS_FAILED,
   SET_CURRENT_INGREDIENT,
   RESET_CURRENT_INGREDIENT,
-} from "../actions/ingredients-actions";
+} from "../../utils/constants";
 
 const initialState = {
   ingredients: [],

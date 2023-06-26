@@ -1,10 +1,11 @@
 import { v4 } from "uuid";
-
-export const ADD_BUN = "ADD_BUN";
-export const ADD_INGREDIENT = "ADD_INGREDIENT";
-export const DELETE_INGREDIENT = "DELETE_INGREDIENT";
-export const MOVE_INGREDIENT = "MOVE_INGREDIENT";
-export const RESET_INGREDIENT = "RESET_INGREDIENT";
+import {
+  ADD_BUN,
+  ADD_INGREDIENT,
+  DELETE_INGREDIENT,
+  MOVE_INGREDIENT,
+  RESET_INGREDIENT,
+} from "../../utils/constants";
 
 export const addBunAction = (bun) => {
   return {

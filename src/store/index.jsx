@@ -11,7 +11,7 @@ import {
   WS_CONNECTION_CLOSED,
   WS_GET_MESSAGE,
   WS_SEND_MESSAGE,
-} from "../services/actions/ws-actions";
+} from "../utils/constants";
 
 const wsActions = {
   wsStart: WS_CONNECTION_START,

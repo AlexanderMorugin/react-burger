@@ -5,24 +5,24 @@ import {
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAILED,
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILED,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
   REGISTER_FAILED,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
   LOGOUT_REQUEST,
-  LOGOUT_FAILED,
   LOGOUT_SUCCESS,
+  LOGOUT_FAILED,
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
   GET_USER_FAILED,
   CHANGE_USER_REQUEST,
   CHANGE_USER_SUCCESS,
   CHANGE_USER_FAILED,
-  SET_AUTH_CHECKED, // добавлено
-  SET_USER, // добавлено
-} from "../actions/auth-actions";
+  SET_AUTH_CHECKED,
+  SET_USER,
+} from "../../utils/constants";
 
 const initialState = {
   forgotRequest: false,
@@ -217,13 +217,13 @@ export const authReducer = (state = initialState, action) => {
     case SET_AUTH_CHECKED:
       return {
         ...state,
-        isAuthChecked: action.payload
-      }
+        isAuthChecked: action.payload,
+      };
     case SET_USER:
       return {
         ...state,
-        user: action.payload
-      }
+        user: action.payload,
+      };
     default: {
       return state;
     }
