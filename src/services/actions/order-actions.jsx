@@ -8,7 +8,8 @@ import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
   GET_ORDER_FAILED,
-} from "../../utils/constants";
+} from "../constants";
+
 
 export const postOrderRequestAction = () => ({
   type: POST_ORDER_REQUEST,
@@ -48,7 +49,7 @@ export const postOrderAction = (data) => async (dispatch) => {
       }),
     });
     const result = await checkResponse(response);
-    // console.log("Заказ успешно отправлен. Результат:", result);
+    console.log("Заказ успешно отправлен. Результат:", result);
     dispatch(postOrderSuccessAction(result));
     return result;
   } catch (error) {

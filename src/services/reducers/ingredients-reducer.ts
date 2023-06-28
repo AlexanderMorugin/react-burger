@@ -4,17 +4,26 @@ import {
   GET_INGREDIENTS_FAILED,
   SET_CURRENT_INGREDIENT,
   RESET_CURRENT_INGREDIENT,
-} from "../../utils/constants";
+} from "../constants";
+import { IIngredient, IIngredientsActions } from '../actions/ingredients-actions';
 
-const initialState = {
+type TIngredientsState = {
+  ingredients: Array<IIngredient>;
+  ingredientsRequest: boolean;
+  ingredientsSuccess: boolean;
+  ingredientsFailed: boolean;
+  сurrentIngredient: IIngredient | undefined;
+};
+
+const initialState: TIngredientsState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsSuccess: false,
   ingredientsFailed: false,
-  сurrentIngredient: null,
+  сurrentIngredient: undefined,
 };
 
-export const ingredientsReducer = (state = initialState, action) => {
+export const ingredientsReducer = (state = initialState, action: IIngredientsActions): TIngredientsState => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST:
       return {
@@ -40,13 +49,13 @@ export const ingredientsReducer = (state = initialState, action) => {
     case SET_CURRENT_INGREDIENT: {
       return {
         ...state,
-        сurrentIngredient: { ...state.сurrentIngredient, ...action.data },
+        сurrentIngredient: action.payload,
       };
     }
     case RESET_CURRENT_INGREDIENT: {
       return {
         ...state,
-        сurrentIngredient: null,
+        сurrentIngredient: undefined,
       };
     }
     default:

@@ -1,3 +1,4 @@
+import { IUser, TAuthActions } from "../actions/auth-actions";
 import {
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_SUCCESS,
@@ -22,7 +23,46 @@ import {
   CHANGE_USER_FAILED,
   SET_AUTH_CHECKED,
   SET_USER,
-} from "../../utils/constants";
+} from "../constants";
+
+export type TUserState = {
+  forgotRequest: boolean,
+  forgotSucces: boolean,
+  forgotFailed: boolean,
+
+  resetRequest: boolean,
+  resetSucces: boolean,
+  resetFailed: boolean,
+
+  registerRequest: boolean,
+  registerSucces: boolean,
+  registerFailed: boolean,
+
+  loginRequest: boolean,
+  loginSucces: boolean,
+  loginFailed: boolean,
+
+  logoutRequest: boolean,
+  logoutSucces: boolean,
+  logoutFailed: boolean,
+
+  getUserRequest: boolean,
+  getUserSucces: boolean,
+  getUserFailed: boolean,
+
+  changeUserRequest: boolean,
+  changeUserSucces: boolean,
+  changeUserFailed: boolean,
+
+  // user: IUser | null;
+  // isLoggedIn: boolean | undefined;
+  // accessToken?: string;
+
+  email: string,
+  user: IUser | null;
+  error: null,
+  isAuthChecked: boolean,
+};
 
 const initialState = {
   forgotRequest: false,
@@ -55,10 +95,11 @@ const initialState = {
 
   email: "",
   user: null,
-  isAuthChecked: false, // добавлено
+  error: null,
+  isAuthChecked: false,
 };
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: TAuthActions) => {
   switch (action.type) {
     case FORGOT_PASSWORD_REQUEST: {
       return {
@@ -80,6 +121,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         forgotSucces: false,
         forgotFailed: true,
+        // error: action.payload,
       };
     }
     case RESET_PASSWORD_REQUEST: {
@@ -101,6 +143,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         resetSucces: false,
         resetFailed: true,
+        // error: action.payload,
       };
     }
     case REGISTER_REQUEST: {
@@ -123,6 +166,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         registerSucces: false,
         registerFailed: true,
+        error: action.payload,
       };
     }
     case LOGIN_REQUEST: {
@@ -145,6 +189,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loginSucces: false,
         loginFailed: true,
+        error: action.payload,
       };
     }
     case LOGOUT_REQUEST: {
@@ -167,6 +212,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         logoutSucces: false,
         logoutFailed: true,
+        error: action.payload,
       };
     }
     case GET_USER_REQUEST: {
@@ -189,6 +235,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         getUserSucces: false,
         getUserFailed: true,
+        error: action.payload,
       };
     }
     case CHANGE_USER_REQUEST: {
@@ -211,9 +258,9 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         changeUserSucces: false,
         changeUserFailed: true,
+        error: action.payload,
       };
     }
-    // добавлено
     case SET_AUTH_CHECKED:
       return {
         ...state,

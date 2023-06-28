@@ -5,7 +5,7 @@ import {
   DELETE_INGREDIENT,
   MOVE_INGREDIENT,
   RESET_INGREDIENT,
-} from "../../utils/constants";
+} from "../constants";
 
 export const addBunAction = (bun) => {
   return {
