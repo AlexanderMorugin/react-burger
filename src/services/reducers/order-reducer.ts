@@ -1,3 +1,4 @@
+import { IOrderDetails, TOrderActions } from "../actions/order-actions";
 import {
   POST_ORDER_REQUEST,
   POST_ORDER_SUCCESS,
@@ -8,7 +9,15 @@ import {
   GET_ORDER_FAILED,
 } from "../constants";
 
-const initialState = {
+export type TOrderState = {
+  data: IOrderDetails | null;
+  orderRequest: boolean,
+  orderSuccess: boolean,
+  orderFailed: boolean,
+  order: null | undefined
+};
+
+const initialState: TOrderState = {
   data: null,
   orderRequest: false,
   orderSuccess: false,
@@ -16,7 +25,7 @@ const initialState = {
   order: null
 };
 
-export const orderReducer = (state = initialState, action) => {
+export const orderReducer = (state = initialState, action: TOrderActions): TOrderState => {
   switch (action.type) {
     case POST_ORDER_REQUEST:
       return {
@@ -42,7 +51,7 @@ export const orderReducer = (state = initialState, action) => {
     case POST_ORDER_RESET:
       return {
         ...state,
-        orderFailed: null,
+        orderFailed: false,
         data: null,
       };
     case GET_ORDER_REQUEST:

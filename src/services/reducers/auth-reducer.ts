@@ -54,10 +54,6 @@ export type TUserState = {
   changeUserSucces: boolean,
   changeUserFailed: boolean,
 
-  // user: IUser | null;
-  // isLoggedIn: boolean | undefined;
-  // accessToken?: string;
-
   email: string,
   user: IUser | null;
   error: null,

@@ -22,48 +22,14 @@ export interface IIngredient {
   __v: number;
 }
 
-export interface IGetIngredientsRequest {
-  readonly type: typeof GET_INGREDIENTS_REQUEST;
-}
-
-export interface IgetIngredientsSuccess {
-  readonly type: typeof GET_INGREDIENTS_SUCCESS;
-  readonly payload: Array<IIngredient>;
-}
-
-export interface IgetIngredientsFailed {
-  readonly type: typeof GET_INGREDIENTS_FAILED;
-}
-
-export interface ISetCurrentIngredientAction {
-  readonly type: typeof SET_CURRENT_INGREDIENT;
-  readonly payload: IIngredient | undefined;
-}
-
-export interface IResetCurrentIngredientAction {
-  readonly type: typeof RESET_CURRENT_INGREDIENT;
-}
-
-export type IIngredientsActions =
-  | IGetIngredientsRequest
-  | IgetIngredientsSuccess
-  | IgetIngredientsFailed
-  | ISetCurrentIngredientAction
-  | IResetCurrentIngredientAction;
-
 // -------------------------------------------------------
-export const getIngredientsRequest = (): IGetIngredientsRequest => ({
-  type: GET_INGREDIENTS_REQUEST,
-});
+interface IGetIngredientsRequest { readonly type: typeof GET_INGREDIENTS_REQUEST };
+interface IgetIngredientsSuccess { readonly type: typeof GET_INGREDIENTS_SUCCESS; readonly payload: Array<IIngredient> };
+interface IgetIngredientsFailed { readonly type: typeof GET_INGREDIENTS_FAILED };
 
-export const getIngredientsSuccess = (data: Array<IIngredient>): IgetIngredientsSuccess => ({
-  type: GET_INGREDIENTS_SUCCESS,
-  payload: data,
-});
-
-export const getIngredientsFailed = (): IgetIngredientsFailed => ({
-  type: GET_INGREDIENTS_FAILED,
-});
+export const getIngredientsRequest = (): IGetIngredientsRequest => ({ type: GET_INGREDIENTS_REQUEST });
+export const getIngredientsSuccess = (data: Array<IIngredient>): IgetIngredientsSuccess => ({ type: GET_INGREDIENTS_SUCCESS, payload: data });
+export const getIngredientsFailed = (): IgetIngredientsFailed => ({ type: GET_INGREDIENTS_FAILED });
 
 export const getIngredientsAction = () => {
   return async (dispatch: any) => {
@@ -79,11 +45,17 @@ export const getIngredientsAction = () => {
 };
 
 // -------------------------------------------------------
-export const setCurrentIngredientAction = (ingredient: IIngredient | undefined): ISetCurrentIngredientAction => ({
-  type: SET_CURRENT_INGREDIENT,
-  payload: ingredient,
-});
+interface ISetCurrentIngredientAction { readonly type: typeof SET_CURRENT_INGREDIENT; readonly payload: IIngredient | undefined };
+interface IResetCurrentIngredientAction { readonly type: typeof RESET_CURRENT_INGREDIENT };
 
-export const resetCurrentIngredientAction = (): IResetCurrentIngredientAction => ({
-  type: RESET_CURRENT_INGREDIENT,
-});
+export const setCurrentIngredientAction = (ingredient: IIngredient | undefined): ISetCurrentIngredientAction => ({ type: SET_CURRENT_INGREDIENT, payload: ingredient });
+export const resetCurrentIngredientAction = (): IResetCurrentIngredientAction => ({ type: RESET_CURRENT_INGREDIENT });
+
+// -------------------------------------------------------
+export type IIngredientsActions =
+  | IGetIngredientsRequest
+  | IgetIngredientsSuccess
+  | IgetIngredientsFailed
+  | ISetCurrentIngredientAction
+  | IResetCurrentIngredientAction;
+

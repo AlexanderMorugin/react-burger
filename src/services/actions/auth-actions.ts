@@ -70,8 +70,8 @@ export const resetPasswordFailed = (): IResetPasswordFailed => ({ type: RESET_PA
 
 // -------------------------------------------------------
 interface IRegisterRequest { readonly type: typeof REGISTER_REQUEST };
-interface IRegisterSuccess { readonly type: typeof REGISTER_SUCCESS; readonly payload: IRegisterUser; };
-interface IRegisterFailed { readonly type: typeof REGISTER_FAILED; readonly payload: string; };
+interface IRegisterSuccess { readonly type: typeof REGISTER_SUCCESS; readonly payload: IRegisterUser };
+interface IRegisterFailed { readonly type: typeof REGISTER_FAILED; readonly payload: string };
 
 export const registerRequest = (): IRegisterRequest => ({ type: REGISTER_REQUEST });
 export const registerSuccess = (token: IRegisterUser): IRegisterSuccess => ({ type: REGISTER_SUCCESS, payload: token });
@@ -97,8 +97,8 @@ export const registerAction = (email: string, password: string, name: string) =>
 
 // -------------------------------------------------------
 interface ILoginRequest { readonly type: typeof LOGIN_REQUEST };
-interface ILoginSuccess { readonly type: typeof LOGIN_SUCCESS; readonly payload: IUserData; };
-interface ILoginFailed { readonly type: typeof LOGIN_FAILED; readonly payload: string; };
+interface ILoginSuccess { readonly type: typeof LOGIN_SUCCESS; readonly payload: IUserData };
+interface ILoginFailed { readonly type: typeof LOGIN_FAILED; readonly payload: string };
 
 export const loginRequest = (): ILoginRequest => ({ type: LOGIN_REQUEST });
 export const loginSuccess = (token: IUserData): ILoginSuccess => ({ type: LOGIN_SUCCESS, payload: token });
@@ -166,7 +166,7 @@ export const getUserAction = () => {
       .then((res) => {
         if (res) {
           dispatch(getUserSuccess(res));
-          console.log(res);
+          // console.log(res);
         }
       })
       .catch((error) => {
