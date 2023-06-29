@@ -13,4 +13,4 @@ export const rootReducer = combineReducers({
   socketStore: wsReducer,
 });
 
-export const getAuthData = (state) => state.authStore;
+export const getAuthData = (state: any) => state.authStore;
