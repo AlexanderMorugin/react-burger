@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getOrder } from "../../services/actions/order-actions";
 import OrderCard from "../order-card/order-card";
+import { FC } from 'react';
 
-export const FeedOrderCard = () => {
+export const FeedOrderCard: FC = () => {
   const { number } = useParams();
 
   const dispatch = useDispatch();

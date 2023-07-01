@@ -1,4 +1,4 @@
-import React from "react";
+import { FC, useState, FormEvent, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { PasswordInput, EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -6,13 +6,13 @@ import styles from "../pages.module.css";
 import { motion } from "framer-motion";
 import { loginAction } from "../../services/actions/auth-actions";
 
-export const LoginPage = () => {
+export const LoginPage: FC = () => {
   const dispatch = useDispatch();
 
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(loginAction(email, password));
   };
@@ -37,11 +37,9 @@ export const LoginPage = () => {
         >
           <EmailInput
             name={"email"}
-            type={"email"}
             placeholder={"E-mail"}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
             value={email}
-            errorText={"Введите корректный адрес почты"}
             isIcon={false}
             extraClass="mb-6"
             required
@@ -55,12 +53,10 @@ export const LoginPage = () => {
         >
           <PasswordInput
             name={"password"}
-            type={"text"}
             placeholder={"Пароль"}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             icon={"ShowIcon"}
             value={password}
-            errorText={"Введите корректный пароль"}
             size={"default"}
             extraClass="mb-6"
             required

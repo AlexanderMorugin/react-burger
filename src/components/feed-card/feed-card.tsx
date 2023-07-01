@@ -1,12 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./feed-card.module.css";
-import PropTypes from "prop-types";
 import { useOrderData } from "../../hooks/useOrderData";
 import { FeedImageList } from "../feed-image-list/feed-image-list";
 import { Link, useLocation } from "react-router-dom";
+import { IOrderDetails } from "../../services/actions/order-actions";
 
-export const FeedCard = ({ order }) => {
+interface IFeedCard {
+  order: IOrderDetails;
+}
+
+export const FeedCard: FC<IFeedCard> = ({ order }) => {
   const location = useLocation();
   const [isProfile, setIsProfile] = useState(false);
 
@@ -44,7 +48,7 @@ export const FeedCard = ({ order }) => {
         </p>
         <p
           className={"text text_type_main-default " + styles.card_result}
-          style={{ color: order.status === "done" && "#00cccc" }}
+          // style={{ color: order.status === "done" && "#00cccc" }}
         >
           {orderStatus}
         </p>
@@ -63,8 +67,4 @@ export const FeedCard = ({ order }) => {
       </Link>
     </div>
   );
-};
-
-FeedCard.propTypes = {
-  order: PropTypes.object.isRequired,
 };

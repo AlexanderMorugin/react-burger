@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import styles from "../pages.module.css";
+import { FC } from 'react';
 
-export const NotFound404 = () => {
+export const NotFound404: FC = () => {
   return (
     <section className={styles.box}>
       <div className={styles.container}>

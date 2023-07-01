@@ -1,8 +1,13 @@
 import { FeedImage } from "../feed-image/feed-image";
 import styles from "./feed-image-list.module.css";
-import PropTypes from "prop-types";
+import { FC } from 'react';
+import { IIngredient } from '../../services/actions/ingredients-actions';
 
-export const FeedImageList = ({ ingredients }) => {
+interface IFeedImageList {
+  ingredients: Array<IIngredient>;
+}
+
+export const FeedImageList: FC<IFeedImageList> = ({ ingredients }) => {
   const viewMore = () => {
     if (ingredients.length - 6 === 0) {
       return false;
@@ -39,6 +44,3 @@ export const FeedImageList = ({ ingredients }) => {
   );
 };
 
-FeedImageList.propTypes = {
-  ingredients: PropTypes.array.isRequired,
-};

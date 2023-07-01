@@ -91,7 +91,7 @@ const initialState = {
 
   email: "",
   user: null,
-  error: null,
+  // error: null,
   isAuthChecked: false,
 };
 
@@ -185,7 +185,7 @@ export const authReducer = (state = initialState, action: TAuthActions) => {
         ...state,
         loginSucces: false,
         loginFailed: true,
-        error: action.payload,
+        // error: action.payload,
       };
     }
     case LOGOUT_REQUEST: {

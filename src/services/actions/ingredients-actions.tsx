@@ -6,6 +6,7 @@ import {
   SET_CURRENT_INGREDIENT,
   RESET_CURRENT_INGREDIENT,
 } from "../constants";
+import { AppDispatch } from "../types";
 
 export interface IIngredient {
   _id: string;
@@ -32,7 +33,7 @@ export const getIngredientsSuccess = (data: Array<IIngredient>): IgetIngredients
 export const getIngredientsFailed = (): IgetIngredientsFailed => ({ type: GET_INGREDIENTS_FAILED });
 
 export const getIngredientsAction = () => {
-  return async (dispatch: any) => {
+  return async (dispatch: AppDispatch) => {
     dispatch(getIngredientsRequest());
     try {
       const res = await fetch(`${baseUrl}/ingredients`);

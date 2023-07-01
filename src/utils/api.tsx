@@ -1,6 +1,6 @@
 export const baseUrl = "https://norma.nomoreparties.space/api";
 
-export const checkResponse = (res) => {
+export const checkResponse = (res: Response) => {
   return res.ok
     ? res.json()
     : res
@@ -10,12 +10,12 @@ export const checkResponse = (res) => {
         );
 };
 
-export async function request(url, options) {
+export async function request(url: string, options?: any) {
   const res = await fetch(url, options);
   return checkResponse(res);
 }
 
-export const fetchForgotPassword = (email) => {
+export const fetchForgotPassword = (email: string) => {
   return request(`${baseUrl}/password-reset`, {
     method: "POST",
     headers: {
@@ -27,7 +27,7 @@ export const fetchForgotPassword = (email) => {
   })
 };
 
-export const fetchResetPassword = (password, token) => {
+export const fetchResetPassword = (password: string, token: string | undefined) => {
   return request(`${baseUrl}/password-reset/reset`, {
     method: "POST",
     headers: {
@@ -40,7 +40,7 @@ export const fetchResetPassword = (password, token) => {
   })
 };
 
-export const fetchRegisterUser = (email, password, name) => {
+export const fetchRegisterUser = (email: string, password: string, name: string) => {
   return request(`${baseUrl}/auth/register`, {
     method: "POST",
     headers: {
@@ -54,7 +54,7 @@ export const fetchRegisterUser = (email, password, name) => {
   })
 };
 
-export const fetchLoginUser = (email, password) => {
+export const fetchLoginUser = (email: string, password: string) => {
   return request(`${baseUrl}/auth/login`, {
     method: "POST",
     headers: {
@@ -67,7 +67,7 @@ export const fetchLoginUser = (email, password) => {
   })
 };
 
-export const fetchLogout = (refreshToken) => {
+export const fetchLogout = (refreshToken: string | undefined) => {
   return request(`${baseUrl}/auth/logout`, {
     method: "POST",
     headers: {
@@ -79,7 +79,7 @@ export const fetchLogout = (refreshToken) => {
   })
 };
 
-export const fetchGetUser = (accessToken) => {
+export const fetchGetUser = (accessToken: string | undefined) => {
   return request(`${baseUrl}/auth/user`, {
     headers: {
       "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export const fetchGetUser = (accessToken) => {
   })
 };
 
-export const fetchRefreshToken = (refreshToken) => {
+export const fetchRefreshToken = (refreshToken: string | undefined) => {
   return request(`${baseUrl}/auth/token`, {
     method: "POST",
     headers: {
@@ -100,7 +100,7 @@ export const fetchRefreshToken = (refreshToken) => {
   })
 };
 
-export const fetchChangeUser = (name, email, password, accessToken) => {
+export const fetchChangeUser = (name: string, email: string, password: string, accessToken: string | undefined) => {
   return request(`${baseUrl}/auth/user`, {
     method: "PATCH",
     headers: {
@@ -115,7 +115,7 @@ export const fetchChangeUser = (name, email, password, accessToken) => {
   })
 };
 
-export const fetchOrder = (number) => {
+export const fetchOrder = (number: number) => {
   return request(`${baseUrl}/orders/${number}`, {
     headers: {
       "Content-Type": "application/json",

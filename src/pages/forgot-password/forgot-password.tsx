@@ -1,32 +1,23 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, FC, FormEvent, ChangeEvent } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
 import { motion } from "framer-motion";
-import { fetchResetPassword } from "../../utils/api";
 import { forgotPasswordSucces } from "../../services/actions/auth-actions";
+import { fetchForgotPassword } from "../../utils/api";
 
-export const ResetPasswordPage = () => {
+export const ForgotPasswordPage: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [password, setPassword] = React.useState("");
-  const [token, setToken] = React.useState("");
+  const [email, setEmail] = useState("");
 
-  const email = useSelector((state) => state.authStore.email);
-
-  useEffect(() => {
-    if (!email) {
-      navigate("/forgot-password");
-    }
-  }, [email]);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetchResetPassword(password, token);
-    navigate("/login");
-    dispatch(forgotPasswordSucces(false));
+    fetchForgotPassword(email);
+    dispatch(forgotPasswordSucces(true));
+    navigate("/reset-password");
   };
 
   return (
@@ -47,33 +38,12 @@ export const ResetPasswordPage = () => {
           animate={{ x: "0", opacity: 1 }}
           transition={{ ease: "easeOut", duration: 1.5 }}
         >
-          <PasswordInput
-            name={"password"}
-            type={"text"}
-            placeholder={"Введите новый пароль"}
-            onChange={(e) => setPassword(e.target.value)}
-            icon={"ShowIcon"}
-            value={password}
-            errorText={"Введите корректный пароль"}
-            size={"default"}
-            extraClass="mb-6"
-            required
-          />
-        </motion.div>
-        <motion.div
-          // анимация
-          initial={{ x: "-100%", opacity: 0 }}
-          animate={{ x: "0", opacity: 1 }}
-          transition={{ ease: "easeOut", duration: 1.5, delay: 0.5 }}
-        >
-          <Input
-            name={"token"}
-            type={"text"}
-            placeholder={"Введите код из письма"}
-            onChange={(e) => setToken(e.target.value)}
-            value={token}
-            errorText={"Введён некорректный код из письма"}
-            size={"default"}
+          <EmailInput
+            name={"email"}
+            placeholder={"Укажите e-mail"}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+            value={email}
+            isIcon={false}
             extraClass="mb-6"
             required
           />
@@ -89,9 +59,9 @@ export const ResetPasswordPage = () => {
             type="primary"
             size="medium"
             extraClass="mb-20"
-            disabled={password && token ? false : true}
+            disabled={email ? false : true}
           >
-            Сохранить
+            Восстановить
           </Button>
         </motion.div>
         <motion.p

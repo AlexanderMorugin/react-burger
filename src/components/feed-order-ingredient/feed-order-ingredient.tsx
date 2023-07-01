@@ -1,9 +1,14 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./feed-order-ingredient.module.css";
-import PropTypes from "prop-types";
-import ingredientPropTypes from "../../utils/ingredient-prop-types";
+import { FC } from 'react';
+import { IIngredient } from '../../services/actions/ingredients-actions';
 
-export const FeedOrderIngredient = ({ ingredient, counter }) => {
+interface IFeedOrderIngredient {
+  ingredient: IIngredient;
+  counter: number;
+}
+
+export const FeedOrderIngredient: FC<IFeedOrderIngredient> = ({ ingredient, counter }) => {
   return (
     <li className={styles.order_block}>
       <div className={styles.order_ingredient}>
@@ -26,7 +31,3 @@ export const FeedOrderIngredient = ({ ingredient, counter }) => {
   );
 };
 
-FeedOrderIngredient.propTypes = {
-  ingredient: ingredientPropTypes,
-  counter: PropTypes.number.isRequired,
-};

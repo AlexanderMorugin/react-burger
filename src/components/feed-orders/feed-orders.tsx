@@ -1,11 +1,16 @@
 import { motion } from "framer-motion";
 import { FeedCard } from "../feed-card/feed-card";
 import styles from "./feed-orders.module.css";
-import PropTypes from "prop-types";
+import { FC } from 'react';
+import { IOrderDetails } from "../../services/actions/order-actions";
 
-export const FeedOrders = ({ orders }) => {
-  // console.log(orders);
-  
+interface IFeedOrders {
+  orders: Array<IOrderDetails>;
+  // orders: any
+  // orders: boolean
+}
+
+export const FeedOrders: FC<IFeedOrders> = ({ orders }) => {  
   return (
     <motion.ul
       className={styles.orders_content}
@@ -21,6 +26,3 @@ export const FeedOrders = ({ orders }) => {
   );
 };
 
-FeedOrders.propTypes = {
-  orders: PropTypes.array.isRequired,
-};

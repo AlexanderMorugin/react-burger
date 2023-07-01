@@ -3,14 +3,18 @@ import styles from "./feed.module.css";
 import { FeedCounts } from "../../components/feed-counts/feed-counts";
 import { FeedOrders } from "../../components/feed-orders/feed-orders";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, FC } from "react";
 import { wsConnectionClosed, wsConnectionStart } from "../../services/actions/ws-actions";
 import { wsUrl } from "../../utils/constants";
 
-export const FeedPage = () => {
+interface IState {
+  socketStore: any;
+}
+
+export const FeedPage: FC = () => {
   const dispatch = useDispatch();
 
-  const { orders, total, totalToday } = useSelector((state) => state.socketStore);
+  const { orders, total, totalToday } = useSelector((state: IState) => state.socketStore);
 
   useEffect(() => {
     dispatch(wsConnectionStart(`${wsUrl}/all`));
@@ -21,7 +25,7 @@ export const FeedPage = () => {
 
   const { doneList, preparingList } = useMemo(() => {
     return orders.reduce(
-      (count, element) => {
+      (count: any, element: any) => {
         switch (element.status) {
           case "done":
             count.doneList.push(element.number);

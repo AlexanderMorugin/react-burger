@@ -1,8 +1,16 @@
 import { motion } from "framer-motion";
 import styles from "./feed-counts.module.css";
-import PropTypes from 'prop-types';
+import { FC } from 'react';
 
-export const FeedCounts = ({ doneList, preparingList, total, totalToday }) => {
+interface IFeedCounts {
+  doneList: Array<number>;
+  preparingList: Array<number>;
+  total: number;
+  totalToday: number;
+}
+
+
+export const FeedCounts: FC<IFeedCounts> = ({ doneList, preparingList, total, totalToday }) => {
   return (
     <div className={styles.counts_content}>
       <div className={styles.counts_top}>
@@ -98,10 +106,3 @@ export const FeedCounts = ({ doneList, preparingList, total, totalToday }) => {
     </div>
   );
 };
-
-FeedCounts.propTypes = {
-  doneList: PropTypes.array.isRequired,
-  preparingList: PropTypes.array.isRequired,
-  total: PropTypes.number.isRequired,
-  totalToday: PropTypes.number.isRequired
-}

@@ -2,16 +2,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { FeedOrders } from "../../components/feed-orders/feed-orders";
 import styles from "./profile-feed.module.css";
 import { getCookie } from "../../utils/cookie";
-import { useEffect } from "react";
+import { useEffect, FC } from "react";
 import { wsConnectionClosed, wsConnectionStart } from "../../services/actions/ws-actions";
 import { wsUrl } from "../../utils/constants";
 import { getUserAction } from "../../services/actions/auth-actions";
 
-export const ProfileFeedPage = () => {
+interface IState {
+  socketStore: any
+}
+
+export const ProfileFeedPage: FC = () => {
   const dispatch = useDispatch();
 
-  const accessToken = getCookie("accessToken").split("Bearer ")[1];
-  const { orders, error } = useSelector((state) => state.socketStore);
+  const accessToken = getCookie("accessToken")?.split("Bearer ")[1];
+  const { orders, error } = useSelector((state: IState) => state.socketStore);
 
   useEffect(() => {
     dispatch(wsConnectionStart(`${wsUrl}?token=${accessToken}`));

@@ -1,4 +1,4 @@
-import React from "react";
+import { FC, useState, FormEvent, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { PasswordInput, EmailInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -6,15 +6,15 @@ import styles from "../pages.module.css";
 import { motion } from "framer-motion";
 import { registerAction } from "../../services/actions/auth-actions";
 
-export const RegisterPage = () => {
+export const RegisterPage: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(registerAction(email, password, name));
     navigate("/profile");
@@ -57,11 +57,9 @@ export const RegisterPage = () => {
         >
           <EmailInput
             name={"email"}
-            type={"email"}
             placeholder={"E-mail"}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
             value={email}
-            errorText={"Введите корректный адрес почты"}
             extraClass="mb-6"
             required
           />
@@ -74,12 +72,10 @@ export const RegisterPage = () => {
         >
           <PasswordInput
             name={"password"}
-            type={"text"}
             placeholder={"Пароль"}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             icon={"ShowIcon"}
             value={password}
-            errorText={"Введите корректный пароль"}
             size={"default"}
             extraClass="mb-6"
             required

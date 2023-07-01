@@ -1,8 +1,15 @@
 import styles from "./feed-image.module.css";
-import PropTypes from "prop-types";
-import ingredientPropTypes from "../../utils/ingredient-prop-types";
+import { IIngredient } from "../../services/actions/ingredients-actions";
+import { FC } from "react";
 
-export const FeedImage = ({ viewMore, length, ingredient, index }) => {
+interface IFeedImage {
+  viewMore: boolean;
+  length: number;
+  ingredient: IIngredient;
+  index: number;
+}
+
+export const FeedImage: FC<IFeedImage> = ({ viewMore, length, ingredient, index }) => {
   return (
     <li className={styles.ingredient} style={{ zIndex: 20 - index }}>
       <img
@@ -17,11 +24,4 @@ export const FeedImage = ({ viewMore, length, ingredient, index }) => {
       )}
     </li>
   );
-};
-
-FeedImage.propTypes = {
-  viewMore: PropTypes.bool.isRequired,
-  length: PropTypes.number.isRequired,
-  ingredient: ingredientPropTypes,
-  index: PropTypes.number.isRequired,
 };

@@ -32,6 +32,7 @@ import {
   SET_AUTH_CHECKED,
   SET_USER,
 } from "../constants";
+import { AppDispatch } from "../types";
 
 export interface IUser {
   name: string;
@@ -45,18 +46,21 @@ export interface IRegisterUser {
 }
 
 export interface IUserData {
-  email: string,
-  user: IUser,
-  isAuthChecked: boolean,
+  // fetchLoginUser: boolean,
+
+  email: string;
+  user: IUser;
+  isAuthChecked: boolean;
+  accessToken: string;
 }
 
 // -------------------------------------------------------
 interface IForgotPasswordRequest { readonly type: typeof FORGOT_PASSWORD_REQUEST };
-interface IForgotPasswordSucces { readonly type: typeof FORGOT_PASSWORD_SUCCESS; readonly payload: IUser };
+interface IForgotPasswordSucces { readonly type: typeof FORGOT_PASSWORD_SUCCESS; readonly payload: boolean };
 interface IForgotPasswordFailed { readonly type: typeof FORGOT_PASSWORD_FAILED };
 
 export const forgotPasswordRequest = (): IForgotPasswordRequest => ({ type: FORGOT_PASSWORD_REQUEST });
-export const forgotPasswordSucces = (email: IUser): IForgotPasswordSucces => ({ type: FORGOT_PASSWORD_SUCCESS, payload: email });
+export const forgotPasswordSucces = (status: boolean): IForgotPasswordSucces => ({ type: FORGOT_PASSWORD_SUCCESS, payload: status });
 export const forgotPasswordFailed = (): IForgotPasswordFailed => ({ type: FORGOT_PASSWORD_FAILED });
 
 // -------------------------------------------------------
@@ -77,8 +81,8 @@ export const registerRequest = (): IRegisterRequest => ({ type: REGISTER_REQUEST
 export const registerSuccess = (token: IRegisterUser): IRegisterSuccess => ({ type: REGISTER_SUCCESS, payload: token });
 export const registerFailed = (error: string): IRegisterFailed => ({ type: REGISTER_FAILED, payload: error });
 
-export const registerAction = (email: string, password: string, name: string) => {
-  return function (dispatch: any) {
+export const registerAction = (email: string, password: string, name: string): any => {
+  return function (dispatch: AppDispatch) {
     dispatch(registerRequest());
 
     fetchRegisterUser(email, password, name)
@@ -86,6 +90,8 @@ export const registerAction = (email: string, password: string, name: string) =>
         dispatch(registerSuccess(res));
         setCookie("accessToken", res.accessToken, { path: "/" });
         setCookie("refreshToken", res.refreshToken, { path: "/" });
+        // setCookie("accessToken", res.accessToken);
+        // setCookie("refreshToken", res.refreshToken);
         console.log("fetchRegisterUser ", res);
       })
       .catch((error) => {
@@ -98,14 +104,14 @@ export const registerAction = (email: string, password: string, name: string) =>
 // -------------------------------------------------------
 interface ILoginRequest { readonly type: typeof LOGIN_REQUEST };
 interface ILoginSuccess { readonly type: typeof LOGIN_SUCCESS; readonly payload: IUserData };
-interface ILoginFailed { readonly type: typeof LOGIN_FAILED; readonly payload: string };
+interface ILoginFailed { readonly type: typeof LOGIN_FAILED };
 
 export const loginRequest = (): ILoginRequest => ({ type: LOGIN_REQUEST });
 export const loginSuccess = (token: IUserData): ILoginSuccess => ({ type: LOGIN_SUCCESS, payload: token });
-export const loginFailed = (error: string): ILoginFailed => ({ type: LOGIN_FAILED, payload: error });
+export const loginFailed = (): ILoginFailed => ({ type: LOGIN_FAILED });
 
-export const loginAction = (email: string, password: string) => {
-  return function (dispatch: any) {
+export const loginAction = (email: string, password: string): any => {
+  return function (dispatch: AppDispatch) {
     dispatch(loginRequest());
 
     fetchLoginUser(email, password)
@@ -115,7 +121,7 @@ export const loginAction = (email: string, password: string) => {
         setCookie("refreshToken", res.refreshToken, { path: "/" });
       })
       .catch((error) => {
-        loginFailed(error);
+        loginFailed();
         console.log(error);
       });
   };
@@ -131,7 +137,7 @@ export const logoutSuccess = (token: string): ILogoutSuccess => ({ type: LOGOUT_
 export const logoutFailed = (error: string): ILogoutFailed => ({ type: LOGOUT_FAILED, payload: error });
 
 export const logoutAction = (token: string) => {
-  return function (dispatch: any) {
+  return function (dispatch: AppDispatch) {
     dispatch(logoutRequest());
 
     fetchLogout(token)
@@ -159,8 +165,8 @@ export const getUserRequest = (): IGetUserRequest => ({ type: GET_USER_REQUEST }
 export const getUserSuccess = (res: IUserData): IGetUserSuccess => ({ type: GET_USER_SUCCESS, payload: res });
 export const getUserFailed = (error: string): IGetUserFailed => ({ type: GET_USER_FAILED, payload: error });
 
-export const getUserAction = () => {
-  return function (dispatch: any) {
+export const getUserAction = (): any => {
+  return function (dispatch: AppDispatch) {
     dispatch(getUserRequest());
     return fetchGetUser(getCookie("accessToken"))
       .then((res) => {
@@ -179,7 +185,7 @@ export const getUserAction = () => {
 };
 
 export const refreshTokenAction = (refreshToken: string | undefined) => {
-  return function (dispatch: any) {
+  return function (dispatch: AppDispatch) {
     fetchRefreshToken(refreshToken).then((res) => {
       setCookie("accessToken", res.accessToken);
       setCookie("refreshToken", res.refreshToken);
@@ -197,8 +203,8 @@ export const changeUserRequest = (): IChangeUserRequest => ({ type: CHANGE_USER_
 export const changeUserSuccess = (userData: IUser): IChangeUserSuccess => ({ type: CHANGE_USER_SUCCESS, payload: userData });
 export const changeUserFailed = (error: string): IChangeUserFailed => ({ type: CHANGE_USER_FAILED, payload: error });
 
-export const changeUserAction = (name: string, email: string, password: string, token: string) => {
-  return function (dispatch: any) {
+export const changeUserAction = (name: string, email: string, password: string, token: string | undefined): any => {
+  return function (dispatch: AppDispatch) {
     dispatch(changeUserRequest());
 
     fetchChangeUser(name, email, password, token)
@@ -223,7 +229,7 @@ export const setAuthChecked = (value: any): ISetAuthChecked => ({ type: SET_AUTH
 export const setUser = (user: any): ISetUser => ({ type: SET_USER, payload: user });
 
 export const checkUserAuth = () => {
-  return (dispatch: any) => {
+  return (dispatch: AppDispatch) => {
     if (getCookie("accessToken")) {
       dispatch(getUserAction())
         .catch(() => {

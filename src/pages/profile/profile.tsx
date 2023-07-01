@@ -1,17 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, FormEvent, ChangeEvent } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import { Button, Input, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./profile.module.css";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { changeUserAction } from "../../services/actions/auth-actions";
 import { ProfileMenu } from "../../components/profile-menu/profile-menu";
 import { getCookie } from "../../utils/cookie";
+import { FC } from 'react';
 
-export const ProfilePage = () => {
+interface IState {
+  authStore: any
+}
+
+export const ProfilePage: FC = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const userData = useSelector((state) => state.authStore.user);
+  const userData = useSelector((state: IState) => state.authStore.user);
 
   const [userValues, setUserValues] = useState({
     name: "",
@@ -31,13 +36,12 @@ export const ProfilePage = () => {
 
   const accessToken = getCookie("accessToken");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(changeUserAction(userValues.name, userValues.email, userValues.password, accessToken));
   };
 
-  const handleCancel = (e) => {
-    e.preventDefault();
+  const handleCancel = () => {
     setUserValues({
       name: userData.user.name,
       email: userData.user.email,
@@ -63,7 +67,7 @@ export const ProfilePage = () => {
                 name={"name"}
                 type={"text"}
                 placeholder={"Имя"}
-                onChange={(e) => {
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   const { value } = e.target;
                   setUserValues((prev) => ({
                     ...prev,
@@ -84,11 +88,10 @@ export const ProfilePage = () => {
               animate={{ x: "0", opacity: 1 }}
               transition={{ ease: "easeOut", duration: 1 }}
             >
-              <EmailInput
+              <Input
                 name={"email"}
-                type={"email"}
                 placeholder={"Логин"}
-                onChange={(e) => {
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   const { value } = e.target;
                   setUserValues((prev) => ({
                     ...prev,
@@ -96,7 +99,6 @@ export const ProfilePage = () => {
                   }));
                 }}
                 value={userValues.email}
-                errorText={"Забыли адрес своей почты?"}
                 icon={"EditIcon"}
                 extraClass="mb-6"
                 required
@@ -110,9 +112,8 @@ export const ProfilePage = () => {
             >
               <PasswordInput
                 name={"password"}
-                type={"text"}
                 placeholder={"Пароль"}
-                onChange={(e) => {
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   const { value } = e.target;
                   setUserValues((prev) => ({
                     ...prev,
@@ -121,7 +122,6 @@ export const ProfilePage = () => {
                 }}
                 icon={"EditIcon"}
                 value={userValues.password}
-                errorText={"Пароль все таки придется вспомнить"}
                 size={"default"}
                 extraClass="mb-6"
                 required

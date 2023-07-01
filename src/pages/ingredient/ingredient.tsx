@@ -1,7 +1,8 @@
 import styles from "./ingredient.module.css";
 import IngredientDetails from "../../components/ingredient-details/ingredient-details";
+import { FC } from 'react';
 
-export const IngredientPage = () => {
+export const IngredientPage: FC = () => {
   return (
     <section className={styles.box_ingredients}>
       <div className={styles.top}>
