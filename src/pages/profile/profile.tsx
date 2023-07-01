@@ -8,6 +8,7 @@ import { changeUserAction } from "../../services/actions/auth-actions";
 import { ProfileMenu } from "../../components/profile-menu/profile-menu";
 import { getCookie } from "../../utils/cookie";
 import { FC } from 'react';
+import { AnimatedButtonOne, AnimatedButtonTwo, AnimatedInputOne, AnimatedInputTwo, AnimatedPasswordInput } from "./animation";
 
 interface IState {
   authStore: any
@@ -57,22 +58,14 @@ export const ProfilePage: FC = () => {
           <Outlet />
         ) : (
           <form className={styles.container} onSubmit={handleSubmit}>
-            <motion.div
-              // анимация
-              initial={{ x: "100%", opacity: 0 }}
-              animate={{ x: "0", opacity: 1 }}
-              transition={{ ease: "easeOut", duration: 1.5 }}
-            >
+            <AnimatedInputOne>
               <Input
                 name={"name"}
                 type={"text"}
                 placeholder={"Имя"}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   const { value } = e.target;
-                  setUserValues((prev) => ({
-                    ...prev,
-                    name: value,
-                  }));
+                  setUserValues((prev) => ({ ...prev, name: value }));
                 }}
                 value={userValues.name}
                 errorText={"Разве это ваше настоящее имя?"}
@@ -81,44 +74,28 @@ export const ProfilePage: FC = () => {
                 extraClass="mb-6"
                 required
               />
-            </motion.div>
-            <motion.div
-              // анимация
-              initial={{ x: "100%", opacity: 0 }}
-              animate={{ x: "0", opacity: 1 }}
-              transition={{ ease: "easeOut", duration: 1 }}
-            >
+            </AnimatedInputOne>
+            <AnimatedInputTwo>
               <Input
                 name={"email"}
                 placeholder={"Логин"}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   const { value } = e.target;
-                  setUserValues((prev) => ({
-                    ...prev,
-                    email: value.trim() !== "" ? value : "",
-                  }));
+                  setUserValues((prev) => ({ ...prev, email: value.trim() !== "" ? value : "" }));
                 }}
                 value={userValues.email}
                 icon={"EditIcon"}
                 extraClass="mb-6"
                 required
               />
-            </motion.div>
-            <motion.div
-              // анимация
-              initial={{ x: "100%", opacity: 0 }}
-              animate={{ x: "0", opacity: 1 }}
-              transition={{ ease: "easeOut", duration: 0.5 }}
-            >
+            </AnimatedInputTwo>
+            <AnimatedPasswordInput>
               <PasswordInput
                 name={"password"}
                 placeholder={"Пароль"}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   const { value } = e.target;
-                  setUserValues((prev) => ({
-                    ...prev,
-                    password: value,
-                  }));
+                  setUserValues((prev) => ({ ...prev, password: value }));
                 }}
                 icon={"EditIcon"}
                 value={userValues.password}
@@ -126,14 +103,9 @@ export const ProfilePage: FC = () => {
                 extraClass="mb-6"
                 required
               />
-            </motion.div>
+            </AnimatedPasswordInput>
             <div className={styles.buttons}>
-              <motion.div
-                // анимация
-                initial={{ y: "300%", opacity: 0 }}
-                animate={{ y: "0", opacity: 1 }}
-                transition={{ ease: "easeOut", delay: 0.5, duration: 1 }}
-              >
+              <AnimatedButtonOne>
                 <Button
                   type="secondary"
                   size="medium"
@@ -147,13 +119,8 @@ export const ProfilePage: FC = () => {
                 >
                   Отмена
                 </Button>
-              </motion.div>
-              <motion.div
-                // анимация
-                initial={{ y: "300%", opacity: 0 }}
-                animate={{ y: "0", opacity: 1 }}
-                transition={{ ease: "easeOut", duration: 1.5 }}
-              >
+              </AnimatedButtonOne>
+              <AnimatedButtonTwo>
                 <Button
                   type="primary"
                   size="medium"
@@ -166,7 +133,7 @@ export const ProfilePage: FC = () => {
                 >
                   Сохранить
                 </Button>
-              </motion.div>
+              </AnimatedButtonTwo>
             </div>
           </form>
         )}

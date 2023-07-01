@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { PasswordInput, EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
-import { motion } from "framer-motion";
 import { loginAction } from "../../services/actions/auth-actions";
+import { AnimatedButton, AnimatedEmailInput, AnimatedPasswordInput, AnimatedTextOne, AnimatedTextTwo, AnimatedTitle } from "./animation";
 
 export const LoginPage: FC = () => {
   const dispatch = useDispatch();
@@ -20,21 +20,10 @@ export const LoginPage: FC = () => {
   return (
     <section className={styles.box}>
       <form className={styles.container} onSubmit={handleSubmit}>
-        <motion.h1
-          className="text text_type_main-medium mb-6"
-          // анимация
-          initial={{ y: "-200%", opacity: 0 }}
-          animate={{ y: "0", opacity: 1 }}
-          transition={{ ease: "easeOut", delay: 1, duration: 1 }}
-        >
+        <AnimatedTitle>
           Вход
-        </motion.h1>
-        <motion.div
-          // анимация
-          initial={{ x: "100%", opacity: 0 }}
-          animate={{ x: "0", opacity: 1 }}
-          transition={{ ease: "easeOut", duration: 1.5 }}
-        >
+        </AnimatedTitle>
+        <AnimatedEmailInput>
           <EmailInput
             name={"email"}
             placeholder={"E-mail"}
@@ -44,13 +33,8 @@ export const LoginPage: FC = () => {
             extraClass="mb-6"
             required
           />
-        </motion.div>
-        <motion.div
-          // анимация
-          initial={{ x: "-200%", opacity: 0 }}
-          animate={{ x: "0", opacity: 1 }}
-          transition={{ ease: "easeOut", duration: 1.5 }}
-        >
+        </AnimatedEmailInput>
+        <AnimatedPasswordInput>
           <PasswordInput
             name={"password"}
             placeholder={"Пароль"}
@@ -61,13 +45,8 @@ export const LoginPage: FC = () => {
             extraClass="mb-6"
             required
           />
-        </motion.div>
-        <motion.div
-          // анимация
-          initial={{ y: "200%", opacity: 0 }}
-          animate={{ y: "0", opacity: 1 }}
-          transition={{ ease: "easeOut", delay: 1, duration: 1 }}
-        >
+        </AnimatedPasswordInput>
+        <AnimatedButton>
           <Button
             htmlType="submit"
             type="primary"
@@ -77,14 +56,8 @@ export const LoginPage: FC = () => {
           >
             Войти
           </Button>
-        </motion.div>
-        <motion.p
-          className="text text_type_main-default text_color_inactive mb-4"
-          // анимация
-          initial={{ y: "200%", opacity: 0 }}
-          animate={{ y: "0", opacity: 1 }}
-          transition={{ ease: "easeOut", delay: 1, duration: 1.5 }}
-        >
+        </AnimatedButton>
+        <AnimatedTextOne>
           Вы новый пользователь?&nbsp;
           <Link
             to={"/register"}
@@ -92,14 +65,8 @@ export const LoginPage: FC = () => {
           >
             Зарегистрироваться
           </Link>
-        </motion.p>
-        <motion.p
-          className="text text_type_main-default text_color_inactive"
-          // анимация
-          initial={{ y: "200%", opacity: 0 }}
-          animate={{ y: "0", opacity: 1 }}
-          transition={{ ease: "easeOut", delay: 1.5, duration: 1.5 }}
-        >
+        </AnimatedTextOne>
+        <AnimatedTextTwo>
           Забыли пароль?&nbsp;
           <Link
             to={"/forgot-password"}
@@ -107,7 +74,7 @@ export const LoginPage: FC = () => {
           >
             Восстановить пароль
           </Link>
-        </motion.p>
+        </AnimatedTextTwo>
       </form>
     </section>
   );

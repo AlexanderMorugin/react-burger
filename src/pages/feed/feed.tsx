@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import styles from "./feed.module.css";
 import { FeedCounts } from "../../components/feed-counts/feed-counts";
 import { FeedOrders } from "../../components/feed-orders/feed-orders";
@@ -6,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, FC } from "react";
 import { wsConnectionClosed, wsConnectionStart } from "../../services/actions/ws-actions";
 import { wsUrl } from "../../utils/constants";
+import { AnimatedTitle } from "./animation";
 
 interface IState {
   socketStore: any;
@@ -46,15 +46,9 @@ export const FeedPage: FC = () => {
   return (
     orders.length && (
       <section className={styles.box}>
-        <motion.h1
-          className="text text_type_main-large mb-5"
-          // анимация
-          initial={{ y: "-100%", opacity: 0 }}
-          animate={{ y: "0", opacity: 1 }}
-          transition={{ ease: "easeOut", duration: 1 }}
-        >
+        <AnimatedTitle>
           Лента заказов
-        </motion.h1>
+        </AnimatedTitle>
         <div className={styles.container}>
           <FeedOrders orders={orders} />
           <FeedCounts

@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
-import { motion } from "framer-motion";
 import { forgotPasswordSucces } from "../../services/actions/auth-actions";
 import { fetchForgotPassword } from "../../utils/api";
+import { AnimatedButton, AnimatedEmailInput, AnimatedText, AnimatedTitle } from "./animation";
 
 export const ForgotPasswordPage: FC = () => {
   const dispatch = useDispatch();
@@ -23,21 +23,10 @@ export const ForgotPasswordPage: FC = () => {
   return (
     <section className={styles.box}>
       <form className={styles.container} onSubmit={handleSubmit}>
-        <motion.h1
-          className="text text_type_main-medium mb-6"
-          // анимация
-          initial={{ x: "-100%", opacity: 0 }}
-          animate={{ x: "0", opacity: 1 }}
-          transition={{ ease: "easeOut", duration: 1 }}
-        >
+        <AnimatedTitle>
           Восстановление пароля
-        </motion.h1>
-        <motion.div
-          // анимация
-          initial={{ x: "100%", opacity: 0 }}
-          animate={{ x: "0", opacity: 1 }}
-          transition={{ ease: "easeOut", duration: 1.5 }}
-        >
+        </AnimatedTitle>
+        <AnimatedEmailInput>
           <EmailInput
             name={"email"}
             placeholder={"Укажите e-mail"}
@@ -47,13 +36,8 @@ export const ForgotPasswordPage: FC = () => {
             extraClass="mb-6"
             required
           />
-        </motion.div>
-        <motion.div
-          // анимация
-          initial={{ y: "200%", opacity: 0 }}
-          animate={{ y: "0", opacity: 1 }}
-          transition={{ ease: "easeOut", delay: 1, duration: 1 }}
-        >
+        </AnimatedEmailInput>
+        <AnimatedButton>
           <Button
             htmlType="submit"
             type="primary"
@@ -63,14 +47,8 @@ export const ForgotPasswordPage: FC = () => {
           >
             Восстановить
           </Button>
-        </motion.div>
-        <motion.p
-          className="text text_type_main-default text_color_inactive"
-          // анимация
-          initial={{ y: "200%", opacity: 0 }}
-          animate={{ y: "0", opacity: 1 }}
-          transition={{ ease: "easeOut", delay: 1.5, duration: 1.5 }}
-        >
+        </AnimatedButton>
+        <AnimatedText>
           Вспомнили пароль?&nbsp;
           <Link
             to={"/login"}
@@ -78,7 +56,7 @@ export const ForgotPasswordPage: FC = () => {
           >
             Войти
           </Link>
-        </motion.p>
+        </AnimatedText>
       </form>
     </section>
   );
