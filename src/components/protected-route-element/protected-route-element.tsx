@@ -33,5 +33,3 @@ const ProtectedRouteElement: FC<IProtectedRouteElement> = ({ onlyUnAuth = false,
 };
 
 export default ProtectedRouteElement;
-
-

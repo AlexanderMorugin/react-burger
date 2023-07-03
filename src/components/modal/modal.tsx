@@ -1,19 +1,27 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
-import PropTypes from "prop-types";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import styles from "./modal.module.css";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
+import { FC, ReactNode } from "react";
 
-const modalRootElement = document.querySelector("#react-modals");
+interface IModal {
+  title?: string;
+  children: ReactNode;
+  onClose: () => void;
+}
 
-const Modal = ({ title, children, onClose }) => {
-  const orderRequest = useSelector((state) => state.orderStore.orderRequest);
+interface IState {
+  orderStore: any;
+}
+
+const Modal: FC<IModal> = ({ title, children, onClose }) => {
+  const orderRequest = useSelector((state: IState) => state.orderStore.orderRequest);
 
   useEffect(() => {
-    const closeOnEscapeKeyDown = (evt) => {
+    const closeOnEscapeKeyDown = (evt: KeyboardEvent) => {
       if (evt.key === 'Escape') {
         onClose()
       }
@@ -50,13 +58,8 @@ const Modal = ({ title, children, onClose }) => {
         {children}
       </motion.div>
     </ModalOverlay>,
-    modalRootElement
+    document.querySelector("#react-modals") as HTMLElement
   );
-};
-
-Modal.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
 };
 
 export default Modal;

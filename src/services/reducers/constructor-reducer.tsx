@@ -5,13 +5,20 @@ import {
   MOVE_INGREDIENT,
   RESET_INGREDIENT,
 } from "../constants";
+import { TConstructorActions } from "../actions/constructor-actions";
+import { IIngredient } from "../actions/ingredients-actions";
 
-const initialState = {
-  bun: "",
+type TConstructorState = {
+  bun: IIngredient | null;
+  ingredients: Array<IIngredient>;
+};
+
+const initialState: TConstructorState = {
+  bun: null,
   ingredients: [],
 };
 
-export const constructorReducer = (state = initialState, action) => {
+export const constructorReducer = (state = initialState, action: TConstructorActions): TConstructorState => {
   switch (action.type) {
     case ADD_BUN:
       return {

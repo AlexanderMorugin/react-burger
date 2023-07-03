@@ -1,11 +1,12 @@
+import { FC } from "react";
 import { NavLink, useMatch } from "react-router-dom";
-import { motion } from "framer-motion";
 import styles from "./profile-menu.module.css";
 import { useDispatch } from "react-redux";
 import { getCookie } from "../../utils/cookie";
 import { logoutAction } from "../../services/actions/auth-actions";
+import { AnimatedTextFour, AnimatedTextOne, AnimatedTextThree, AnimatedTextTwo } from "./animation";
 
-export const ProfileMenu = () => {
+export const ProfileMenu: FC = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -30,14 +31,9 @@ export const ProfileMenu = () => {
             }
             to="/profile"
           >
-            <motion.p
-              // анимация
-              initial={{ y: "300%", opacity: 0 }}
-              animate={{ y: "0", opacity: 1 }}
-              transition={{ ease: "easeOut", duration: 1.5 }}
-            >
+            <AnimatedTextOne>
               Профиль
-            </motion.p>
+            </AnimatedTextOne>
           </NavLink>
         </li>
         <li className={styles.link_box}>
@@ -49,14 +45,9 @@ export const ProfileMenu = () => {
             }
             to="orders"
           >
-            <motion.p
-              // анимация
-              initial={{ y: "300%", opacity: 0 }}
-              animate={{ y: "0", opacity: 1 }}
-              transition={{ ease: "easeOut", delay: 0.5, duration: 1 }}
-            >
+            <AnimatedTextTwo>
               История заказов
-            </motion.p>
+            </AnimatedTextTwo>
           </NavLink>
         </li>
         <li className={styles.link_box}>
@@ -69,29 +60,15 @@ export const ProfileMenu = () => {
             onClick={handleLogout}
             to="/login"
           >
-            <motion.p
-              // анимация
-              initial={{ y: "300%", opacity: 0 }}
-              animate={{ y: "0", opacity: 1 }}
-              transition={{ ease: "easeOut", delay: 1, duration: 0.5 }}
-            >
+            <AnimatedTextThree>
               Выход
-            </motion.p>
+            </AnimatedTextThree>
           </NavLink>
         </li>
       </ul>
-      <motion.p
-        className={
-          "text text_type_main-default text_color_inactive " +
-          styles.description
-        }
-        // анимация
-        initial={{ y: "300%", opacity: 0 }}
-        animate={{ y: "0", opacity: 1 }}
-        transition={{ ease: "easeOut", delay: 1.5 }}
-      >
+      <AnimatedTextFour>
         В этом разделе вы можете изменить свои персональные данные
-      </motion.p>
+      </AnimatedTextFour>
     </div>
   );
 };

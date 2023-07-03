@@ -1,9 +1,10 @@
-import { compose } from "@reduxjs/toolkit";
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
 import { rootReducer } from "../services/reducers/root-reducer";
+import thunk from "redux-thunk";
+import { createStore, applyMiddleware } from "redux";
 import { socketMiddleware } from "../services/middleware/socket-middleware";
+import { composeWithDevTools } from "redux-devtools-extension";
 import { wsUrl } from "../utils/constants";
+
 import {
   WS_CONNECTION_START,
   WS_CONNECTION_SUCCESS,
@@ -22,12 +23,7 @@ const wsActions = {
   wsSend: WS_SEND_MESSAGE,
 };
 
-const composeEnhancers =
-  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-    : compose;
-
-const enhancer = composeEnhancers(
+const enhancer = composeWithDevTools(
   applyMiddleware(thunk, socketMiddleware(wsUrl, wsActions))
 );
 

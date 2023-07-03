@@ -1,8 +1,13 @@
-import PropTypes from "prop-types";
 import styles from "./modal-overlay.module.css";
 import { motion } from "framer-motion";
+import { FC, ReactNode } from "react";
 
-const ModalOverlay = ({ onClick, children }) => {
+interface IModalOverlay {
+  children: ReactNode;
+  onClick: () => void;
+}
+
+const ModalOverlay: FC<IModalOverlay> = ({ onClick, children }) => {
   return (
     <motion.div
       className={styles.overlay}
@@ -10,7 +15,7 @@ const ModalOverlay = ({ onClick, children }) => {
       // анимация
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 1 } }}
+      exit={{ opacity: 0, transition: { duration: 5 } }}
       transition={{
         type: "tween",
       }}
@@ -18,10 +23,6 @@ const ModalOverlay = ({ onClick, children }) => {
       {children}
     </motion.div>
   );
-};
-
-ModalOverlay.propTypes = {
-  onClick: PropTypes.func.isRequired,
 };
 
 export default ModalOverlay;

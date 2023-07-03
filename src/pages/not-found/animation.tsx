@@ -11,6 +11,7 @@ export const AnimatedTitle: FC<IAnimatedChildren> = ({ children }) => {
       className="text text_type_main-medium mb-6"
       initial={{ y: "-200%", opacity: 0 }}
       animate={{ y: "0", opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ ease: "easeOut", duration: 1 }}
     >
       {children}
@@ -24,6 +25,7 @@ export const AnimatedText: FC<IAnimatedChildren> = ({ children }) => {
       className="text text_type_main-medium mb-6"
       initial={{ y: "200%", opacity: 0 }}
       animate={{ y: "0", opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ ease: "easeOut", duration: 1.5 }}
     >
       {children}
@@ -37,6 +39,7 @@ export const AnimatedLinkText: FC<IAnimatedChildren> = ({ children }) => {
       className="text text_type_main-default text_color_inactive"
       initial={{ y: "200%", opacity: 0 }}
       animate={{ y: "0", opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ ease: "easeOut", delay: 1, duration: 1.5 }}
     >
       {children}

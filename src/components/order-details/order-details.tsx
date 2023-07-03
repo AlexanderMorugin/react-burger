@@ -1,7 +1,11 @@
 import styles from "./order-details.module.css";
-import PropTypes from "prop-types";
+import { FC } from "react";
 
-const OrderDetails = ({ orderNumber }) => {
+interface IOrderDetails {
+  orderNumber: number
+}
+
+const OrderDetails: FC<IOrderDetails> = ({ orderNumber }) => {
   return (
     <div className={styles.container}>
       <p className={"text text_type_digits-large " + styles.number}>
@@ -20,7 +24,3 @@ const OrderDetails = ({ orderNumber }) => {
 };
 
 export default OrderDetails;
-
-OrderDetails.propTypes = {
-  orderNumber: PropTypes.number.isRequired,
-};

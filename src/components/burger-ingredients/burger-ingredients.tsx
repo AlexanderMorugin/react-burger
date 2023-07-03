@@ -6,15 +6,20 @@ import IngredientsList from "../ingredients-list/ingredients-list";
 import styles from "./burger-ingredients.module.css";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from 'react-router-dom';
+import { IIngredient } from "../../services/actions/ingredients-actions";
 
-const BurgerIngredients = () => {
+interface IState {
+  ingredientsStore: any
+}
+
+const BurgerIngredients: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const getIngredientsData = (state) => state.ingredientsStore;
+  const getIngredientsData = (state: IState) => state.ingredientsStore;
   const ingredientsData = useSelector(getIngredientsData);
 
-  const openModal = (ingredient) => {
+  const openModal = (ingredient: IIngredient) => {
     navigate(`/ingredients/${ingredient._id}`, { state: {background: location}, replace: true});
   };
 
@@ -41,15 +46,15 @@ const BurgerIngredients = () => {
     }
   }, [inBunView, inSauceView, inMainView]);
 
-  const handleClickNav = (ingredients) => {
+  const handleClickNav = (ingredients: any) => {
     const scrollToId = `${ingredients.toLowerCase()}`;
-    document.getElementById(scrollToId).scrollIntoView({ behavior: "smooth" });
+    document.getElementById(scrollToId)?.scrollIntoView({ behavior: "smooth" });
     setCurrent(ingredients);
   };
 
   const buns = useMemo(
     () =>
-      ingredientsData.ingredients.filter((item) => {
+      ingredientsData.ingredients.filter((item: any) => {
         return item.type === "bun";
       }),
     [ingredientsData]
@@ -57,7 +62,7 @@ const BurgerIngredients = () => {
 
   const sauce = useMemo(
     () =>
-      ingredientsData.ingredients.filter((item) => {
+      ingredientsData.ingredients.filter((item: any) => {
         return item.type === "sauce";
       }),
     [ingredientsData]
@@ -65,7 +70,7 @@ const BurgerIngredients = () => {
 
   const main = useMemo(
     () =>
-      ingredientsData.ingredients.filter((item) => {
+      ingredientsData.ingredients.filter((item: any) => {
         return item.type === "main";
       }),
     [ingredientsData]

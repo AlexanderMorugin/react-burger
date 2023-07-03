@@ -6,9 +6,14 @@ import {
 import styles from "./app-header.module.css";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { FC } from "react";
 
-const AppHeader = () => {
-  const userData = useSelector((state) => state.authStore.user);
+interface IState {
+  authStore: any
+}
+
+const AppHeader: FC = () => {
+  const userData = useSelector((state: IState) => state.authStore.user);
 
   return (
     <header className={`${styles.header} text text_type_main-default`}>
@@ -23,7 +28,6 @@ const AppHeader = () => {
             <BurgerIcon type="secondary" />
             <span>Конструктор</span>
           </NavLink>
-
           <NavLink
             className={({ isActive }) =>
               isActive ? `${styles.button_active}` : `${styles.button}`
@@ -34,11 +38,9 @@ const AppHeader = () => {
             <span>Лента&nbsp;заказов</span>
           </NavLink>
         </div>
-
         <Link to={"/"} className={styles.logoBlock}>
           <Logo />
         </Link>
-
         <NavLink
           className={({ isActive }) =>
             isActive ? `${styles.button_active}` : `${styles.button}`

@@ -1,6 +1,9 @@
-export const socketMiddleware = (wsUrl, wsActions) => {
+import { Middleware } from "redux";
+import { IWebSocket } from "../actions/ws-actions";
+
+export const socketMiddleware = (wsUrl: string, wsActions: IWebSocket): Middleware => {
   return store => {
-    let socket = null;
+    let socket: WebSocket | null = null;
     let url = undefined;
 
     return next => action => {
@@ -12,9 +15,9 @@ export const socketMiddleware = (wsUrl, wsActions) => {
         url = payload;
         socket = new WebSocket(url);
       }
-      // else if (type === onClose) {
-      //   socket.close(1000, 'CLOSE_NORMAL')
-      // }
+      else if (type === onClose) {
+        socket && socket.close(1000, 'CLOSE_NORMAL');
+      }
       if (socket) {
         socket.onopen = event => {
           dispatch({ type: onOpen, payload: event });
@@ -27,10 +30,9 @@ export const socketMiddleware = (wsUrl, wsActions) => {
           const parsedData = JSON.parse(data);
           dispatch({ type: onMessage, payload: parsedData });
         };
-        socket.onClose = event => {
+        socket.onclose = event => {
           dispatch({ type: onClose, payload: event });
         };
-
         if (type === wsSend) {
           const message = payload;
           socket.send(JSON.stringify(message));

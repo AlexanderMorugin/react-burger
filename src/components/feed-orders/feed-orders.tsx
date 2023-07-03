@@ -6,8 +6,6 @@ import { IOrderDetails } from "../../services/actions/order-actions";
 
 interface IFeedOrders {
   orders: Array<IOrderDetails>;
-  // orders: any
-  // orders: boolean
 }
 
 export const FeedOrders: FC<IFeedOrders> = ({ orders }) => {  

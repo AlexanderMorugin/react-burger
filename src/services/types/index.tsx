@@ -6,7 +6,7 @@ import { IIngredientsActions } from '../actions/ingredients-actions';
 import { TOrderActions } from '../actions/order-actions';
 import { TAuthActions } from '../actions/auth-actions';
 import { TWSActions } from '../actions/ws-actions';
-// import { TIngredientsState } from '../reducers/ingredients-reducer';
+// import { TIngred ientsState } from '../reducers/ingredients-reducer';
 // import { TUserState } from '../reducers/userReducer';
 // import { TOrderState } from '../reducers/orderReducer';
 // import { TSocketState } from '../reducers/wsReducer';

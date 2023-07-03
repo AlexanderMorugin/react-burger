@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
 import { ConstructorElement, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -12,25 +12,31 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ModalOrderRequest } from "../modal-order-request/modal-order-request";
 
-const BurgerConstructor = () => {
-  const getConstructorData = (state) => state.constructorStore;
+interface IState {
+  constructorStore: any;
+  orderStore: any;
+  authStore: any;
+}
+
+const BurgerConstructor: FC = () => {
+  const getConstructorData = (state: IState) => state.constructorStore;
   const { bun, ingredients } = useSelector(getConstructorData);
 
-  const getOrderNumber = (state) => state.orderStore.data;
+  const getOrderNumber = (state: IState) => state.orderStore.data;
   const orderNumber = useSelector(getOrderNumber);
 
-  const orderRequest = useSelector((state) => state.orderStore.orderRequest);
+  const orderRequest = useSelector((state: IState) => state.orderStore.orderRequest);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const userData = useSelector((state) => state.authStore.user);
+  const userData = useSelector((state: IState) => state.authStore.user);
 
   const [totalPrice, setTotalPrice] = useState(null);
 
   const [{ isHover }, dropTarget] = useDrop({
     accept: "ingredients",
-    drop(item) {
+    drop(item: any) {
       if (item.ingredient.type === "bun") {
         dispatch(addBunAction(item.ingredient));
       } else {
@@ -46,14 +52,14 @@ const BurgerConstructor = () => {
 
   useEffect(() => {
     const sum = ingredients.reduce(
-      (current, total) => current + total.price,
+      (current: any, total: any) => current + total.price,
       bun === null || bun.price === undefined ? 0 : bun.price * 2
     );
     setTotalPrice(sum);
   }, [bun, ingredients]);
 
   const handleOpenModal = () => {
-    const ingredientsId = ingredients.map((item) => item._id);
+    const ingredientsId = ingredients.map((item: any) => item._id);
     const bunId = bun._id;
     const orderItems = [bunId, ...ingredientsId, bunId];
     if (!userData) {
@@ -92,30 +98,18 @@ const BurgerConstructor = () => {
           )}
           <ul className={styles.content}>
             {ingredients.length > 0 ? (
-              ingredients.map((item, index) => (
+              ingredients.map((item: any, index: any) => (
                 <li className={styles.element} key={item.key}>
                   <ConstructorIngredient item={item} index={index} />
                 </li>
               ))
             ) : (
-              <div
-                className={styles.chekConstructorTwo}
-                style={{ backgroundColor }}
-              >
-                <p
-                  className={
-                    "text text_type_main-medium text_color_inactive " +
-                    styles.chekTextTop
-                  }
-                >
+              <div className={styles.chekConstructorTwo} style={{ backgroundColor }}>
+                <p className={"text text_type_main-medium text_color_inactive " + styles.chekTextTop}>
                   Теперь добавьте ингредиенты.
                 </p>
                 <div className={styles.chekImage}></div>
-                <p
-                  className={
-                    "text text_type_main-medium " + styles.chekTextBottom
-                  }
-                >
+                <p className={"text text_type_main-medium " + styles.chekTextBottom}>
                   Это будет вкусный бургер!
                 </p>
               </div>
@@ -135,12 +129,7 @@ const BurgerConstructor = () => {
         </div>
       ) : (
         <div className={styles.chekConstructorOne} style={{ backgroundColor }}>
-          <p
-            className={
-              "text text_type_main-medium text_color_inactive " +
-              styles.chekConstructorText
-            }
-          >
+          <p className={"text text_type_main-medium text_color_inactive " + styles.chekConstructorText}>
             Перенестите необходимые ингредиенты для бургера в эту часть экрана.
           </p>
           <div className={styles.chekImage}></div>
@@ -157,26 +146,18 @@ const BurgerConstructor = () => {
           htmlType="button"
           type="primary"
           size="large"
-          onClick={() => {
-            handleOpenModal();
-          }}
+          onClick={() => {handleOpenModal()}}
           disabled={bun && ingredients.length > 0 ? false : true}
         >
           {userData ? "Оформить заказ" : "Авторизуйтесь"}
         </Button>
       </div>
 
-      {orderRequest ? (
-        <ModalOrderRequest />
-      ) : null }
+      {orderRequest ? ( <ModalOrderRequest /> ) : null }
 
       {orderNumber && (
         <Modal onClose={handleCloseModal}>
-          <OrderDetails
-            orderNumber={
-              orderNumber && orderNumber.order && orderNumber.order.number
-            }
-          />
+          <OrderDetails orderNumber={orderNumber && orderNumber.order && orderNumber.order.number} />
         </Modal>
       )}
     </motion.section>

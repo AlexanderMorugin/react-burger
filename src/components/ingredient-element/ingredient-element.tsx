@@ -1,21 +1,29 @@
-import { useMemo } from "react";
+import { useMemo, FC } from "react";
 import { useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import Image from "../image/image";
 import styles from "./ingredient-element.module.css";
-import PropTypes from "prop-types";
-import ingredientPropTypes from "../../utils/ingredient-prop-types";
 import { useMatch, useNavigate } from "react-router-dom";
+import { IIngredient } from "../../services/actions/ingredients-actions";
 
-const IngredientElement = ({ ingredient, onClick }) => {
+interface IIngredientElement {
+  ingredient: IIngredient;
+  onClick: any;
+}
+
+interface IState {
+  constructorStore: any
+}
+
+const IngredientElement: FC<IIngredientElement> = ({ ingredient, onClick }) => {
   const { _id, image, price, name } = ingredient;
 
   const navigate = useNavigate();
   const match = useMatch("/ingredients/:id");
   const { id } = match?.params || {};
 
-  const getConstructorData = (state) => state.constructorStore;
+  const getConstructorData = (state: IState) => state.constructorStore;
   const { bun, ingredients } = useSelector(getConstructorData);
 
   const [{ opacity }, dragRef] = useDrag({
@@ -60,11 +68,6 @@ const IngredientElement = ({ ingredient, onClick }) => {
       </p>
     </li>
   );
-};
-
-IngredientElement.propTypes = {
-  ingredient: ingredientPropTypes,
-  onClick: PropTypes.func,
 };
 
 export default IngredientElement;

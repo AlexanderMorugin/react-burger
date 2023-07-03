@@ -46,8 +46,6 @@ export interface IRegisterUser {
 }
 
 export interface IUserData {
-  // fetchLoginUser: boolean,
-
   email: string;
   user: IUser;
   isAuthChecked: boolean;
@@ -90,9 +88,6 @@ export const registerAction = (email: string, password: string, name: string): a
         dispatch(registerSuccess(res));
         setCookie("accessToken", res.accessToken, { path: "/" });
         setCookie("refreshToken", res.refreshToken, { path: "/" });
-        // setCookie("accessToken", res.accessToken);
-        // setCookie("refreshToken", res.refreshToken);
-        console.log("fetchRegisterUser ", res);
       })
       .catch((error) => {
         dispatch(registerFailed(error));
@@ -130,13 +125,13 @@ export const loginAction = (email: string, password: string): any => {
 // -------------------------------------------------------
 interface ILogoutRequest { readonly type: typeof LOGOUT_REQUEST };
 interface ILogoutSuccess { readonly type: typeof LOGOUT_SUCCESS; readonly payload: string; };
-interface ILogoutFailed { readonly type: typeof LOGOUT_FAILED; readonly payload: string; };
+interface ILogoutFailed { readonly type: typeof LOGOUT_FAILED };
 
 export const logoutRequest = (): ILogoutRequest => ({ type: LOGOUT_REQUEST });
 export const logoutSuccess = (token: string): ILogoutSuccess => ({ type: LOGOUT_SUCCESS, payload: token });
-export const logoutFailed = (error: string): ILogoutFailed => ({ type: LOGOUT_FAILED, payload: error });
+export const logoutFailed = (): ILogoutFailed => ({ type: LOGOUT_FAILED });
 
-export const logoutAction = (token: string) => {
+export const logoutAction = (token: string | undefined): any => {
   return function (dispatch: AppDispatch) {
     dispatch(logoutRequest());
 
@@ -146,11 +141,10 @@ export const logoutAction = (token: string) => {
           deleteCookie("accessToken");
           deleteCookie("refreshToken");
           dispatch(logoutSuccess(res));
-          console.log(res);
         }
       })
       .catch((error) => {
-        logoutFailed(error);
+        logoutFailed();
         console.log(error);
       });
   };
@@ -172,7 +166,6 @@ export const getUserAction = (): any => {
       .then((res) => {
         if (res) {
           dispatch(getUserSuccess(res));
-          // console.log(res);
         }
       })
       .catch((error) => {
@@ -228,7 +221,7 @@ interface ISetUser { readonly type: typeof SET_USER; readonly payload: any; };
 export const setAuthChecked = (value: any): ISetAuthChecked => ({ type: SET_AUTH_CHECKED, payload: value });
 export const setUser = (user: any): ISetUser => ({ type: SET_USER, payload: user });
 
-export const checkUserAuth = () => {
+export const checkUserAuth = (): any => {
   return (dispatch: AppDispatch) => {
     if (getCookie("accessToken")) {
       dispatch(getUserAction())

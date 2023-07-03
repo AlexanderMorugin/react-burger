@@ -37,12 +37,16 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 import { FeedOrderCard } from "../feed-order-card/feed-order-card";
 
+interface IState {
+  ingredientsStore: any
+}
+
 const App: FC = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { ingredientsSuccess } = useSelector((state) => state.ingredientsStore);
+  const { ingredientsSuccess } = useSelector((state: IState) => state.ingredientsStore);
 
   const background = location.state && location.state.background;
 
@@ -144,7 +148,7 @@ const App: FC = () => {
                   path={PATH_INGREDIENT_ID}
                   element={
                     <Modal
-                      onClose={() => closeModal(location)}
+                      onClose={() => closeModal()}
                       title="Детали ингредиента"
                     >
                       <IngredientDetails />

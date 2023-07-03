@@ -11,7 +11,7 @@ import { AppDispatch } from "../types";
 export interface IIngredient {
   _id: string;
   name: string;
-  type: string;
+  type: string;  
   proteins: number;
   fat: number;
   carbohydrates: number;
@@ -21,6 +21,11 @@ export interface IIngredient {
   image_mobile: string;
   image_large: string;
   __v: number;
+
+  map?: any;
+  ingridient?: any;
+  key?: any;
+  index?: any;
 }
 
 // -------------------------------------------------------
@@ -32,7 +37,7 @@ export const getIngredientsRequest = (): IGetIngredientsRequest => ({ type: GET_
 export const getIngredientsSuccess = (data: Array<IIngredient>): IgetIngredientsSuccess => ({ type: GET_INGREDIENTS_SUCCESS, payload: data });
 export const getIngredientsFailed = (): IgetIngredientsFailed => ({ type: GET_INGREDIENTS_FAILED });
 
-export const getIngredientsAction = () => {
+export const getIngredientsAction = (): any => {
   return async (dispatch: AppDispatch) => {
     dispatch(getIngredientsRequest());
     try {
