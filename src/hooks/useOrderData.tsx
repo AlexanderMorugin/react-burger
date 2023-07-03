@@ -86,7 +86,7 @@ export const useOrderDataWithStatistics = (order: any) => {
     [order.ingredients]
   );
 
-  console.log("statistics", statistics);
+  // console.log("statistics", statistics);
 
   const orderIngredients = useMemo(
     () => idToIngredients(uniqueIds, ingredients),

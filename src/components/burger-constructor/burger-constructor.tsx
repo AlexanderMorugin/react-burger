@@ -11,6 +11,7 @@ import styles from "./burger-constructor.module.css";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ModalOrderRequest } from "../modal-order-request/modal-order-request";
+import { IIngredient } from "../../services/actions/ingredients-actions";
 
 interface IState {
   constructorStore: any;
@@ -59,7 +60,7 @@ const BurgerConstructor: FC = () => {
   }, [bun, ingredients]);
 
   const handleOpenModal = () => {
-    const ingredientsId = ingredients.map((item: any) => item._id);
+    const ingredientsId = ingredients.map((item: IIngredient) => item._id);
     const bunId = bun._id;
     const orderItems = [bunId, ...ingredientsId, bunId];
     if (!userData) {
@@ -91,14 +92,14 @@ const BurgerConstructor: FC = () => {
                 type="top"
                 isLocked={true}
                 text={`${bun.name} (верх)`}
-                price={`${bun.price}`}
+                price={bun.price}
                 thumbnail={`${bun.image}`}
               />
             </div>
           )}
           <ul className={styles.content}>
             {ingredients.length > 0 ? (
-              ingredients.map((item: any, index: any) => (
+              ingredients.map((item: IIngredient, index: number) => (
                 <li className={styles.element} key={item.key}>
                   <ConstructorIngredient item={item} index={index} />
                 </li>
@@ -121,7 +122,7 @@ const BurgerConstructor: FC = () => {
                 type="bottom"
                 isLocked={true}
                 text={`${bun.name} (низ)`}
-                price={`${bun.price}`}
+                price={bun.price}
                 thumbnail={`${bun.image}`}
               />
             </div>

@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import styles from "./feed-order-ingredients.module.css";
 
 interface IAnimatedChildren {
-  children: any;
+  children?: ReactNode;
 }
 
 export const AnimatedText: FC<IAnimatedChildren> = ({ children }) => {

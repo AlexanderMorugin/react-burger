@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
-import styles from "../pages.module.css";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 interface IAnimatedChildren {
-  children: any;
+  children?: ReactNode;
 }
 
 export const AnimatedTitle: FC<IAnimatedChildren> = ({ children }) => {

@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, FC } from "react";
 import { wsConnectionClosed, wsConnectionStart } from "../../services/actions/ws-actions";
 import { wsUrl } from "../../utils/constants";
-import { AnimatedTitle } from "./animation";
+import { AnimatedLoading, AnimatedTitle } from "./animation";
+import ModalOverlay from "../../components/modal-overlay/modal-overlay";
 
 interface IState {
   socketStore: any;
@@ -42,6 +43,13 @@ export const FeedPage: FC = () => {
       { doneList: [], preparingList: [] }
     );
   }, [orders]);
+
+  if (!orders.length) {
+    return (
+      <AnimatedLoading>Загружаем данные...</AnimatedLoading>
+    )
+    // console.log("Привет!")
+  }
 
   return (
     orders.length && (

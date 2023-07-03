@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 interface IAnimatedChildren {
-  children: any;
+  children?: ReactNode;
 }
 
 export const AnimatedTitle: FC<IAnimatedChildren> = ({ children }) => {

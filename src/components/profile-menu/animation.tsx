@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import styles from "./profile-menu.module.css";
 
 interface IAnimatedChildren {
-  children: any;
+  children?: ReactNode;
 }
 
 export const AnimatedTextOne: FC<IAnimatedChildren> = ({ children }) => {

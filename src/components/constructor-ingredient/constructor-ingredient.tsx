@@ -1,24 +1,30 @@
-import { useRef } from "react";
+import { useRef, FC } from "react";
 import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { deleteIngredientAction, moveIngredientAction } from "../../services/actions/constructor-actions";
 import styles from "./constructor-ingredient.module.css";
+import { IIngredient } from "../../services/actions/ingredients-actions";
 
-const ConstructorIngredient = ({ index, item }) => {
+interface IConstructorIngredient {
+  index: number;
+  item: IIngredient;
+}
+
+const ConstructorIngredient: FC<IConstructorIngredient> = ({ index, item }) => {
   const dispatch = useDispatch();
 
   const { image, _id, price, name } = item;
 
   const ref = useRef(null);
 
-  const handleDelete = (index, item) => {
+  const handleDelete = (index: any, item: any) => {
     dispatch(deleteIngredientAction(item, index));
   };
 
   const [, drop] = useDrop({
     accept: "item",
-    hover(item) {
+    hover(item: IIngredient) {
       if (!ref.current) {
         return;
       }

@@ -24,7 +24,7 @@ const initialState: TSocketState = {
   total: 0,
   totalToday: 0,
   error: false,
-  errMessage: null
+  errMessage: null,
 };
 
 export const wsReducer = (state = initialState, action: TWSActions): TSocketState => {

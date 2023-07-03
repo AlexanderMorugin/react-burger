@@ -1,17 +1,23 @@
 import { useSelector } from "react-redux";
+import { FC } from "react";
 import Image from "../image/image";
 import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
+import { IIngredient } from "../../services/actions/ingredients-actions";
 
-const IngredientDetails = () => {
+interface IState {
+  ingredientsStore: any
+}
+
+const IngredientDetails: FC = () => {
   const ingredients = useSelector(
-    (state) => state.ingredientsStore.ingredients
+    (state: IState) => state.ingredientsStore.ingredients
   );
 
   const { id } = useParams();
 
   const currentIngredient = ingredients.find(
-    (ingredient) => ingredient._id === id
+    (ingredient: IIngredient) => ingredient._id === id
   );
 
   if (!currentIngredient) {

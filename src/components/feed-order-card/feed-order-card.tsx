@@ -4,13 +4,13 @@ import { useEffect, FC } from "react";
 import { getOrder } from "../../services/actions/order-actions";
 import OrderCard from "../order-card/order-card";
 
-// interface IState {
-//   socketStore: any;
-//   orderStore: any;
-// }
+interface IState {
+  socketStore: any;
+  orderStore: any;
+}
 
-export const FeedOrderCard: FC = () => {
-  const { number } = useParams();
+export const FeedOrderCard: FC = (): any => {
+  const { number }: any = useParams();
 
   const dispatch = useDispatch();
 
