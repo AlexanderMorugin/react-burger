@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect, FC } from "react";
 import { useInView } from "react-intersection-observer";
-import { useSelector } from "react-redux";
+import { useTypedSelector } from "../../services/hooks";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientsList from "../ingredients-list/ingredients-list";
 import styles from "./burger-ingredients.module.css";
@@ -8,23 +8,19 @@ import { motion } from "framer-motion";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { IIngredient } from "../../services/actions/ingredients-actions";
 
-interface IState {
-  ingredientsStore: any
-}
-
 const BurgerIngredients: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const getIngredientsData = (state: IState) => state.ingredientsStore;
-  const ingredientsData = useSelector(getIngredientsData);
+  const getIngredientsData = (state: any) => state.ingredientsStore;
+  const ingredientsData = useTypedSelector(getIngredientsData);
 
   const openModal = (ingredient: IIngredient) => {
     navigate(`/ingredients/${ingredient._id}`, { state: {background: location}, replace: true});
   };
 
   // Работа Табов с прокруткой ингредиентов
-  const [current, setCurrent] = useState("bun");
+  const [current, setCurrent] = useState<string>("bun");
 
   const tabs = [
     { id: "bun", title: "Булки" },

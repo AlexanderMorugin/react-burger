@@ -2,22 +2,17 @@ import { useEffect, useState, FormEvent, ChangeEvent } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./profile.module.css";
-import { motion } from "framer-motion";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useTypedSelector } from "../../services/hooks";
 import { changeUserAction } from "../../services/actions/auth-actions";
 import { ProfileMenu } from "../../components/profile-menu/profile-menu";
 import { getCookie } from "../../utils/cookie";
 import { FC } from 'react';
-import { AnimatedButtonOne, AnimatedButtonTwo, AnimatedInputOne, AnimatedInputTwo, AnimatedPasswordInput } from "./animation";
-
-interface IState {
-  authStore: any
-}
+import { AnimatedButtonOne, AnimatedButtonTwo, AnimatedInputOne, AnimatedInputTwo, AnimatedPasswordInput } from "./animation"; 
 
 export const ProfilePage: FC = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const userData = useSelector((state: IState) => state.authStore.user);
+  const userData = useTypedSelector((state: any) => state.authStore.user);
 
   const [userValues, setUserValues] = useState({
     name: "",

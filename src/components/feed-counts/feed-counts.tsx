@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import styles from "./feed-counts.module.css";
 import { FC } from 'react';
+import { AnimatedDoneList, AnimatedPrepareList, AnimatedTextDone, AnimatedTextPrepare, AnimatedTextTotal, AnimatedTotal, AnimatedTextToday, AnimatedToday } from "./animation";
 
 interface IFeedCounts {
   doneList: Array<number>;
@@ -9,28 +10,15 @@ interface IFeedCounts {
   totalToday: number;
 }
 
-
 export const FeedCounts: FC<IFeedCounts> = ({ doneList, preparingList, total, totalToday }) => {
   return (
     <div className={styles.counts_content}>
       <div className={styles.counts_top}>
         <div className={styles.counts_block}>
-          <motion.p
-            className="text text_type_main-medium mb-6"
-            // анимация
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.7, duration: 0.5 }}
-          >
+          <AnimatedTextDone>
             Готовы:
-          </motion.p>
-          <motion.ul
-            className={"text text_type_digits-default " + styles.counts_list}
-            // анимация
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ ease: "easeOut", delay: 0.6, duration: 0.5 }}
-          >
+          </AnimatedTextDone>
+          <AnimatedDoneList>
             {doneList.map((item, index) => {
               return (
                 <li className={styles.counts_active} key={index}>
@@ -38,70 +26,34 @@ export const FeedCounts: FC<IFeedCounts> = ({ doneList, preparingList, total, to
                 </li>
               );
             })}
-          </motion.ul>
+          </AnimatedDoneList>
         </div>
         <div className={styles.counts_block}>
-          <motion.p
-            className="text text_type_main-medium mb-6"
-            // анимация
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-          >
+          <AnimatedTextPrepare>
             В работе:
-          </motion.p>
-          <motion.ul
-            className={"text text_type_digits-default " + styles.counts_list}
-            // анимация
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ ease: "easeOut", delay: 0.8, duration: 0.5 }}
-          >
+          </AnimatedTextPrepare>
+          <AnimatedPrepareList>
             {preparingList.map((item, index) => {
               return <li key={index}>{item}</li>;
             })}
-          </motion.ul>
+          </AnimatedPrepareList>
         </div>
       </div>
       <div className={styles.counts_middle}>
-        <motion.p
-          className="text text_type_main-medium"
-          // анимация
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.9, duration: 0.5 }}
-        >
+        <AnimatedTextTotal>
           Выполнено за все время:
-        </motion.p>
-        <motion.p
-          className="text text_type_digits-large"
-          // анимация
-          initial={{ x: "100%", opacity: 0 }}
-          animate={{ x: "0", opacity: 1 }}
-          transition={{ ease: "easeOut", delay: 1.3, duration: 0.8 }}
-        >
+        </AnimatedTextTotal>
+        <AnimatedTotal>
           {total}
-        </motion.p>
+        </AnimatedTotal>
       </div>
       <div className={styles.counts_middle}>
-        <motion.p
-          className="text text_type_main-medium"
-          // анимация
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1.1, duration: 0.5 }}
-        >
+        <AnimatedTextToday>
           Выполнено за сегодня:
-        </motion.p>
-        <motion.p
-          className="text text_type_digits-large"
-          // анимация
-          initial={{ y: "200%", opacity: 0 }}
-          animate={{ y: "0", opacity: 1 }}
-          transition={{ ease: "easeOut", delay: 1.5, duration: 1.5 }}
-        >
+        </AnimatedTextToday>
+        <AnimatedToday>
           {totalToday}
-        </motion.p>
+        </AnimatedToday>
       </div>
     </div>
   );

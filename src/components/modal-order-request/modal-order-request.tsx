@@ -13,7 +13,7 @@ export const ModalOrderRequest: FC = () => {
         </AnimatedTextOne>
         <Spinner />
         <AnimatedTextTwo>
-          Ожидайте номера заказа
+          Ожидайте идентификатор заказа
         </AnimatedTextTwo>
       </div>
     </Modal>

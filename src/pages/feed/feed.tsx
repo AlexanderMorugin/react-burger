@@ -1,32 +1,35 @@
 import styles from "./feed.module.css";
 import { FeedCounts } from "../../components/feed-counts/feed-counts";
 import { FeedOrders } from "../../components/feed-orders/feed-orders";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useTypedSelector } from "../../services/hooks";
 import { useEffect, useMemo, FC } from "react";
 import { wsConnectionClosed, wsConnectionStart } from "../../services/actions/ws-actions";
 import { wsUrl } from "../../utils/constants";
 import { AnimatedLoading, AnimatedTitle } from "./animation";
-import ModalOverlay from "../../components/modal-overlay/modal-overlay";
 
-interface IState {
-  socketStore: any;
+interface IOrderStatus {
+  doneList: Array<number>;
+  preparingList: Array<number>;
 }
 
-export const FeedPage: FC = () => {
+export const FeedPage: FC = (): any => {
   const dispatch = useDispatch();
 
-  const { orders, total, totalToday } = useSelector((state: IState) => state.socketStore);
+  const { orders, total, totalToday } = useTypedSelector((state) => state.socketStore);
 
   useEffect(() => {
-    dispatch(wsConnectionStart(`${wsUrl}/all`));
+    setTimeout(() => {
+      dispatch(wsConnectionStart(`${wsUrl}/all`));
+    }, 1000)
+    
     return () => {
       dispatch(wsConnectionClosed());
     };
   }, []);
 
   const { doneList, preparingList } = useMemo(() => {
-    return orders.reduce(
-      (count: any, element: any) => {
+    return orders.reduce<IOrderStatus>(
+      (count, element) => {
         switch (element.status) {
           case "done":
             count.doneList.push(element.number);
@@ -48,7 +51,6 @@ export const FeedPage: FC = () => {
     return (
       <AnimatedLoading>Загружаем данные...</AnimatedLoading>
     )
-    // console.log("Привет!")
   }
 
   return (

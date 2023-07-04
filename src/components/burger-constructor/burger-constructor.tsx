@@ -1,5 +1,5 @@
 import { useState, useEffect, FC } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useTypedSelector, useDispatch } from "../../services/hooks";
 import { useDrop } from "react-dnd";
 import { ConstructorElement, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modal/modal";
@@ -13,25 +13,19 @@ import { useNavigate } from "react-router-dom";
 import { ModalOrderRequest } from "../modal-order-request/modal-order-request";
 import { IIngredient } from "../../services/actions/ingredients-actions";
 
-interface IState {
-  constructorStore: any;
-  orderStore: any;
-  authStore: any;
-}
-
 const BurgerConstructor: FC = () => {
-  const getConstructorData = (state: IState) => state.constructorStore;
-  const { bun, ingredients } = useSelector(getConstructorData);
-
-  const getOrderNumber = (state: IState) => state.orderStore.data;
-  const orderNumber = useSelector(getOrderNumber);
-
-  const orderRequest = useSelector((state: IState) => state.orderStore.orderRequest);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const userData = useSelector((state: IState) => state.authStore.user);
+  const getConstructorData = (state: any) => state.constructorStore;
+  const { bun, ingredients } = useTypedSelector(getConstructorData);
+
+  const getOrderNumber = (state: any) => state.orderStore.data;
+  const orderNumber = useTypedSelector(getOrderNumber);
+
+  const orderRequest = useTypedSelector((state) => state.orderStore.orderRequest);
+
+  const userData = useTypedSelector((state: any) => state.authStore.user);
 
   const [totalPrice, setTotalPrice] = useState(null);
 

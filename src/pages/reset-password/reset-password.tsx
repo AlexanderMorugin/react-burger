@@ -1,15 +1,11 @@
 import { useEffect, FC, useState, FormEvent, ChangeEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useTypedSelector } from "../../services/hooks";
 import { Link, useNavigate } from "react-router-dom";
 import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
 import { fetchResetPassword } from "../../utils/api";
 import { forgotPasswordSucces } from "../../services/actions/auth-actions";
 import { AnimatedButton, AnimatedInput, AnimatedPasswordInput, AnimatedText, AnimatedTitle } from "./animation";
-
-interface IState {
-  authStore: any
-}
 
 export const ResetPasswordPage: FC = () => {
   const dispatch = useDispatch();
@@ -18,7 +14,7 @@ export const ResetPasswordPage: FC = () => {
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
 
-  const { email } = useSelector((state: IState) => state.authStore);
+  const { email } = useTypedSelector((state) => state.authStore);
 
   useEffect(() => {
     if (!email) {

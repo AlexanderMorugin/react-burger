@@ -18,7 +18,7 @@ const ConstructorIngredient: FC<IConstructorIngredient> = ({ index, item }) => {
 
   const ref = useRef(null);
 
-  const handleDelete = (index: any, item: any) => {
+  const handleDelete = (index: number, item: IIngredient) => {
     dispatch(deleteIngredientAction(item, index));
   };
 

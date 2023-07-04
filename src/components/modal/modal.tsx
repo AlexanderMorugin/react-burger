@@ -1,11 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, FC, ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import styles from "./modal.module.css";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
-import { FC, ReactNode } from "react";
+import { useTypedSelector } from "../../services/hooks";
 
 interface IModal {
   title?: string;
@@ -13,12 +12,8 @@ interface IModal {
   onClose: () => void;
 }
 
-interface IState {
-  orderStore: any;
-}
-
 const Modal: FC<IModal> = ({ title, children, onClose }) => {
-  const orderRequest = useSelector((state: IState) => state.orderStore.orderRequest);
+  const orderRequest = useTypedSelector((state) => state.orderStore.orderRequest);
 
   useEffect(() => {
     const closeOnEscapeKeyDown = (evt: KeyboardEvent) => {
@@ -36,6 +31,7 @@ const Modal: FC<IModal> = ({ title, children, onClose }) => {
     <ModalOverlay onClick={onClose}>
       <motion.div
         className={styles.modal}
+        style={{background: orderRequest ? "tranparent" : "#1C1C21"}}
         onClick={(evt) => evt.stopPropagation()}
         // анимация
         initial={{ scale: 0, opacity: 0 }}

@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useTypedSelector } from "../../services/hooks";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import {
   ConstructorPage,
@@ -15,18 +15,18 @@ import {
   ProfileFeedPage,
 } from "../../pages";
 import {
-  PATH_INDEX,
-  PATH_LOGIN,
-  PATH_REGISTER,
-  PATH_FORGOT_RASSWORD,
-  PATH_RESET_RASSWORD,
-  PATH_PROFILE,
-  PATH_NOT_FOUND,
-  PATH_INGREDIENT_ID,
-  PATH_PROFILE_ORDERS,
-  PATH_PROFILE_ORDERS_NUMBER,
-  PATH_FEED,
-  PATH_FEED_NUMBER,
+  indexUrl,
+  loginUrl,
+  registerUrl,
+  forgotPasswordUrl,
+  resetPasswordUrl,
+  profileUrl,
+  notFoundUrl,
+  ingredientIdUrl,
+  profileOrdersUrl,
+  profileOrdersNumberUrl,
+  feedUrl,
+  feedNumberUrl,
 } from "../../utils/constants";
 import AppHeader from "../app-header/app-header";
 import { getIngredientsAction } from "../../services/actions/ingredients-actions";
@@ -37,16 +37,12 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 import { FeedOrderCard } from "../feed-order-card/feed-order-card";
 
-interface IState {
-  ingredientsStore: any
-}
-
 const App: FC = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { ingredientsSuccess } = useSelector((state: IState) => state.ingredientsStore);
+  const { ingredientsSuccess } = useTypedSelector((state) => state.ingredientsStore);
 
   const background = location.state && location.state.background;
 
@@ -66,66 +62,24 @@ const App: FC = () => {
         {ingredientsSuccess && (
           <>
             <Routes location={background || location}>
-              <Route path={PATH_INDEX} element={<ConstructorPage />} />
-              <Route
-                path={PATH_LOGIN}
-                element={
-                  <ProtectedRouteElement onlyUnAuth component={<LoginPage />} />
-                }
-              />
-              <Route
-                path={PATH_REGISTER}
-                element={
-                  <ProtectedRouteElement
-                    onlyUnAuth
-                    component={<RegisterPage />}
-                  />
-                }
-              />
-              <Route
-                path={PATH_FORGOT_RASSWORD}
-                element={
-                  <ProtectedRouteElement
-                    onlyUnAuth
-                    component={<ForgotPasswordPage />}
-                  />
-                }
-              />
-              <Route
-                path={PATH_RESET_RASSWORD}
-                element={
-                  <ProtectedRouteElement
-                    onlyUnAuth
-                    component={<ResetPasswordPage />}
-                  />
-                }
-              />
-              <Route
-                path={PATH_PROFILE}
-                element={<ProtectedRouteElement component={<ProfilePage />} />}
-              >
-                <Route
-                  path={PATH_PROFILE_ORDERS}
-                  element={
-                    <ProtectedRouteElement component={<ProfileFeedPage />} />
-                  }
-                />
+              <Route path={indexUrl} element={<ConstructorPage />} />
+              <Route path={loginUrl} element={<ProtectedRouteElement onlyUnAuth component={<LoginPage />} />} />
+              <Route path={registerUrl} element={<ProtectedRouteElement onlyUnAuth component={<RegisterPage />} />} />
+              <Route path={forgotPasswordUrl} element={<ProtectedRouteElement onlyUnAuth component={<ForgotPasswordPage />} />} />
+              <Route path={resetPasswordUrl} element={<ProtectedRouteElement onlyUnAuth component={<ResetPasswordPage />} />} />
+              <Route path={profileUrl} element={<ProtectedRouteElement component={<ProfilePage />} />}>
+                <Route path={profileOrdersUrl} element={<ProtectedRouteElement component={<ProfileFeedPage />} />} />
               </Route>
-              <Route path={PATH_INGREDIENT_ID} element={<IngredientPage />} />
-              <Route path={PATH_FEED} element={<FeedPage />} />
-              <Route path={PATH_FEED_NUMBER} element={<OrderInfoPage />} />
-              <Route
-                path={PATH_PROFILE_ORDERS_NUMBER}
-                element={
-                  <ProtectedRouteElement component={<OrderInfoPage />} />
-                }
-              />
-              <Route path={PATH_NOT_FOUND} element={<NotFound404 />} />
+              <Route path={ingredientIdUrl} element={<IngredientPage />} />
+              <Route path={feedUrl} element={<FeedPage />} />
+              <Route path={feedNumberUrl} element={<OrderInfoPage />} />
+              <Route path={profileOrdersNumberUrl} element={<ProtectedRouteElement component={<OrderInfoPage />} />} />
+              <Route path={notFoundUrl} element={<NotFound404 />} />
             </Routes>
             {background && (
               <Routes>
                 <Route
-                  path={PATH_FEED_NUMBER}
+                  path={feedNumberUrl}
                   element={
                     <Modal onClose={() => closeModal()}>
                       <FeedOrderCard />
@@ -133,7 +87,7 @@ const App: FC = () => {
                   }
                 />
                 <Route
-                  path={PATH_PROFILE_ORDERS_NUMBER}
+                  path={profileOrdersNumberUrl}
                   element={
                     <ProtectedRouteElement
                       component={
@@ -145,7 +99,7 @@ const App: FC = () => {
                   }
                 />
                 <Route
-                  path={PATH_INGREDIENT_ID}
+                  path={ingredientIdUrl}
                   element={
                     <Modal
                       onClose={() => closeModal()}

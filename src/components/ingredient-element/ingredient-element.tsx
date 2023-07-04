@@ -1,5 +1,5 @@
 import { useMemo, FC } from "react";
-import { useSelector } from "react-redux";
+import { useTypedSelector } from "../../services/hooks";
 import { useDrag } from "react-dnd";
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import Image from "../image/image";
@@ -12,10 +12,6 @@ interface IIngredientElement {
   onClick: any;
 }
 
-interface IState {
-  constructorStore: any
-}
-
 const IngredientElement: FC<IIngredientElement> = ({ ingredient, onClick }) => {
   const { _id, image, price, name } = ingredient;
 
@@ -23,8 +19,8 @@ const IngredientElement: FC<IIngredientElement> = ({ ingredient, onClick }) => {
   const match = useMatch("/ingredients/:id");
   const { id } = match?.params || {};
 
-  const getConstructorData = (state: IState) => state.constructorStore;
-  const { bun, ingredients } = useSelector(getConstructorData);
+  const getConstructorData = (state: any) => state.constructorStore;
+  const { bun, ingredients } = useTypedSelector(getConstructorData);
 
   const [{ opacity }, dragRef] = useDrag({
     type: "ingredients",

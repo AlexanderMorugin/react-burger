@@ -1,18 +1,12 @@
-import { useSelector } from "react-redux";
+import { useTypedSelector } from "../../services/hooks";
 import { FC } from "react";
 import Image from "../image/image";
 import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
 import { IIngredient } from "../../services/actions/ingredients-actions";
 
-interface IState {
-  ingredientsStore: any
-}
-
 const IngredientDetails: FC = () => {
-  const ingredients = useSelector(
-    (state: IState) => state.ingredientsStore.ingredients
-  );
+  const ingredients = useTypedSelector((state) => state.ingredientsStore.ingredients);
 
   const { id } = useParams();
 
@@ -38,74 +32,34 @@ const IngredientDetails: FC = () => {
         </p>
         <ul className={styles.nutritions}>
           <li className={styles.nutrition}>
-            <p
-              className={
-                "text text_type_main-default text_color_inactive " +
-                styles.caloriesText
-              }
-            >
+            <p className={"text text_type_main-default text_color_inactive " + styles.caloriesText}>
               Калории, ккал
             </p>
-            <p
-              className={
-                "text text_type_digits-default text_color_inactive " +
-                styles.caloriesNumber
-              }
-            >
+            <p className={"text text_type_digits-default text_color_inactive " + styles.caloriesNumber}>
               {currentIngredient.calories / 10}
             </p>
           </li>
           <li className={styles.nutrition}>
-            <p
-              className={
-                "text text_type_main-default text_color_inactive " +
-                styles.proteinsText
-              }
-            >
+            <p className={"text text_type_main-default text_color_inactive " + styles.proteinsText}>
               Белки, г
             </p>
-            <p
-              className={
-                "text text_type_digits-default text_color_inactive " +
-                styles.proteinsNumber
-              }
-            >
+            <p className={"text text_type_digits-default text_color_inactive " + styles.proteinsNumber}>
               {currentIngredient.proteins / 10}
             </p>
           </li>
           <li className={styles.nutrition}>
-            <p
-              className={
-                "text text_type_main-default text_color_inactive " +
-                styles.fatText
-              }
-            >
+            <p className={"text text_type_main-default text_color_inactive " + styles.fatText}>
               Жиры, г
             </p>
-            <p
-              className={
-                "text text_type_digits-default text_color_inactive " +
-                styles.fatNumber
-              }
-            >
+            <p className={"text text_type_digits-default text_color_inactive " + styles.fatNumber}>
               {currentIngredient.fat / 10}
             </p>
           </li>
           <li className={styles.nutrition}>
-            <p
-              className={
-                "text text_type_main-default text_color_inactive " +
-                styles.carbohydratesText
-              }
-            >
+            <p className={"text text_type_main-default text_color_inactive " + styles.carbohydratesText}>
               Углеводы, г
             </p>
-            <p
-              className={
-                "text text_type_digits-default text_color_inactive " +
-                styles.carbohydratesNumber
-              }
-            >
+            <p className={"text text_type_digits-default text_color_inactive " + styles.carbohydratesNumber}>
               {currentIngredient.carbohydrates / 10}
             </p>
           </li>

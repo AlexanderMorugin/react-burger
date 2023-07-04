@@ -1,5 +1,5 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useTypedSelector } from "../../services/hooks";
 import { FC } from "react";
 
 interface IProtectedRouteElement {
@@ -7,13 +7,9 @@ interface IProtectedRouteElement {
   onlyUnAuth?: boolean;
 }
 
-interface IState {
-  authStore: any
-}
-
 const ProtectedRouteElement: FC<IProtectedRouteElement> = ({ onlyUnAuth = false, component }) => {
-  const { isAuthChecked } = useSelector((state: IState) => state.authStore);
-  const { user } = useSelector((state: IState) => state.authStore);
+  const { isAuthChecked } = useTypedSelector((state) => state.authStore);
+  const { user } = useTypedSelector((state) => state.authStore);
   const location = useLocation();
 
   if (!isAuthChecked) {

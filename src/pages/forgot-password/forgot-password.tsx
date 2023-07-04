@@ -1,5 +1,5 @@
 import { useState, FC, FormEvent, ChangeEvent } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/hooks";
 import { Link, useNavigate } from "react-router-dom";
 import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";

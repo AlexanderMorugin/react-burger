@@ -4,7 +4,7 @@ import { AnimatedContent, AnimatedText } from "./animation";
 import { IIngredient } from "../../services/actions/ingredients-actions";
 
 interface IFeedOrderIngredients {
-  ingredients: any;
+  ingredients: Array<IIngredient>;
   statistics: any;
 }
 

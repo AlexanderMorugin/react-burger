@@ -9,6 +9,7 @@ import {
   GET_ORDER_SUCCESS,
   GET_ORDER_FAILED,
 } from "../constants";
+import { AppDispatch } from "../types";
 
 export interface IOrderDetails {
   readonly _id: string;
@@ -44,7 +45,7 @@ export const postOrderSuccess = (data: IOrderDetails): IPostOrderSuccess => ({ t
 export const postOrderFailed = (): IPostOrderFailed => ({ type: POST_ORDER_FAILED });
 export const postOrderResetAction = ():IPostOrderReset => ({ type: POST_ORDER_RESET });
 
-export const postOrderAction = (data: Array<string>): any => async (dispatch: any) => {
+export const postOrderAction = (data: Array<string>) => async (dispatch: AppDispatch) => {
   try {
     dispatch(postOrderRequest());
 
@@ -79,8 +80,8 @@ export const getOrderRequest = (): IGetOrderRequest => ({ type: GET_ORDER_REQUES
 export const getOrderSuccess = (res: any): IGetOrderSuccess => ({ type: GET_ORDER_SUCCESS, payload: res.orders[0] });
 export const getOrderFailed = (): IGetOrderFailed => ({ type: GET_ORDER_FAILED });
 
-export const getOrder = (number: any): any => {
-  return function (dispatch: any) {
+export const getOrder = (number: number) => {
+  return function (dispatch: AppDispatch) {
     dispatch(getOrderRequest());
     
     fetchOrder(number)

@@ -1,19 +1,11 @@
-import {
-  Logo,
-  BurgerIcon,
-  ProfileIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Logo, BurgerIcon, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./app-header.module.css";
 import { Link, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useTypedSelector } from "../../services/hooks";
 import { FC } from "react";
 
-interface IState {
-  authStore: any
-}
-
 const AppHeader: FC = () => {
-  const userData = useSelector((state: IState) => state.authStore.user);
+  const userData = useTypedSelector((state: any) => state.authStore.user);
 
   return (
     <header className={`${styles.header} text text_type_main-default`}>

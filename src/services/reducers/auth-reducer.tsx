@@ -91,7 +91,6 @@ const initialState = {
 
   email: "",
   user: null,
-  // error: null,
   isAuthChecked: false,
 };
 
@@ -117,7 +116,6 @@ export const authReducer = (state = initialState, action: TAuthActions) => {
         ...state,
         forgotSucces: false,
         forgotFailed: true,
-        // error: action.payload,
       };
     }
     case RESET_PASSWORD_REQUEST: {
@@ -139,7 +137,6 @@ export const authReducer = (state = initialState, action: TAuthActions) => {
         ...state,
         resetSucces: false,
         resetFailed: true,
-        // error: action.payload,
       };
     }
     case REGISTER_REQUEST: {
@@ -162,7 +159,6 @@ export const authReducer = (state = initialState, action: TAuthActions) => {
         ...state,
         registerSucces: false,
         registerFailed: true,
-        // error: action.payload,
       };
     }
     case LOGIN_REQUEST: {
@@ -185,7 +181,6 @@ export const authReducer = (state = initialState, action: TAuthActions) => {
         ...state,
         loginSucces: false,
         loginFailed: true,
-        // error: action.payload,
       };
     }
     case LOGOUT_REQUEST: {
@@ -208,7 +203,6 @@ export const authReducer = (state = initialState, action: TAuthActions) => {
         ...state,
         logoutSucces: false,
         logoutFailed: true,
-        // error: action.payload,
       };
     }
     case GET_USER_REQUEST: {
@@ -231,7 +225,6 @@ export const authReducer = (state = initialState, action: TAuthActions) => {
         ...state,
         getUserSucces: false,
         getUserFailed: true,
-        // error: action.payload,
       };
     }
     case CHANGE_USER_REQUEST: {
@@ -254,7 +247,6 @@ export const authReducer = (state = initialState, action: TAuthActions) => {
         ...state,
         changeUserSucces: false,
         changeUserFailed: true,
-        // error: action.payload,
       };
     }
     case SET_AUTH_CHECKED:

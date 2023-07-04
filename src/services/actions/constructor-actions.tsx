@@ -6,15 +6,16 @@ import {
   MOVE_INGREDIENT,
   RESET_INGREDIENT,
 } from "../constants";
+import { IIngredient } from "./ingredients-actions";
 
 // -------------------------------------------------------
-interface IAddBunAction { readonly type: typeof ADD_BUN, readonly bun: any };
-interface IAddIngridientAction { readonly type: typeof ADD_INGREDIENT; readonly ingridient: any };
-interface IDeleteIngredientAction { readonly type: typeof DELETE_INGREDIENT, readonly index: any, readonly ingridient: any };
+interface IAddBunAction { readonly type: typeof ADD_BUN, readonly bun: IIngredient };
+interface IAddIngridientAction { readonly type: typeof ADD_INGREDIENT; readonly ingridient: IIngredient };
+interface IDeleteIngredientAction { readonly type: typeof DELETE_INGREDIENT, readonly index: number, readonly ingridient: IIngredient };
 interface IMoveIngredientAction { readonly type: typeof MOVE_INGREDIENT, readonly data: any };
 interface IResetIngredientAction { readonly type: typeof RESET_INGREDIENT };
 
-export const addBunAction = (bun: any): IAddBunAction => {
+export const addBunAction = (bun: IIngredient): IAddBunAction => {
   return {
     type: ADD_BUN,
     bun: {
@@ -24,7 +25,7 @@ export const addBunAction = (bun: any): IAddBunAction => {
   };
 };
 
-export const addIngridientAction = (ingridient: any): IAddIngridientAction => {
+export const addIngridientAction = (ingridient: IIngredient): IAddIngridientAction => {
   const key = v4();
 
   return {
@@ -36,7 +37,7 @@ export const addIngridientAction = (ingridient: any): IAddIngridientAction => {
   };
 };
 
-export const deleteIngredientAction = (ingridient: any, index: any): IDeleteIngredientAction => {
+export const deleteIngredientAction = (ingridient: IIngredient, index: number): IDeleteIngredientAction => {
   return {
     type: DELETE_INGREDIENT,
     index,
@@ -44,7 +45,7 @@ export const deleteIngredientAction = (ingridient: any, index: any): IDeleteIngr
   };
 };
 
-export const moveIngredientAction = (draggedIngredient: any, hoverIngredient: any): IMoveIngredientAction => {
+export const moveIngredientAction = (draggedIngredient: IIngredient, hoverIngredient: any): IMoveIngredientAction => {
   return {
     type: MOVE_INGREDIENT,
     data: { draggedIngredient, hoverIngredient },

@@ -48,7 +48,6 @@ export const FeedCard: FC<IFeedCard> = ({ order }) => {
         </p>
         <p
           className={"text text_type_main-default " + styles.card_result}
-          // style={{ color: order.status === "done" && "#00cccc" }}
         >
           {orderStatus}
         </p>

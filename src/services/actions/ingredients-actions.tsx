@@ -37,7 +37,7 @@ export const getIngredientsRequest = (): IGetIngredientsRequest => ({ type: GET_
 export const getIngredientsSuccess = (data: Array<IIngredient>): IgetIngredientsSuccess => ({ type: GET_INGREDIENTS_SUCCESS, payload: data });
 export const getIngredientsFailed = (): IgetIngredientsFailed => ({ type: GET_INGREDIENTS_FAILED });
 
-export const getIngredientsAction = (): any => {
+export const getIngredientsAction = () => {
   return async (dispatch: AppDispatch) => {
     dispatch(getIngredientsRequest());
     try {

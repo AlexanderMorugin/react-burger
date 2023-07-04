@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { NavLink, useMatch } from "react-router-dom";
 import styles from "./profile-menu.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/hooks";
 import { getCookie } from "../../utils/cookie";
 import { logoutAction } from "../../services/actions/auth-actions";
 import { AnimatedTextFour, AnimatedTextOne, AnimatedTextThree, AnimatedTextTwo } from "./animation";
