@@ -1,31 +1,27 @@
 import { useState, useEffect, FC } from "react";
-import { useTypedSelector, useDispatch } from "../../services/hooks";
+import { useTypedSelector, useTypedDispatch } from "../../services/hooks";
 import { useDrop } from "react-dnd";
 import { ConstructorElement, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import Modal from "../modal/modal";
+import { Modal } from "../modal/modal";
 import { addIngridientAction, addBunAction, resetIngredientAction } from "../../services/actions/constructor-actions";
 import { postOrderAction, postOrderResetAction } from "../../services/actions/order-actions";
-import OrderDetails from "../order-details/order-details";
-import ConstructorIngredient from "../constructor-ingredient/constructor-ingredient";
+import { OrderDetails } from "../order-details/order-details";
+import { ConstructorIngredient } from "../constructor-ingredient/constructor-ingredient";
 import styles from "./burger-constructor.module.css";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ModalOrderRequest } from "../modal-order-request/modal-order-request";
 import { IIngredient } from "../../services/actions/ingredients-actions";
+import { loginUrl } from "../../utils/constants";
 
-const BurgerConstructor: FC = () => {
-  const dispatch = useDispatch();
+export const BurgerConstructor: FC = () => {
+  const dispatch = useTypedDispatch();
   const navigate = useNavigate();
 
-  const getConstructorData = (state: any) => state.constructorStore;
-  const { bun, ingredients } = useTypedSelector(getConstructorData);
-
-  const getOrderNumber = (state: any) => state.orderStore.data;
-  const orderNumber = useTypedSelector(getOrderNumber);
-
-  const orderRequest = useTypedSelector((state) => state.orderStore.orderRequest);
-
-  const userData = useTypedSelector((state: any) => state.authStore.user);
+  const { bun, ingredients } = useTypedSelector(state => state.constructorStore);
+  const orderNumber = useTypedSelector(state => state.orderStore.data);
+  const { orderRequest } = useTypedSelector(state => state.orderStore);
+  const { user } = useTypedSelector(state => state.authStore);
 
   const [totalPrice, setTotalPrice] = useState(null);
 
@@ -55,10 +51,10 @@ const BurgerConstructor: FC = () => {
 
   const handleOpenModal = () => {
     const ingredientsId = ingredients.map((item: IIngredient) => item._id);
-    const bunId = bun._id;
+    const bunId = bun!._id;
     const orderItems = [bunId, ...ingredientsId, bunId];
-    if (!userData) {
-      navigate("/login");
+    if (!user) {
+      navigate(loginUrl);
     } else {
       dispatch(postOrderAction(orderItems));
     }
@@ -144,7 +140,7 @@ const BurgerConstructor: FC = () => {
           onClick={() => {handleOpenModal()}}
           disabled={bun && ingredients.length > 0 ? false : true}
         >
-          {userData ? "Оформить заказ" : "Авторизуйтесь"}
+          {user ? "Оформить заказ" : "Авторизуйтесь"}
         </Button>
       </div>
 
@@ -158,5 +154,3 @@ const BurgerConstructor: FC = () => {
     </motion.section>
   );
 };
-
-export default BurgerConstructor;

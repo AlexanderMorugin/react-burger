@@ -11,10 +11,11 @@ import {
 
 export type TOrderState = {
   data: IOrderDetails | null;
-  orderRequest: boolean,
-  orderSuccess: boolean,
-  orderFailed: boolean,
-  order: null | undefined
+  orderRequest: boolean;
+  orderSuccess: boolean;
+  orderFailed: boolean;
+  order: null | undefined;
+  number: null | undefined;
 };
 
 const initialState: TOrderState = {
@@ -22,7 +23,8 @@ const initialState: TOrderState = {
   orderRequest: false,
   orderSuccess: false,
   orderFailed: false,
-  order: null
+  order: null,
+  number: null,
 };
 
 export const orderReducer = (state = initialState, action: TOrderActions): TOrderState => {

@@ -2,7 +2,7 @@ import { useEffect, useState, FormEvent, ChangeEvent } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./profile.module.css";
-import { useDispatch, useTypedSelector } from "../../services/hooks";
+import { useTypedDispatch, useTypedSelector } from "../../services/hooks";
 import { changeUserAction } from "../../services/actions/auth-actions";
 import { ProfileMenu } from "../../components/profile-menu/profile-menu";
 import { getCookie } from "../../utils/cookie";
@@ -10,7 +10,7 @@ import { FC } from 'react';
 import { AnimatedButtonOne, AnimatedButtonTwo, AnimatedInputOne, AnimatedInputTwo, AnimatedPasswordInput } from "./animation"; 
 
 export const ProfilePage: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
   const location = useLocation();
   const userData = useTypedSelector((state: any) => state.authStore.user);
 

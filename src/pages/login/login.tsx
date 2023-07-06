@@ -1,13 +1,14 @@
 import { FC, useState, FormEvent, ChangeEvent } from "react";
-import { useDispatch } from "../../services/hooks";
+import { useTypedDispatch } from "../../services/hooks";
 import { Link } from "react-router-dom";
 import { PasswordInput, EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
 import { loginAction } from "../../services/actions/auth-actions";
 import { AnimatedButton, AnimatedEmailInput, AnimatedPasswordInput, AnimatedTextOne, AnimatedTextTwo, AnimatedTitle } from "./animation";
+import { forgotPasswordUrl, registerUrl } from "../../utils/constants";
 
 export const LoginPage: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -60,7 +61,7 @@ export const LoginPage: FC = () => {
         <AnimatedTextOne>
           Вы новый пользователь?&nbsp;
           <Link
-            to={"/register"}
+            to={registerUrl}
             className={"text text_type_main-default " + styles.link}
           >
             Зарегистрироваться
@@ -69,7 +70,7 @@ export const LoginPage: FC = () => {
         <AnimatedTextTwo>
           Забыли пароль?&nbsp;
           <Link
-            to={"/forgot-password"}
+            to={forgotPasswordUrl}
             className={"text text_type_main-default " + styles.link}
           >
             Восстановить пароль

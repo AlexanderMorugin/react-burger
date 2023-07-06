@@ -1,14 +1,15 @@
 import { useState, FC, FormEvent, ChangeEvent } from "react";
-import { useDispatch } from "../../services/hooks";
+import { useTypedDispatch } from "../../services/hooks";
 import { Link, useNavigate } from "react-router-dom";
 import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
 import { forgotPasswordSucces } from "../../services/actions/auth-actions";
 import { fetchForgotPassword } from "../../utils/api";
 import { AnimatedButton, AnimatedEmailInput, AnimatedText, AnimatedTitle } from "./animation";
+import { resetPasswordUrl } from "../../utils/constants";
 
 export const ForgotPasswordPage: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ export const ForgotPasswordPage: FC = () => {
     e.preventDefault();
     fetchForgotPassword(email);
     dispatch(forgotPasswordSucces(true));
-    navigate("/reset-password");
+    navigate(resetPasswordUrl);
   };
 
   return (

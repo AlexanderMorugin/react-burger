@@ -1,4 +1,4 @@
-import { useDispatch, useTypedSelector } from "../../services/hooks";
+import { useTypedDispatch, useTypedSelector } from "../../services/hooks";
 import { FeedOrders } from "../../components/feed-orders/feed-orders";
 import styles from "./profile-feed.module.css";
 import { getCookie } from "../../utils/cookie";
@@ -8,10 +8,10 @@ import { wsUrl } from "../../utils/constants";
 import { getUserAction } from "../../services/actions/auth-actions";
 
 export const ProfileFeedPage: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
 
   const accessToken = getCookie("accessToken")?.split("Bearer ")[1];
-  const { orders, error } = useTypedSelector((state) => state.socketStore);
+  const { orders, error } = useTypedSelector(state => state.socketStore);
 
   useEffect(() => {
     dispatch(wsConnectionStart(`${wsUrl}?token=${accessToken}`));

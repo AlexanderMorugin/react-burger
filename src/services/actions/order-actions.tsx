@@ -20,6 +20,7 @@ export interface IOrderDetails {
   readonly updatedAt: string;
   readonly number: number;
   readonly orders?: any;
+  readonly order?: any;
 }
 
 export interface IOrderData {

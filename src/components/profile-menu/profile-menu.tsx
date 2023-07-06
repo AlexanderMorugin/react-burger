@@ -1,21 +1,22 @@
 import { FC } from "react";
 import { NavLink, useMatch } from "react-router-dom";
 import styles from "./profile-menu.module.css";
-import { useDispatch } from "../../services/hooks";
+import { useTypedDispatch } from "../../services/hooks";
 import { getCookie } from "../../utils/cookie";
 import { logoutAction } from "../../services/actions/auth-actions";
 import { AnimatedTextFour, AnimatedTextOne, AnimatedTextThree, AnimatedTextTwo } from "./animation";
+import { loginUrl, profileOrdersUrl, profileUrl } from "../../utils/constants";
 
 export const ProfileMenu: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
 
   const handleLogout = () => {
     const refreshToken = getCookie("refreshToken");
     dispatch(logoutAction(refreshToken));
   };
 
-  const matchProfile = useMatch("/profile");
-  const matchOrders = useMatch("/profile/orders");
+  const matchProfile = useMatch(profileUrl);
+  const matchOrders = useMatch(`${profileUrl}/${profileOrdersUrl}`);
 
   return (
     <div className={styles.panel}>
@@ -29,7 +30,7 @@ export const ProfileMenu: FC = () => {
                 ? `${styles.profile_link_active}`
                 : `${styles.profile_link}`
             }
-            to="/profile"
+            to={profileUrl}
           >
             <AnimatedTextOne>
               Профиль
@@ -43,7 +44,7 @@ export const ProfileMenu: FC = () => {
                 ? `${styles.profile_link_active}`
                 : `${styles.profile_link}`
             }
-            to="orders"
+            to={profileOrdersUrl}
           >
             <AnimatedTextTwo>
               История заказов
@@ -58,7 +59,7 @@ export const ProfileMenu: FC = () => {
                 : `${styles.profile_link}`
             }
             onClick={handleLogout}
-            to="/login"
+            to={loginUrl}
           >
             <AnimatedTextThree>
               Выход

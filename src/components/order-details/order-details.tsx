@@ -5,7 +5,7 @@ interface IOrderDetails {
   orderNumber: number
 }
 
-const OrderDetails: FC<IOrderDetails> = ({ orderNumber }) => {
+export const OrderDetails: FC<IOrderDetails> = ({ orderNumber }) => {
   return (
     <div className={styles.container}>
       <p className={"text text_type_digits-large " + styles.number}>
@@ -22,5 +22,3 @@ const OrderDetails: FC<IOrderDetails> = ({ orderNumber }) => {
     </div>
   );
 };
-
-export default OrderDetails;

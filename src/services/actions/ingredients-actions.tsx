@@ -26,6 +26,7 @@ export interface IIngredient {
   ingridient?: any;
   key?: any;
   index?: any;
+  // data?: any;
 }
 
 // -------------------------------------------------------

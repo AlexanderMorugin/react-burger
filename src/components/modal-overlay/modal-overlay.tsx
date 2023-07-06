@@ -7,7 +7,7 @@ interface IModalOverlay {
   onClick: () => void;
 }
 
-const ModalOverlay: FC<IModalOverlay> = ({ onClick, children }) => {
+export const ModalOverlay: FC<IModalOverlay> = ({ onClick, children }) => {
   return (
     <motion.div
       className={styles.overlay}
@@ -24,5 +24,3 @@ const ModalOverlay: FC<IModalOverlay> = ({ onClick, children }) => {
     </motion.div>
   );
 };
-
-export default ModalOverlay;

@@ -1,6 +1,7 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useTypedSelector } from "../../services/hooks";
 import { FC } from "react";
+import { loginUrl } from "../../utils/constants";
 
 interface IProtectedRouteElement {
   component: any;
@@ -8,8 +9,8 @@ interface IProtectedRouteElement {
 }
 
 const ProtectedRouteElement: FC<IProtectedRouteElement> = ({ onlyUnAuth = false, component }) => {
-  const { isAuthChecked } = useTypedSelector((state) => state.authStore);
-  const { user } = useTypedSelector((state) => state.authStore);
+  const { isAuthChecked } = useTypedSelector(state => state.authStore);
+  const { user } = useTypedSelector(state => state.authStore);
   const location = useLocation();
 
   if (!isAuthChecked) {
@@ -22,7 +23,7 @@ const ProtectedRouteElement: FC<IProtectedRouteElement> = ({ onlyUnAuth = false,
   }
 
   if (!onlyUnAuth && !user) {
-    return <Navigate to="/login" state={{ from: location }} />;
+    return <Navigate to={loginUrl} state={{ from: location }} />;
   }
 
   return component;

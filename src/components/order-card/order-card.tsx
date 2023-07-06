@@ -9,7 +9,7 @@ interface IOrderCard {
   order: any;
 }
 
-const OrderCard: FC<IOrderCard> = ({order}) => {
+export const OrderCard: FC<IOrderCard> = ({order}) => {
   const { orderIngredients, orderStatus, orderPrice, time, statistics } = useOrderDataWithStatistics(order);
 
   return (
@@ -40,5 +40,3 @@ const OrderCard: FC<IOrderCard> = ({order}) => {
     </>
   );
 }
-
-export default OrderCard;

@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import styles from "./feed-counts.module.css";
 import { FC } from 'react';
 import { AnimatedDoneList, AnimatedPrepareList, AnimatedTextDone, AnimatedTextPrepare, AnimatedTextTotal, AnimatedTotal, AnimatedTextToday, AnimatedToday } from "./animation";

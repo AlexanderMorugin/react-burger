@@ -1,21 +1,16 @@
 import { useParams } from "react-router-dom";
-import { useDispatch, useTypedSelector } from "../../services/hooks";
+import { useTypedDispatch, useTypedSelector } from "../../services/hooks";
 import { useEffect, FC } from "react";
 import { getOrder } from "../../services/actions/order-actions";
-import OrderCard from "../order-card/order-card";
-
-interface IState {
-  socketStore: any;
-  orderStore: any;
-}
+import { OrderCard } from "../order-card/order-card";
 
 export const FeedOrderCard: FC = (): any => {
   const { number }: any = useParams();
 
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
 
-  const order = useTypedSelector((state: IState) => {
-    if (state.socketStore.wsConnect && state.socketStore.orders.length) {
+  const order = useTypedSelector((state: any) => {
+    if (state.socketStore.wsConnected && state.socketStore.orders.length) {
       const data = state.socketStore.orders.find(
         (item: any) => item.number === +number
       );

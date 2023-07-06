@@ -2,7 +2,7 @@ import { useMemo, FC } from "react";
 import { useTypedSelector } from "../../services/hooks";
 import { useDrag } from "react-dnd";
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import Image from "../image/image";
+import { Image } from "../image/image";
 import styles from "./ingredient-element.module.css";
 import { useMatch, useNavigate } from "react-router-dom";
 import { IIngredient } from "../../services/actions/ingredients-actions";
@@ -12,15 +12,14 @@ interface IIngredientElement {
   onClick: any;
 }
 
-const IngredientElement: FC<IIngredientElement> = ({ ingredient, onClick }) => {
+export const IngredientElement: FC<IIngredientElement> = ({ ingredient, onClick }) => {
   const { _id, image, price, name } = ingredient;
 
   const navigate = useNavigate();
   const match = useMatch("/ingredients/:id");
   const { id } = match?.params || {};
 
-  const getConstructorData = (state: any) => state.constructorStore;
-  const { bun, ingredients } = useTypedSelector(getConstructorData);
+  const { bun, ingredients } = useTypedSelector(state => state.constructorStore);
 
   const [{ opacity }, dragRef] = useDrag({
     type: "ingredients",
@@ -65,5 +64,3 @@ const IngredientElement: FC<IIngredientElement> = ({ ingredient, onClick }) => {
     </li>
   );
 };
-
-export default IngredientElement;

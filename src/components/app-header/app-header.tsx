@@ -3,8 +3,9 @@ import styles from "./app-header.module.css";
 import { Link, NavLink } from "react-router-dom";
 import { useTypedSelector } from "../../services/hooks";
 import { FC } from "react";
+import { feedUrl, indexUrl, profileUrl } from "../../utils/constants";
 
-const AppHeader: FC = () => {
+export const AppHeader: FC = () => {
   const userData = useTypedSelector((state: any) => state.authStore.user);
 
   return (
@@ -15,7 +16,7 @@ const AppHeader: FC = () => {
             className={({ isActive }) =>
               isActive ? `${styles.button_active}` : `${styles.button}`
             }
-            to="/"
+            to={indexUrl}
           >
             <BurgerIcon type="secondary" />
             <span>Конструктор</span>
@@ -24,20 +25,20 @@ const AppHeader: FC = () => {
             className={({ isActive }) =>
               isActive ? `${styles.button_active}` : `${styles.button}`
             }
-            to="/feed"
+            to={feedUrl}
           >
             <BurgerIcon type="secondary" />
             <span>Лента&nbsp;заказов</span>
           </NavLink>
         </div>
-        <Link to={"/"} className={styles.logoBlock}>
+        <Link to={indexUrl} className={styles.logoBlock}>
           <Logo />
         </Link>
         <NavLink
           className={({ isActive }) =>
             isActive ? `${styles.button_active}` : `${styles.button}`
           }
-          to="/profile"
+          to={profileUrl}
         >
           <ProfileIcon type="secondary" />
           <span>
@@ -48,5 +49,3 @@ const AppHeader: FC = () => {
     </header>
   );
 };
-
-export default AppHeader;

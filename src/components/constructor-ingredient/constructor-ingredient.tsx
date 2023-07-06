@@ -1,5 +1,5 @@
 import { useRef, FC } from "react";
-import { useDispatch } from "react-redux";
+import { useTypedDispatch } from "../../services/hooks";
 import { useDrag, useDrop } from "react-dnd";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { deleteIngredientAction, moveIngredientAction } from "../../services/actions/constructor-actions";
@@ -11,8 +11,8 @@ interface IConstructorIngredient {
   item: IIngredient;
 }
 
-const ConstructorIngredient: FC<IConstructorIngredient> = ({ index, item }) => {
-  const dispatch = useDispatch();
+export const ConstructorIngredient: FC<IConstructorIngredient> = ({ index, item }) => {
+  const dispatch = useTypedDispatch();
 
   const { image, _id, price, name } = item;
 
@@ -59,5 +59,3 @@ const ConstructorIngredient: FC<IConstructorIngredient> = ({ index, item }) => {
     </div>
   );
 };
-
-export default ConstructorIngredient;

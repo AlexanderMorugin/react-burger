@@ -2,18 +2,17 @@ import { useMemo, useState, useEffect, FC } from "react";
 import { useInView } from "react-intersection-observer";
 import { useTypedSelector } from "../../services/hooks";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import IngredientsList from "../ingredients-list/ingredients-list";
+import { IngredientsList } from "../ingredients-list/ingredients-list";
 import styles from "./burger-ingredients.module.css";
-import { motion } from "framer-motion";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { IIngredient } from "../../services/actions/ingredients-actions";
+import { AnimatedSection } from "./animation";
 
-const BurgerIngredients: FC = () => {
+export const BurgerIngredients: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const getIngredientsData = (state: any) => state.ingredientsStore;
-  const ingredientsData = useTypedSelector(getIngredientsData);
+  const ingredientsData = useTypedSelector(state => state.ingredientsStore);
 
   const openModal = (ingredient: IIngredient) => {
     navigate(`/ingredients/${ingredient._id}`, { state: {background: location}, replace: true});
@@ -50,7 +49,7 @@ const BurgerIngredients: FC = () => {
 
   const buns = useMemo(
     () =>
-      ingredientsData.ingredients.filter((item: any) => {
+      ingredientsData.ingredients.filter((item) => {
         return item.type === "bun";
       }),
     [ingredientsData]
@@ -58,7 +57,7 @@ const BurgerIngredients: FC = () => {
 
   const sauce = useMemo(
     () =>
-      ingredientsData.ingredients.filter((item: any) => {
+      ingredientsData.ingredients.filter((item) => {
         return item.type === "sauce";
       }),
     [ingredientsData]
@@ -66,20 +65,14 @@ const BurgerIngredients: FC = () => {
 
   const main = useMemo(
     () =>
-      ingredientsData.ingredients.filter((item: any) => {
+      ingredientsData.ingredients.filter((item) => {
         return item.type === "main";
       }),
     [ingredientsData]
   );
 
   return (
-    <motion.section
-      className={styles.box}
-      // анимация
-      initial={{ x: "-100%" }}
-      animate={{ x: "0" }}
-      transition={{ ease: "easeOut", duration: 0.5 }}
-    >
+    <AnimatedSection>
       <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
       <nav className={styles.tabs}>
         {tabs.map((tab) => (
@@ -116,8 +109,6 @@ const BurgerIngredients: FC = () => {
           id="main"
         />
       </div>
-    </motion.section>
+    </AnimatedSection>
   );
 };
-
-export default BurgerIngredients;

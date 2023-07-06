@@ -1,31 +1,32 @@
 import { useEffect, FC, useState, FormEvent, ChangeEvent } from "react";
-import { useDispatch, useTypedSelector } from "../../services/hooks";
+import { useTypedDispatch, useTypedSelector } from "../../services/hooks";
 import { Link, useNavigate } from "react-router-dom";
 import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
 import { fetchResetPassword } from "../../utils/api";
 import { forgotPasswordSucces } from "../../services/actions/auth-actions";
 import { AnimatedButton, AnimatedInput, AnimatedPasswordInput, AnimatedText, AnimatedTitle } from "./animation";
+import { forgotPasswordUrl, loginUrl } from "../../utils/constants";
 
 export const ResetPasswordPage: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
   const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
 
-  const { email } = useTypedSelector((state) => state.authStore);
+  const { forgotSucces } = useTypedSelector(state => state.authStore);
 
   useEffect(() => {
-    if (!email) {
-      navigate("/forgot-password");
+    if (!forgotSucces) {
+      navigate(forgotPasswordUrl);
     }
-  }, [email]);
+  }, [forgotSucces]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     fetchResetPassword(password, token);
-    navigate("/login");
+    navigate(loginUrl);
     dispatch(forgotPasswordSucces(false));
   };
 
@@ -74,7 +75,7 @@ export const ResetPasswordPage: FC = () => {
         <AnimatedText>
           Вспомнили пароль?&nbsp;
           <Link
-            to={"/login"}
+            to={loginUrl}
             className={"text text_type_main-default " + styles.link}
           >
             Войти

@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { store } from "./store";
-import App from "./components/app/app";
+import { App } from "./components/app/app";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 

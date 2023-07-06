@@ -1,13 +1,14 @@
 import { FC, useState, FormEvent, ChangeEvent } from "react";
-import { useDispatch } from "../../services/hooks";
+import { useTypedDispatch } from "../../services/hooks";
 import { Link, useNavigate } from "react-router-dom";
 import { PasswordInput, EmailInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "../pages.module.css";
 import { registerAction } from "../../services/actions/auth-actions";
 import { AnimatedButton, AnimatedEmailInput, AnimatedEmailPasswordInput, AnimatedInput, AnimatedText, AnimatedTitle } from "./animation";
+import { loginUrl, profileUrl } from "../../utils/constants";
 
 export const RegisterPage: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -17,7 +18,7 @@ export const RegisterPage: FC = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(registerAction(email, password, name));
-    navigate("/profile");
+    navigate(profileUrl);
   };
 
   return (
@@ -74,7 +75,7 @@ export const RegisterPage: FC = () => {
         <AnimatedText>
           Уже зарегистрированы?&nbsp;
           <Link
-            to={"/login"}
+            to={loginUrl}
             className={"text text_type_main-default " + styles.link}
           >
             Войти

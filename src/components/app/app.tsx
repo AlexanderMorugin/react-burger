@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { useDispatch, useTypedSelector } from "../../services/hooks";
+import { useTypedDispatch, useTypedSelector } from "../../services/hooks";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import {
   ConstructorPage,
@@ -28,21 +28,21 @@ import {
   feedUrl,
   feedNumberUrl,
 } from "../../utils/constants";
-import AppHeader from "../app-header/app-header";
+import { AppHeader } from "../app-header/app-header";
 import { getIngredientsAction } from "../../services/actions/ingredients-actions";
 import styles from "./app.module.css";
 import ProtectedRouteElement from "../protected-route-element/protected-route-element";
 import { checkUserAuth } from "../../services/actions/auth-actions";
 import IngredientDetails from "../ingredient-details/ingredient-details";
-import Modal from "../modal/modal";
+import { Modal } from "../modal/modal";
 import { FeedOrderCard } from "../feed-order-card/feed-order-card";
 
-const App: FC = () => {
-  const dispatch = useDispatch();
+export const App: FC = () => {
+  const dispatch = useTypedDispatch();
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { ingredientsSuccess } = useTypedSelector((state) => state.ingredientsStore);
+  const { ingredientsSuccess } = useTypedSelector(state => state.ingredientsStore);
 
   const background = location.state && location.state.background;
 
@@ -117,5 +117,3 @@ const App: FC = () => {
     </>
   );
 };
-
-export default App;

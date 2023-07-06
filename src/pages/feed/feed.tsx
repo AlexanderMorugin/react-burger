@@ -1,7 +1,7 @@
 import styles from "./feed.module.css";
 import { FeedCounts } from "../../components/feed-counts/feed-counts";
 import { FeedOrders } from "../../components/feed-orders/feed-orders";
-import { useDispatch, useTypedSelector } from "../../services/hooks";
+import { useTypedDispatch, useTypedSelector } from "../../services/hooks";
 import { useEffect, useMemo, FC } from "react";
 import { wsConnectionClosed, wsConnectionStart } from "../../services/actions/ws-actions";
 import { wsUrl } from "../../utils/constants";
@@ -13,7 +13,7 @@ interface IOrderStatus {
 }
 
 export const FeedPage: FC = (): any => {
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
 
   const { orders, total, totalToday } = useTypedSelector((state) => state.socketStore);
 

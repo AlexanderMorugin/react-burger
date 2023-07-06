@@ -1,4 +1,4 @@
-import Modal from "../modal/modal";
+import { Modal } from "../modal/modal";
 import { Spinner } from "../spinner/spinner";
 import { AnimatedTextOne, AnimatedTextTwo } from "./animation";
 import styles from "./modal-order-request.module.css";

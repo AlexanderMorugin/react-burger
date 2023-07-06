@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "../pages.module.css";
 import { FC } from 'react';
 import { AnimatedLinkText, AnimatedText, AnimatedTitle } from "./animation";
+import { indexUrl } from "../../utils/constants";
 
 export const NotFound404: FC = () => {
   return (
@@ -19,7 +20,7 @@ export const NotFound404: FC = () => {
         <AnimatedLinkText>
           Перейти на главную страницу?&nbsp;
           <Link
-            to={{ pathname: `/` }}
+            to={indexUrl}
             className={"text text_type_main-default " + styles.link}
           >
             Далее
