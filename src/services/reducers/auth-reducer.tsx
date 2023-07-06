@@ -56,11 +56,11 @@ export type TUserState = {
 
   email: string,
   user: IUser | null;
-  error: null,
+  // error: null,
   isAuthChecked: boolean,
 };
 
-const initialState = {
+const initialState: TUserState = {
   forgotRequest: false,
   forgotSucces: false,
   forgotFailed: false,
@@ -94,7 +94,7 @@ const initialState = {
   isAuthChecked: false,
 };
 
-export const authReducer = (state = initialState, action: TAuthActions) => {
+export const authReducer = (state = initialState, action: TAuthActions): TUserState => {
   switch (action.type) {
     case FORGOT_PASSWORD_REQUEST: {
       return {
@@ -106,9 +106,10 @@ export const authReducer = (state = initialState, action: TAuthActions) => {
     case FORGOT_PASSWORD_SUCCESS: {
       return {
         ...state,
-        forgotSucces: true,
+        // forgotSucces: true,
         forgotFailed: false,
-        email: action.payload,
+        // email: action.payload,
+        forgotSucces: action.payload,
       };
     }
     case FORGOT_PASSWORD_FAILED: {
@@ -174,6 +175,7 @@ export const authReducer = (state = initialState, action: TAuthActions) => {
         loginSucces: true,
         loginFailed: false,
         user: action.payload,
+        // user: action.payload.user,
       };
     }
     case LOGIN_FAILED: {
@@ -218,6 +220,7 @@ export const authReducer = (state = initialState, action: TAuthActions) => {
         getUserSucces: true,
         getUserFailed: false,
         user: action.payload,
+        // user: action.payload.user,
       };
     }
     case GET_USER_FAILED: {

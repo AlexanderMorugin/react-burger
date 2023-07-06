@@ -37,15 +37,19 @@ import { AppDispatch } from "../types";
 export interface IUser {
   name: string;
   email: string;
+  user: any;
 }
 
 export interface IRegisterUser {
   name: string;
   email: string;
   password: string;
+  user: IUser;
 }
 
 export interface IUserData {
+  // user: IUser;
+  name: string;
   email: string;
   user: IUser;
   isAuthChecked: boolean;
@@ -153,11 +157,11 @@ export const logoutAction = (token: string | undefined) => {
 // -------------------------------------------------------
 interface IGetUserRequest { readonly type: typeof GET_USER_REQUEST };
 interface IGetUserSuccess { readonly type: typeof GET_USER_SUCCESS; readonly payload: IUserData };
-interface IGetUserFailed { readonly type: typeof GET_USER_FAILED; readonly payload: string };
+interface IGetUserFailed { readonly type: typeof GET_USER_FAILED };
 
 export const getUserRequest = (): IGetUserRequest => ({ type: GET_USER_REQUEST });
 export const getUserSuccess = (res: IUserData): IGetUserSuccess => ({ type: GET_USER_SUCCESS, payload: res });
-export const getUserFailed = (error: string): IGetUserFailed => ({ type: GET_USER_FAILED, payload: error });
+export const getUserFailed = (): IGetUserFailed => ({ type: GET_USER_FAILED });
 
 export const getUserAction = () => {
   return function (dispatch: AppDispatch) {
@@ -190,11 +194,11 @@ export const refreshTokenAction = (refreshToken: string | undefined) => {
 // -------------------------------------------------------
 interface IChangeUserRequest { readonly type: typeof CHANGE_USER_REQUEST };
 interface IChangeUserSuccess { readonly type: typeof CHANGE_USER_SUCCESS; readonly payload: IUser };
-interface IChangeUserFailed { readonly type: typeof CHANGE_USER_FAILED; readonly payload: string };
+interface IChangeUserFailed { readonly type: typeof CHANGE_USER_FAILED };
 
 export const changeUserRequest = (): IChangeUserRequest => ({ type: CHANGE_USER_REQUEST });
 export const changeUserSuccess = (userData: IUser): IChangeUserSuccess => ({ type: CHANGE_USER_SUCCESS, payload: userData });
-export const changeUserFailed = (error: string): IChangeUserFailed => ({ type: CHANGE_USER_FAILED, payload: error });
+export const changeUserFailed = (): IChangeUserFailed => ({ type: CHANGE_USER_FAILED });
 
 export const changeUserAction = (name: string, email: string, password: string, token: string | undefined) => {
   return function (dispatch: AppDispatch) {
@@ -208,7 +212,7 @@ export const changeUserAction = (name: string, email: string, password: string, 
         }
       })
       .catch((error) => {
-        changeUserFailed(error);
+        changeUserFailed();
         console.log(error);
       });
   };

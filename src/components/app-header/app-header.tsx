@@ -6,7 +6,8 @@ import { FC } from "react";
 import { feedUrl, indexUrl, profileUrl } from "../../utils/constants";
 
 export const AppHeader: FC = () => {
-  const userData = useTypedSelector((state: any) => state.authStore.user);
+  const userData = useTypedSelector(state => state.authStore.user);
+  // console.log("AppHeader: userData ", userData?.user.name)
 
   return (
     <header className={`${styles.header} text text_type_main-default`}>
@@ -42,7 +43,9 @@ export const AppHeader: FC = () => {
         >
           <ProfileIcon type="secondary" />
           <span>
+            {/* Личный кабинет */}
             {userData !== null ? `${userData.user.name}` : "Личный кабинет"}
+            {/* {userData !== null ? `${userData?.name}` : "Личный кабинет"} */}
           </span>
         </NavLink>
       </div>

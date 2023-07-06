@@ -12,7 +12,7 @@ import { AnimatedButtonOne, AnimatedButtonTwo, AnimatedInputOne, AnimatedInputTw
 export const ProfilePage: FC = () => {
   const dispatch = useTypedDispatch();
   const location = useLocation();
-  const userData = useTypedSelector((state: any) => state.authStore.user);
+  const userData = useTypedSelector(state => state.authStore.user);
 
   const [userValues, setUserValues] = useState({
     name: "",
@@ -25,6 +25,8 @@ export const ProfilePage: FC = () => {
       setUserValues({
         name: userData.user.name || "",
         email: userData.user.email || "",
+        // name: userData?.name,
+        // email: userData?.email,
         password: "",
       });
     }
@@ -39,8 +41,10 @@ export const ProfilePage: FC = () => {
 
   const handleCancel = () => {
     setUserValues({
-      name: userData.user.name,
-      email: userData.user.email,
+      name: userData!.user.name,
+      email: userData!.user.email,
+      // name: userData!.name,
+      // email: userData!.email,
       password: "",
     });
   };
@@ -67,7 +71,7 @@ export const ProfilePage: FC = () => {
                 icon={"EditIcon"}
                 size={"default"}
                 extraClass="mb-6"
-                required
+                // required
               />
             </AnimatedInputOne>
             <AnimatedInputTwo>
@@ -81,7 +85,7 @@ export const ProfilePage: FC = () => {
                 value={userValues.email}
                 icon={"EditIcon"}
                 extraClass="mb-6"
-                required
+                // required
               />
             </AnimatedInputTwo>
             <AnimatedPasswordInput>
@@ -96,7 +100,7 @@ export const ProfilePage: FC = () => {
                 value={userValues.password}
                 size={"default"}
                 extraClass="mb-6"
-                required
+                // required
               />
             </AnimatedPasswordInput>
             <div className={styles.buttons}>
