@@ -1,4 +1,3 @@
-import styles from "./feed.module.css";
 import { FeedCounts } from "../../components/feed-counts/feed-counts";
 import { FeedOrders } from "../../components/feed-orders/feed-orders";
 import { useTypedDispatch, useTypedSelector } from "../../services/hooks";
@@ -6,22 +5,22 @@ import { useEffect, useMemo, FC } from "react";
 import { wsConnectionClosed, wsConnectionStart } from "../../services/actions/ws-actions";
 import { wsUrl } from "../../utils/constants";
 import { AnimatedLoading, AnimatedTitle } from "./animation";
+import styles from "./feed.module.css";
 
 interface IOrderStatus {
   doneList: Array<number>;
   preparingList: Array<number>;
 }
 
-export const FeedPage: FC = (): any => {
+export const FeedPage: FC = () => {
   const dispatch = useTypedDispatch();
 
-  const { orders, total, totalToday } = useTypedSelector((state) => state.socketStore);
+  const { orders, total, totalToday } = useTypedSelector(state => state.socketStore);
 
   useEffect(() => {
     setTimeout(() => {
       dispatch(wsConnectionStart(`${wsUrl}/all`));
-    }, 1000)
-    
+    }, 1000)    
     return () => {
       dispatch(wsConnectionClosed());
     };
@@ -54,7 +53,7 @@ export const FeedPage: FC = (): any => {
   }
 
   return (
-    orders.length && (
+    orders && (
       <section className={styles.box}>
         <AnimatedTitle>
           Лента заказов

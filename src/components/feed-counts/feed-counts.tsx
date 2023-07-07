@@ -1,6 +1,15 @@
-import styles from "./feed-counts.module.css";
 import { FC } from 'react';
-import { AnimatedDoneList, AnimatedPrepareList, AnimatedTextDone, AnimatedTextPrepare, AnimatedTextTotal, AnimatedTotal, AnimatedTextToday, AnimatedToday } from "./animation";
+import {
+  AnimatedDoneList,
+  AnimatedPrepareList,
+  AnimatedTextDone,
+  AnimatedTextPrepare,
+  AnimatedTextTotal,
+  AnimatedTotal,
+  AnimatedTextToday,
+  AnimatedToday
+} from "./animation";
+import styles from "./feed-counts.module.css";
 
 interface IFeedCounts {
   doneList: Array<number>;

@@ -56,7 +56,6 @@ export type TUserState = {
 
   email: string,
   user: IUser | null;
-  // error: null,
   isAuthChecked: boolean,
 };
 
@@ -106,9 +105,7 @@ export const authReducer = (state = initialState, action: TAuthActions): TUserSt
     case FORGOT_PASSWORD_SUCCESS: {
       return {
         ...state,
-        // forgotSucces: true,
         forgotFailed: false,
-        // email: action.payload,
         forgotSucces: action.payload,
       };
     }
@@ -175,7 +172,6 @@ export const authReducer = (state = initialState, action: TAuthActions): TUserSt
         loginSucces: true,
         loginFailed: false,
         user: action.payload,
-        // user: action.payload.user,
       };
     }
     case LOGIN_FAILED: {
@@ -220,7 +216,6 @@ export const authReducer = (state = initialState, action: TAuthActions): TUserSt
         getUserSucces: true,
         getUserFailed: false,
         user: action.payload,
-        // user: action.payload.user,
       };
     }
     case GET_USER_FAILED: {

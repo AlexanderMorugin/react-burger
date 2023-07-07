@@ -1,6 +1,6 @@
-import styles from "./ingredient.module.css";
-import IngredientDetails from "../../components/ingredient-details/ingredient-details";
+import { IngredientDetails } from "../../components/ingredient-details/ingredient-details";
 import { FC } from 'react';
+import styles from "./ingredient.module.css";
 
 export const IngredientPage: FC = () => {
   return (

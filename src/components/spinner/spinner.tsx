@@ -1,6 +1,6 @@
-import styles from "./spinner.module.css";
 import { motion } from "framer-motion";
 import { FC } from "react";
+import styles from "./spinner.module.css";
 
 export const Spinner: FC = () => {
   return (

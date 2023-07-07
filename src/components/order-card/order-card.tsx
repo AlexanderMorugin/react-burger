@@ -2,8 +2,8 @@ import { FC } from "react";
 import { useOrderDataWithStatistics } from "../../hooks/useOrderData";
 import { FeedOrderIngredients } from "../feed-order-ingredients/feed-order-ingredients";
 import { FormattedDate, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./order-card.module.css";
 import { AnimatedFormattedDate, AnimatedOrderName, AnimatedOrderPrice, AnimatedOrderStatus, AnimatedTitle } from "./animation";
+import styles from "./order-card.module.css";
 
 interface IOrderCard {
   order: any;

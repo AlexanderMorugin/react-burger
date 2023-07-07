@@ -3,10 +3,11 @@ import { useInView } from "react-intersection-observer";
 import { useTypedSelector } from "../../services/hooks";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { IngredientsList } from "../ingredients-list/ingredients-list";
-import styles from "./burger-ingredients.module.css";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { IIngredient } from "../../services/actions/ingredients-actions";
 import { AnimatedSection } from "./animation";
+import styles from "./burger-ingredients.module.css";
+import { ingredientUrl } from "../../utils/constants";
 
 export const BurgerIngredients: FC = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export const BurgerIngredients: FC = () => {
   const ingredientsData = useTypedSelector(state => state.ingredientsStore);
 
   const openModal = (ingredient: IIngredient) => {
-    navigate(`/ingredients/${ingredient._id}`, { state: {background: location}, replace: true});
+    navigate(`${ingredientUrl}/${ingredient._id}`, { state: {background: location}, replace: true});
   };
 
   // Работа Табов с прокруткой ингредиентов

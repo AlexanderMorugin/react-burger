@@ -2,9 +2,9 @@ import { useEffect, FC, ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ModalOverlay } from "../modal-overlay/modal-overlay";
-import styles from "./modal.module.css";
 import { motion } from "framer-motion";
 import { useTypedSelector } from "../../services/hooks";
+import styles from "./modal.module.css";
 
 interface IModal {
   title?: string;

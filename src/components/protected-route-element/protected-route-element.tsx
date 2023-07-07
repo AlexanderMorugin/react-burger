@@ -8,7 +8,7 @@ interface IProtectedRouteElement {
   onlyUnAuth?: boolean;
 }
 
-const ProtectedRouteElement: FC<IProtectedRouteElement> = ({ onlyUnAuth = false, component }) => {
+export const ProtectedRouteElement: FC<IProtectedRouteElement> = ({ onlyUnAuth = false, component }) => {
   const { isAuthChecked } = useTypedSelector(state => state.authStore);
   const { user } = useTypedSelector(state => state.authStore);
   const location = useLocation();
@@ -28,5 +28,3 @@ const ProtectedRouteElement: FC<IProtectedRouteElement> = ({ onlyUnAuth = false,
 
   return component;
 };
-
-export default ProtectedRouteElement;

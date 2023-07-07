@@ -7,12 +7,12 @@ import { addIngridientAction, addBunAction, resetIngredientAction } from "../../
 import { postOrderAction, postOrderResetAction } from "../../services/actions/order-actions";
 import { OrderDetails } from "../order-details/order-details";
 import { ConstructorIngredient } from "../constructor-ingredient/constructor-ingredient";
-import styles from "./burger-constructor.module.css";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ModalOrderRequest } from "../modal-order-request/modal-order-request";
 import { IIngredient } from "../../services/actions/ingredients-actions";
 import { loginUrl } from "../../utils/constants";
+import styles from "./burger-constructor.module.css";
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useTypedDispatch();

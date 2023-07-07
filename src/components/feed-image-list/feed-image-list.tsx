@@ -1,7 +1,7 @@
 import { FeedImage } from "../feed-image/feed-image";
-import styles from "./feed-image-list.module.css";
 import { FC } from 'react';
 import { IIngredient } from '../../services/actions/ingredients-actions';
+import styles from "./feed-image-list.module.css";
 
 interface IFeedImageList {
   ingredients: Array<IIngredient>;

@@ -2,10 +2,10 @@ import { FC, useState, FormEvent, ChangeEvent } from "react";
 import { useTypedDispatch } from "../../services/hooks";
 import { Link } from "react-router-dom";
 import { PasswordInput, EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "../pages.module.css";
 import { loginAction } from "../../services/actions/auth-actions";
 import { AnimatedButton, AnimatedEmailInput, AnimatedPasswordInput, AnimatedTextOne, AnimatedTextTwo, AnimatedTitle } from "./animation";
 import { forgotPasswordUrl, registerUrl } from "../../utils/constants";
+import styles from "../pages.module.css";
 
 export const LoginPage: FC = () => {
   const dispatch = useTypedDispatch();

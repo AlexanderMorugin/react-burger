@@ -1,7 +1,7 @@
-import { forwardRef, FC } from "react";
+import { forwardRef } from "react";
 import { IngredientElement } from "../ingredient-element/ingredient-element";
-import styles from "./ingredients-list.module.css";
 import { IIngredient } from "../../services/actions/ingredients-actions";
+import styles from "./ingredients-list.module.css";
 
 interface IIngredientsList {
   title: string;

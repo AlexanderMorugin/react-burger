@@ -19,7 +19,6 @@ export interface IOrderDetails {
   readonly createdAt: string | number | Date;
   readonly updatedAt: string;
   readonly number: number;
-  readonly orders?: any;
   readonly order?: any;
 }
 
@@ -31,7 +30,6 @@ export interface IOrderData {
       readonly name: string;
       readonly createdAt: string | number | Date;
       readonly updatedAt: string;
-      readonly number: number;
     }
 }
 
@@ -81,7 +79,7 @@ export const getOrderRequest = (): IGetOrderRequest => ({ type: GET_ORDER_REQUES
 export const getOrderSuccess = (res: any): IGetOrderSuccess => ({ type: GET_ORDER_SUCCESS, payload: res.orders[0] });
 export const getOrderFailed = (): IGetOrderFailed => ({ type: GET_ORDER_FAILED });
 
-export const getOrder = (number: number) => {
+export const getOrder = (number: any) => {
   return function (dispatch: AppDispatch) {
     dispatch(getOrderRequest());
     

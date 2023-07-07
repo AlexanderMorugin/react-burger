@@ -2,11 +2,11 @@ import { useState, FC, FormEvent, ChangeEvent } from "react";
 import { useTypedDispatch } from "../../services/hooks";
 import { Link, useNavigate } from "react-router-dom";
 import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "../pages.module.css";
 import { forgotPasswordSucces } from "../../services/actions/auth-actions";
 import { fetchForgotPassword } from "../../utils/api";
 import { AnimatedButton, AnimatedEmailInput, AnimatedText, AnimatedTitle } from "./animation";
-import { resetPasswordUrl } from "../../utils/constants";
+import { loginUrl, resetPasswordUrl } from "../../utils/constants";
+import styles from "../pages.module.css";
 
 export const ForgotPasswordPage: FC = () => {
   const dispatch = useTypedDispatch();
@@ -52,7 +52,7 @@ export const ForgotPasswordPage: FC = () => {
         <AnimatedText>
           Вспомнили пароль?&nbsp;
           <Link
-            to={"/login"}
+            to={loginUrl}
             className={"text text_type_main-default " + styles.link}
           >
             Войти

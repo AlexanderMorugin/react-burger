@@ -1,5 +1,5 @@
-import styles from "./order-details.module.css";
 import { FC } from "react";
+import styles from "./order-details.module.css";
 
 interface IOrderDetails {
   orderNumber: number

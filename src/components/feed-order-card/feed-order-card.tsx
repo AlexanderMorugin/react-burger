@@ -4,21 +4,17 @@ import { useEffect, FC } from "react";
 import { getOrder } from "../../services/actions/order-actions";
 import { OrderCard } from "../order-card/order-card";
 
-export const FeedOrderCard: FC = (): any => {
-  const { number }: any = useParams();
+export const FeedOrderCard: FC = () => {
+  const { number } = useParams<{number: any}>();
 
   const dispatch = useTypedDispatch();
 
-  const order = useTypedSelector((state: any) => {
+  const order = useTypedSelector((state) => {
     if (state.socketStore.wsConnected && state.socketStore.orders.length) {
       const data = state.socketStore.orders.find(
-        (item: any) => item.number === +number
+        (item) => item.number === +number
       );
       if (data) return data;
-    }
-
-    if (state.orderStore.order?.number === +number) {
-      return state.orderStore.order;
     }
 
     return null;
@@ -31,7 +27,9 @@ export const FeedOrderCard: FC = (): any => {
   }, [dispatch, order, number]);
 
   if (!order) {
-    return;
+    return (
+    <h1 className="text text_type_main-medium mb-20">Данные загружаются...</h1>
+    )
   }
 
   return <OrderCard order={order} />;

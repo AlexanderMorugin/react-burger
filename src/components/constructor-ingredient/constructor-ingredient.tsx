@@ -3,8 +3,8 @@ import { useTypedDispatch } from "../../services/hooks";
 import { useDrag, useDrop } from "react-dnd";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { deleteIngredientAction, moveIngredientAction } from "../../services/actions/constructor-actions";
-import styles from "./constructor-ingredient.module.css";
 import { IIngredient } from "../../services/actions/ingredients-actions";
+import styles from "./constructor-ingredient.module.css";
 
 interface IConstructorIngredient {
   index: number;

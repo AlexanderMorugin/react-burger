@@ -1,6 +1,6 @@
-import styles from "./modal-overlay.module.css";
 import { motion } from "framer-motion";
 import { FC, ReactNode } from "react";
+import styles from "./modal-overlay.module.css";
 
 interface IModalOverlay {
   children: ReactNode;

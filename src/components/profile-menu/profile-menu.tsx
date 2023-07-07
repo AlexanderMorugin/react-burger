@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { NavLink, useMatch } from "react-router-dom";
-import styles from "./profile-menu.module.css";
 import { useTypedDispatch } from "../../services/hooks";
 import { getCookie } from "../../utils/cookie";
 import { logoutAction } from "../../services/actions/auth-actions";
 import { AnimatedTextFour, AnimatedTextOne, AnimatedTextThree, AnimatedTextTwo } from "./animation";
 import { loginUrl, profileOrdersUrl, profileUrl } from "../../utils/constants";
+import styles from "./profile-menu.module.css";
 
 export const ProfileMenu: FC = () => {
   const dispatch = useTypedDispatch();

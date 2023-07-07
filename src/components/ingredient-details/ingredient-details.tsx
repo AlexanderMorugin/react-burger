@@ -1,11 +1,11 @@
 import { useTypedSelector } from "../../services/hooks";
 import { FC } from "react";
 import { Image } from "../image/image";
-import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
 import { IIngredient } from "../../services/actions/ingredients-actions";
+import styles from "./ingredient-details.module.css";
 
-const IngredientDetails: FC = () => {
+export const IngredientDetails: FC = () => {
   const ingredients = useTypedSelector(state => state.ingredientsStore.ingredients);
 
   const { id } = useParams();
@@ -68,5 +68,3 @@ const IngredientDetails: FC = () => {
     </>
   );
 };
-
-export default IngredientDetails;

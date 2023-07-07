@@ -30,12 +30,12 @@ import {
 } from "../../utils/constants";
 import { AppHeader } from "../app-header/app-header";
 import { getIngredientsAction } from "../../services/actions/ingredients-actions";
-import styles from "./app.module.css";
-import ProtectedRouteElement from "../protected-route-element/protected-route-element";
+import { ProtectedRouteElement } from "../protected-route-element/protected-route-element";
 import { checkUserAuth } from "../../services/actions/auth-actions";
-import IngredientDetails from "../ingredient-details/ingredient-details";
+import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { Modal } from "../modal/modal";
 import { FeedOrderCard } from "../feed-order-card/feed-order-card";
+import styles from "./app.module.css";
 
 export const App: FC = () => {
   const dispatch = useTypedDispatch();

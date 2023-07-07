@@ -1,6 +1,6 @@
-import styles from "./feed-image.module.css";
 import { IIngredient } from "../../services/actions/ingredients-actions";
 import { FC } from "react";
+import styles from "./feed-image.module.css";
 
 interface IFeedImage {
   viewMore: boolean;

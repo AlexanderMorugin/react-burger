@@ -44,14 +44,13 @@ export interface IRegisterUser {
   name: string;
   email: string;
   password: string;
-  user: IUser;
+  user: any;
 }
 
 export interface IUserData {
-  // user: IUser;
   name: string;
   email: string;
-  user: IUser;
+  user: any;
   isAuthChecked: boolean;
   accessToken: string;
 }

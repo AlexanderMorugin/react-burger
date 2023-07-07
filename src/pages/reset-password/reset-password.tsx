@@ -2,11 +2,11 @@ import { useEffect, FC, useState, FormEvent, ChangeEvent } from "react";
 import { useTypedDispatch, useTypedSelector } from "../../services/hooks";
 import { Link, useNavigate } from "react-router-dom";
 import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "../pages.module.css";
 import { fetchResetPassword } from "../../utils/api";
 import { forgotPasswordSucces } from "../../services/actions/auth-actions";
 import { AnimatedButton, AnimatedInput, AnimatedPasswordInput, AnimatedText, AnimatedTitle } from "./animation";
 import { forgotPasswordUrl, loginUrl } from "../../utils/constants";
+import styles from "../pages.module.css";
 
 export const ResetPasswordPage: FC = () => {
   const dispatch = useTypedDispatch();

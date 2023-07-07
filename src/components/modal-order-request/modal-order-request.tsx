@@ -1,8 +1,8 @@
 import { Modal } from "../modal/modal";
 import { Spinner } from "../spinner/spinner";
 import { AnimatedTextOne, AnimatedTextTwo } from "./animation";
-import styles from "./modal-order-request.module.css";
 import { FC } from "react";
+import styles from "./modal-order-request.module.css";
 
 export const ModalOrderRequest: FC = () => {
   return (

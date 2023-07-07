@@ -6,6 +6,7 @@ export const forgotPasswordUrl = "/forgot-password";
 export const resetPasswordUrl = "/reset-password";
 export const profileUrl = "/profile";
 export const notFoundUrl = "*";
+export const ingredientUrl = "/ingredients";
 export const ingredientIdUrl = "ingredients/:id";
 
 // ws

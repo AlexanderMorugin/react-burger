@@ -3,9 +3,10 @@ import { useTypedSelector } from "../../services/hooks";
 import { useDrag } from "react-dnd";
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Image } from "../image/image";
-import styles from "./ingredient-element.module.css";
 import { useMatch, useNavigate } from "react-router-dom";
 import { IIngredient } from "../../services/actions/ingredients-actions";
+import { ingredientIdUrl, ingredientUrl } from "../../utils/constants";
+import styles from "./ingredient-element.module.css";
 
 interface IIngredientElement {
   ingredient: IIngredient;
@@ -16,7 +17,7 @@ export const IngredientElement: FC<IIngredientElement> = ({ ingredient, onClick 
   const { _id, image, price, name } = ingredient;
 
   const navigate = useNavigate();
-  const match = useMatch("/ingredients/:id");
+  const match = useMatch(ingredientIdUrl);
   const { id } = match?.params || {};
 
   const { bun, ingredients } = useTypedSelector(state => state.constructorStore);
@@ -41,7 +42,7 @@ export const IngredientElement: FC<IIngredientElement> = ({ ingredient, onClick 
       className={styles.element}
       onClick={() => {
         if (id !== ingredient._id) {
-          navigate(`/ingredients/${ingredient._id}`, {
+          navigate(`${ingredientUrl}/${ingredient._id}`, {
             state: { modal: true },
           });
           onClick();

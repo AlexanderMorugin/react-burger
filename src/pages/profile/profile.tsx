@@ -1,13 +1,13 @@
 import { useEffect, useState, FormEvent, ChangeEvent } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./profile.module.css";
 import { useTypedDispatch, useTypedSelector } from "../../services/hooks";
 import { changeUserAction } from "../../services/actions/auth-actions";
 import { ProfileMenu } from "../../components/profile-menu/profile-menu";
 import { getCookie } from "../../utils/cookie";
 import { FC } from 'react';
 import { AnimatedButtonOne, AnimatedButtonTwo, AnimatedInputOne, AnimatedInputTwo, AnimatedPasswordInput } from "./animation"; 
+import styles from "./profile.module.css";
 
 export const ProfilePage: FC = () => {
   const dispatch = useTypedDispatch();
@@ -25,8 +25,6 @@ export const ProfilePage: FC = () => {
       setUserValues({
         name: userData.user.name || "",
         email: userData.user.email || "",
-        // name: userData?.name,
-        // email: userData?.email,
         password: "",
       });
     }
@@ -43,8 +41,6 @@ export const ProfilePage: FC = () => {
     setUserValues({
       name: userData!.user.name,
       email: userData!.user.email,
-      // name: userData!.name,
-      // email: userData!.email,
       password: "",
     });
   };
@@ -71,7 +67,7 @@ export const ProfilePage: FC = () => {
                 icon={"EditIcon"}
                 size={"default"}
                 extraClass="mb-6"
-                // required
+                required
               />
             </AnimatedInputOne>
             <AnimatedInputTwo>
@@ -85,7 +81,7 @@ export const ProfilePage: FC = () => {
                 value={userValues.email}
                 icon={"EditIcon"}
                 extraClass="mb-6"
-                // required
+                required
               />
             </AnimatedInputTwo>
             <AnimatedPasswordInput>
@@ -100,7 +96,7 @@ export const ProfilePage: FC = () => {
                 value={userValues.password}
                 size={"default"}
                 extraClass="mb-6"
-                // required
+                required
               />
             </AnimatedPasswordInput>
             <div className={styles.buttons}>

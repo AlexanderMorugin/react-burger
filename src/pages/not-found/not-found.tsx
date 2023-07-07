@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import styles from "../pages.module.css";
 import { FC } from 'react';
 import { AnimatedLinkText, AnimatedText, AnimatedTitle } from "./animation";
 import { indexUrl } from "../../utils/constants";
+import styles from "../pages.module.css";
 
 export const NotFound404: FC = () => {
   return (

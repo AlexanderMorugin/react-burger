@@ -1,17 +1,17 @@
-import { useSelector } from "react-redux";
 import { useMatch } from "react-router-dom";
 import { useMemo } from "react";
 import { IOrderDetails } from "../services/actions/order-actions";
+import { useTypedSelector } from "../services/hooks";
 
-const unique = (src: any) => Array.from(new Set(src));
+const unique = (src: string) => Array.from(new Set(src));
 
-const createStatistics = (src: any) => 
-  src.reduce((map: any, id: any) => map.set(id, (map.get(id) ?? 0) + 1), new Map());
+const createStatistics = (src: Array<string>) => 
+  src.reduce((map: any, id: string) => map.set(id, (map.get(id) ?? 0) + 1), new Map());
 
-const totalPriceByStatistics = (src: any, statistics: any) =>
-  src.reduce((total: any, item: any) => total + item.price * statistics.get(item._id), 0);
+const totalPriceByStatistics = (src: Array<string>, statistics: any) =>
+  src.reduce((total: number, item: any) => total + item.price * statistics.get(item._id), 0);
 
-const totalPrice = (src: any) => src.reduce((total: any, item: any) => total + item.price, 0);
+const totalPrice = (src: Array<string>) => src.reduce((total: number, item: any) => total + item.price, 0);
 
 const idToIngredients = (uniqueSrc: any, ingredients: any) =>
   uniqueSrc.map((id: any) => ingredients.find((item: any) => item._id === id));
@@ -28,14 +28,8 @@ const getOrderStatus = (order: any) => {
   }
 };
 
-interface IState {
-  ingredientsStore: any
-}
-
 export function useOrderData(order: IOrderDetails | undefined) {
-  const ingredients = useSelector(
-    (state: IState) => state.ingredientsStore.ingredients
-  );
+  const ingredients = useTypedSelector(state => state.ingredientsStore.ingredients);
 
   const matchProfile = useMatch("/profile/orders/");
   const feedMatch = useMatch("/feed");
@@ -67,9 +61,7 @@ export function useOrderData(order: IOrderDetails | undefined) {
 }
 
 export const useOrderDataWithStatistics = (order: any) => {
-  const ingredients = useSelector(
-    (state: IState) => state.ingredientsStore.ingredients
-  );
+  const ingredients = useTypedSelector(state => state.ingredientsStore.ingredients);
 
   const matchProfile = useMatch("/profile/orders/");
   const feedMatch = useMatch("/feed");
@@ -85,8 +77,6 @@ export const useOrderDataWithStatistics = (order: any) => {
     () => createStatistics(order.ingredients),
     [order.ingredients]
   );
-
-  // console.log("statistics", statistics);
 
   const orderIngredients = useMemo(
     () => idToIngredients(uniqueIds, ingredients),

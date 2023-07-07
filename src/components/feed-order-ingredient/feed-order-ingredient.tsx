@@ -1,7 +1,7 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./feed-order-ingredient.module.css";
 import { FC } from 'react';
 import { IIngredient } from '../../services/actions/ingredients-actions';
+import styles from "./feed-order-ingredient.module.css";
 
 interface IFeedOrderIngredient {
   ingredient: IIngredient;

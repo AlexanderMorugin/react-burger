@@ -1,10 +1,10 @@
 import { useState, useEffect, FC } from "react";
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./feed-card.module.css";
 import { useOrderData } from "../../hooks/useOrderData";
 import { FeedImageList } from "../feed-image-list/feed-image-list";
 import { Link, useLocation } from "react-router-dom";
 import { IOrderDetails } from "../../services/actions/order-actions";
+import styles from "./feed-card.module.css";
 
 interface IFeedCard {
   order: IOrderDetails;

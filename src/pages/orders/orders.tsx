@@ -1,7 +1,7 @@
 import { FeedOrders } from "../../components/feed-orders/feed-orders";
 import { IOrderDetails } from "../../services/actions/order-actions";
-import styles from "./orders.module.css";
 import { FC } from 'react';
+import styles from "./orders.module.css";
 
 interface IFeedOrders {
   orders: Array<IOrderDetails>;
