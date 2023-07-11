@@ -3,7 +3,8 @@
   width: 100%;
   max-width: 720px;
   height: fit-content;
-  background: #1C1C21;
+  /* background: #1C1C21; */
+  /* background: transparent; */
   border-radius: 40px;
   box-sizing: border-box;
   margin: 0;
