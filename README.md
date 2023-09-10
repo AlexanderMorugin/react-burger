@@ -38,7 +38,7 @@
 
 ## Смотреть проект ##
 
-- Ссылка на проект в gh-pages: [React-Burger](https://alexandermorugin.github.io/react-burger/)
+- Ссылка на проект в gh-pages: **[React-Burger](https://alexandermorugin.github.io/react-burger/)**
 
 --------
 студент "Яндекс Практикум"\
