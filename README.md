@@ -2,7 +2,7 @@
 
 Учебный проект космической бургерной, курса Веб-разработчик Яндекс.Практикум.
 
-![Mesto Demo](/react-burger-readme-min.png)
+![Stellar Demo](/react-burger-readme-min.png)
 
 ## О проекте ##
 
