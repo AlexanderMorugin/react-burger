@@ -38,7 +38,7 @@
 
 ## Как получилось ##
 
-- Проект выложен на сервере GitHub. Посмотреть готовый сайт-приложение можно перейдя по этой ссылке [React-Burger](https://alexandermorugin.github.io/react-burger/)
+- Ссылка на проект в gh-pages: [React-Burger](https://alexandermorugin.github.io/react-burger/)
 
 --------
 студент "Яндекс Практикум"\
